@@ -9,19 +9,48 @@
     	font-style: normal;
 
 }
+#banner {
+	position:static;
+	top: 0;
+	left: 0;
+	right: 0;
+	width:auto;
+	height: auto;
+}
 
+hr {
+	border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #D1D1D1, #8c8b8b, #D1D1D1);
+}
+
+h1{
+		float:left;
+		align-content: center;
+		list-style-type: none;
+		padding: 8px;
+		margin: 0;
+		overflow: hidden;
+		background-color:lightsteelblue;
+		border: 2px solid aliceblue;
+		border-radius:15px;
+		color: #555555;
+}
 	header {
-		font-size:36px;
-		font-family:Segoe " sans-serif", monospace;
+		padding: 0.5em;
+		background-image: repeating-radial-gradient(aliceblue,lightsteelblue,#D1D1D1);
+		clear: left;
+		border-radius: 0;
+		text-align: center;
 		
 	}
-	header, footer {
-		padding: 1em;
-		color: black;
+	footer {
+		padding: 2em;
 		background-image: repeating-radial-gradient(aliceblue,lightsteelblue,#D1D1D1);
 		clear: left;
 		text-align: center;
-		border-radius:115px;
+		border-radius: 0;
+		color: #555555;
 	}
 	nav {
 		align-content: left;
@@ -157,17 +186,19 @@ img{
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 25px 8px 22px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-    transition: 0.3s;
+    transition: 0.5s;
+	
+	
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: #f1f1f1;
+    background-color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */
