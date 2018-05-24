@@ -45,17 +45,30 @@ function closeNav() {
 
 <article>
 	<h1>Products</h1>
+	
 	<nav class="console">
 <ul>
-	<li><a>All</a></li>
-	<li><a>Xbox One</a></li>
-	<li><a>PlayStation 4</a></li>
-	<li><a>PC</a></li>
-	<li><a>Nintendo Switch</a></li>
-	
-	
+	<li><a href = "products.php?console=all" style = "cursor: pointer">All</a></li>
+	<li><a href = "products.php?console=Nintendo_Switch" style = "cursor: pointer">Nintendo Switch</a></li>
+	<li><a href = "products.php?console=PS4" style = "cursor: pointer">PlayStation 4</a></li>
+	<li><a href = "products.php?console=PC" style = "cursor: pointer">PC</a></li>
+	<li><a href = "products.php?console=XB1" style = "cursor: pointer">Xbox One</a></li>
 </ul>
 </nav>
+<?php
+$console = @$_GET['console'];
+//print "console =" . $console . '<br>';
+
+if($console == "all") {
+	$query = 'select * from games';
+}
+else {
+	$query = "select * from games where console_name like " . '"' . $console . '"';
+}
+
+//print "Query: " . $query . '<br>';
+?>
+
 
 <div class="textBack" align="left" style="float:left" >
 <?php header('charset=utf-8');
@@ -63,7 +76,7 @@ include ('connectionSQL.php');
 
 
  
- $result = mysqli_query($link,'select * from games');
+ $result = mysqli_query($link, $query);
  if ($result)   {
      $row_count = mysqli_num_rows($result);
      //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
