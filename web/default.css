@@ -17,6 +17,12 @@
 	width:auto;
 	height: auto;
 }
+.images {
+	/*add css to make images to position on the form*/
+}
+.consoleName {
+	/*add css for console name*/
+}
 
 hr {
 	border: 0; 
