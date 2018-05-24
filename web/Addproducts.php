@@ -32,10 +32,11 @@ function closeNav() {
 
 <div class="textBack" align="left" style="float:left" >
 
-<form action="" method="GET">
+<form action="ProductInsert.php" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="MAX_FILE_SIZE" value="100000">
 <p>Game Name: <input type="text" name="gamename" /></p>
 <p>Description: <input type="text" name="gamedesc" /></p>
-<p>IMAGE: <input type="file" name="image" /> </p>
+<p>IMAGE URL: <input type="text" name="image" /> </p>
 <p>Price: <input type="text" name="price" /></p>
 <p>Console: 
 <input type="radio" name="console" value="PS4"> PS4
@@ -44,10 +45,14 @@ function closeNav() {
 <input type="radio" name="console" value="SWITCH"> SWITCH</p>
 
 <p> Genre:
-<input type="radio" name="genre" value="action"> ACTION
-<input type="radio" name="genre" value="adventure"> ADVENTURE
-<input type="radio" name="genre" value="strategy"> STRATEGY
-<input type="radio" name="genre" value="RPG"> RPG</p>
+<input type="checkbox" name="genre[]" value="action"> Action
+<input type="checkbox" name="genre[]" value="adventure"> Adventure
+<input type="checkbox" name="genre[]" value="strategy"> Strategy
+<input type="checkbox" name="genre[]" value="rpg"> RPG
+<input type="checkbox" name="genre[]" value="MMO"> MMO
+<input type="checkbox" name="genre[]" value="open-world"> Open-world
+<input type="checkbox" name="genre[]" value="racing"> Racing
+<input type="checkbox" name="genre[]" value="shooter"> Shooter</p>
 
 <input type="submit" value="Submit" />
 </form>
