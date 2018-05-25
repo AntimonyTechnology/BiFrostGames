@@ -56,10 +56,10 @@ function closeNav() {
 </ul>
 </nav>
 <?php
+//used to determine the console query
 $console = @$_GET['console'];
-//print "console =" . $console . '<br>';
 
-if($console == "all") {
+if($console == "" || $console == "all"){
 	$query = 'select * from games';
 }
 else {
@@ -67,8 +67,53 @@ else {
 }
 
 //print "Query: " . $query . '<br>';
+//print "console =" . $console . '<br>';
 ?>
+<br><br><br>
+<form class = "genreSelect" action="products.php" method="Post" style = "float:right">
+<select name = "theGenre">
+<option value = "All">All</option>
 
+<?php 
+//used to get the genres from DB
+	include ('connectionSQL.php');
+	$genreQuery = "select * from genres";
+	$genreList = mysqli_query($link, $genreQuery);
+if($genreList){
+	$genreRows = mysqli_num_rows($genreList);
+	print $genreRows;
+	while($genre = mysqli_fetch_array($genreList)) {
+		print '<option value =' . '"' . $genre['genre_id'] . '">' . $genre['genre_id'] . '</option>';
+	}
+}
+
+if(isset($_POST['submit'])){
+	$selectedGenre = $_POST['theGenre'];
+}
+
+?>
+</select>
+<input type = "submit" name ="submit"/>
+</form>
+<br>
+
+
+
+<?php
+
+print "the genre: " . $selectedGenre;
+
+if($selectedGenre == "All" || $selectedGenre == "") {
+	//nothing selected no changes
+}
+else if($console != "" || $console != "All") {
+	//console and genre selected
+}
+else {
+	//console only
+}
+
+?>
 
 <div class="textBack" align="left" style="float:left" >
 <?php header('charset=utf-8');
@@ -82,7 +127,11 @@ include ('connectionSQL.php');
      //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
      
      while ($row = mysqli_fetch_array($result)) {
-         print $row['name'] . '<br>' . '<span class=\'consoleName\'>' . $row['console_name'] . '</span><br>'. $row['description'] .'<br>' . '<img class=\'images\'; src= $row[\'image\']\'>' .'<br>' . $row['price'] . '<br>';
+         print $row['name'] . '<br>' .
+          '<span class=\'consoleName\'>' . $row['console_name'] . '</span><br>'. 
+          $row['description'] .'<br>' .
+          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">' . '<br>' .
+          $row['price'] . '<br>';
          echo '<hr name = \'productLine\'>';
 
 
