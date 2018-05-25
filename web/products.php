@@ -48,7 +48,7 @@ function closeNav() {
 	
 	<nav class="console">
 <ul>
-	<li><a href = "products.php?console=all" style = "cursor: pointer">All</a></li>
+	<li><a href = "products.php?console=All" style = "cursor: pointer">All</a></li>
 	<li><a href = "products.php?console=Nintendo_Switch" style = "cursor: pointer">Nintendo Switch</a></li>
 	<li><a href = "products.php?console=PS4" style = "cursor: pointer">PlayStation 4</a></li>
 	<li><a href = "products.php?console=PC" style = "cursor: pointer">PC</a></li>
@@ -56,18 +56,10 @@ function closeNav() {
 </ul>
 </nav>
 <?php
+session_start();
 //used to determine the console query
 $console = @$_GET['console'];
-
-if($console == "" || $console == "all"){
-	$query = 'select * from games';
-}
-else {
-	$query = "select * from games where console_name like " . '"' . $console . '"';
-}
-
-//print "Query: " . $query . '<br>';
-//print "console =" . $console . '<br>';
+$_SESSION['theconsole'] = $console;
 ?>
 <br><br><br>
 <form class = "genreSelect" action="products.php" method="Post" style = "float:right">
@@ -85,10 +77,13 @@ if($genreList){
 	while($genre = mysqli_fetch_array($genreList)) {
 		print '<option value =' . '"' . $genre['genre_id'] . '">' . $genre['genre_id'] . '</option>';
 	}
+	print '<input name=' . '"' . 'theconsole' . '"' . 'type=' . "'" . 'hidden' . "'" . 'value = ' . "'" . $console . "'" . '>';
 }
 
 if(isset($_POST['submit'])){
+
 	$selectedGenre = $_POST['theGenre'];
+	$console = $_POST['theconsole'];
 }
 
 ?>
@@ -101,18 +96,34 @@ if(isset($_POST['submit'])){
 
 <?php
 
-print "the genre: " . $selectedGenre;
 
-if($selectedGenre == "All" || $selectedGenre == "") {
-	//nothing selected no changes
+
+
+if($console == "" || $console == "All" && $selectedGenre == "" || $selectedGenre == "All"){
+	//none selected
+	$query = 'select * from games';
 }
-else if($console != "" || $console != "All") {
-	//console and genre selected
+else if($console != "" || $console != "All" && $selectedGenre == "" || $selectedGenre == "All"){
+	//console only selected
+	$query = "select * from games where console_name like " . '"' . $console . '"';
+}
+
+else if($selectedGenre != "" || $selectedGenre != "All" && $console == "" || $console == "All") {
+	//genre only selected
+	$query = 'select * from games
+		inner join game_genres using(game_id)
+		where genre_id =' . '"' . $selectedGenre . '"';
 }
 else {
-	//console only
+	//console and genre selected
+	$query = 'select * from games
+			inner join game_genres using(game_id)
+			where genre_id =' . '"' . $selectedGenre . '"' .
+			'AND console_name =' . '"' . $console . '"';
 }
-
+print "the console: " . $console . '<br>';
+print "the genre: " . $selectedGenre . '<br>';
+print "the query: " . $query . '<br>';
 ?>
 
 <div class="textBack" align="left" style="float:left" >
