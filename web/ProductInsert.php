@@ -2,9 +2,10 @@
 <?php
     session_start();
     include('header.html');
-    echo "<h1>Add Product</h1>";
-
+    
+    echo "<article>";
     echo "<div class=\"textBack\" align=\"left\" style=\"float:left\">";
+    echo "<h1>Add Product</h1><br><br><br>";
         $gamename = strip_tags($_POST['gamename']);
         $price = strip_tags($_POST['price']);
         $gamedesc = nl2br(addslashes(strip_tags($_POST['gamedesc'])));
@@ -37,8 +38,9 @@
         }
 
         echo "<p>Successfully added game # $gameid</p>";
-        echo "<p><a href=\"Addproducts.php\">Add another product?</a></p>";
+        echo "<p><a href=\"addProducts.php\">Add another product?</a></p>";
     echo "</div>";
+    echo "<article>";
 ?>
 
 </body>

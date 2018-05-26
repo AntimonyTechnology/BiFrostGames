@@ -12,7 +12,7 @@ if (!$link) {
     die ('MySQL Error:' . mysqli_connect_error());
 }
 else {
-     print "Connecting to database <BR>" ;
+     //print "Connecting to database <BR>" ;
  }
 
 

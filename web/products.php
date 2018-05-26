@@ -1,46 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="default.css">
-<title>BiFrost Games</title>
-<style>
-	
-</style>
-
-<script>
-function myFunction() {
-	var x = document.getElementById("myTopnav");
-	if (x.className === "topnav") {
-		x.className += " responsive";
-	} else {
-		x.className = "topnav";
-	}
-}
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-
-
-</head>
-
-<body>
-<header><img id="banner" src="BiFrostBanner.gif" alt="BiFrost Games"/></header>
-<hr>
-<nav>
-<ul id="mySidenav" class="sidenav">
-	<li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
-	<li><a href="index.html" title="Browse products" class="viewing">Shop</a></li>	
-	<li><a href="cart.html" title="View your cart" >My Cart</a></li>
-	<li><a href="signup.html" title="Sign Up here!">Sign Up</a></li>
-	<li class="icon"><a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a></li>
-</ul>
-</nav>
-<span style="font-size:32px;cursor:pointer" onClick="openNav()">&#9776;</span>
+<?php 
+include "header.html";
+?>
 	
 
 <article>

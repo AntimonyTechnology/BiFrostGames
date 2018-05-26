@@ -1,72 +1,11 @@
-<html>
-<head>
-<link rel="stylesheet" href="default.css">
-<title>Add a product</title>
-
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-    function validation() {
-        /* Test that Game Name isn't empty
-        if (document.getElementById("gamename").value.length < 1 ){
-            alert("You must include a Game Name");
-            return false;
-        } */
-
-        /* Test that the game has a valid price
-        if (document.getElementById("price").value == ''){
-            alert("You must include a price");
-            return false;
-        }
-
-        var priceexp = /^\d+(\.\d{1,2})?$/;
-        var exptest = priceexp.test(document.getElementById("price").value);
-        if(!exptest){
-            alert("Price can only be a number");
-            return false;
-        } */
-
-        // Make sure that at least one genre is selected
-        var inputElems = document.getElementsByTagName("input");
-        var count = 0;
-        for (var i=0; i<inputElems.length; i++) {
-            if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) {
-                count++;
-            }
-        }
-        if(count < 1){
-            alert("You must select at least one genre");
-            return false;
-        }
-
-    }
-</script>
-
-</head>
-<body>
-    <header><img id="banner" src="BiFrostBanner.gif" alt="BiFrost Games"/></header>
-    <hr>
-    <nav>
-    <ul id="mySidenav" class="sidenav">
-        <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;&ensp;</a></li>
-        <li><a href="index.html" title="Browse products" class="viewing">Shop</a></li>
-        <li><a href="info.html" title="View your cart" >My Cart</a></li>
-        <li><a href="signup.html" title="Sign Up here!">Sign Up</a></li>
-        <li class="icon"><a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a></li>
-    </ul>
-    </nav>
-
-    <span style="font-size:32px;cursor:pointer" onClick="openNav()">&#9776;</span>
-
-    <h1>Add Product</h1>
-
+<?php 
+include "header.html";
+?>
+    
+<article>
     <div class="textBack" align="left" style="float:left" >
-
-    <form action="ProductInsert.php" method="POST" enctype="multipart/form-data" onsubmit="return validation();">
+<h1>Add Product</h1><br><br><br>
+    <form action="productInsert.php" method="POST" enctype="multipart/form-data" onsubmit="return validation();">
         <input type="hidden" name="MAX_FILE_SIZE" value="100000">
         <p>Game Name: <input type="text" name="gamename" id="gamename" required /></p>
         <p>Price: <input type="text" name="price" id="price" pattern="^\d+(\.\d{1,2})?$" required /></p>
@@ -90,6 +29,7 @@
     </form>
 
     </div>
+</article>
     <footer>
     Copyright &copy; 2018 Curtis Naples
     </footer>
