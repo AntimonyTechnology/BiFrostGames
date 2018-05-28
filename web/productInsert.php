@@ -8,7 +8,6 @@
     echo "<div class=\"textBack\" align=\"left\" style=\"float:left\">";
     echo "<h1>Add Product</h1><br><br><br>";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        print_r($_FILES);
         $gamename = strip_tags($_POST['gamename']);
         $price = strip_tags($_POST['price']);
         $gamedesc = nl2br(addslashes(strip_tags($_POST['gamedesc'])));
