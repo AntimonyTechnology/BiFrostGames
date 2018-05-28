@@ -1,12 +1,28 @@
 <?php 
 include "header.html";
 ?>
-    
+
+<script>
+    function validation() {
+        var inputElems = document.getElementsByTagName("input");
+        var count = 0;
+        for (var i=0; i<inputElems.length; i++) {
+            if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) {
+                count++;
+            }
+        }
+        if(count < 1){
+            alert("You must select a genre");
+            return false;
+        }
+    }
+</script>
+
 <article>
     <div class="textBack" align="left" style="float:left" >
 <h1>Add Product</h1><br><br><br>
     <form action="productInsert.php" method="POST" enctype="multipart/form-data" onsubmit="return validation();">
-        <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+        <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
         <p>Game Name: <input type="text" name="gamename" id="gamename" required /></p>
         <p>Price: <input type="text" name="price" id="price" pattern="^\d+(\.\d{1,2})?$" required /></p>
         <p>Description: </p><textarea name="gamedesc" id="gamedesc" rows="8" cols="60"></textarea>
