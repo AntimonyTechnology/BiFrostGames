@@ -59,31 +59,31 @@ if(isset($_POST['submit'])){
 
 
 
-if($console == "" || $console == "All" && $selectedGenre == "" || $selectedGenre == "All"){
-	//none selected
-	$query = 'select * from games';
+if(($console == "" || $console == "All")){
+	if($selectedGenre == "" || $selectedGenre == "All") {
+		//none selected
+		$query = 'select * from games';
+	}
+	else {
+		//genre selected only
+		$query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"';
+	}
 }
-else if($console != "" || $console != "All" && $selectedGenre == "" || $selectedGenre == "All"){
+else {
+	if($selectedGenre == "" || $selectedGenre == "All") {
 	//console only selected
 	$query = "select * from games where console_name like " . '"' . $console . '"';
 }
+	else {
+		//both selected
+		$query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"' . 'AND console_name =' . '"' . $console . '"';
+	}
+	
+}
 
-else if($selectedGenre != "" || $selectedGenre != "All" && $console == "" || $console == "All") {
-	//genre only selected
-	$query = 'select * from games
-		inner join game_genres using(game_id)
-		where genre_id =' . '"' . $selectedGenre . '"';
-}
-else {
-	//console and genre selected
-	$query = 'select * from games
-			inner join game_genres using(game_id)
-			where genre_id =' . '"' . $selectedGenre . '"' .
-			'AND console_name =' . '"' . $console . '"';
-}
-print "the console: " . $console . '<br>';
-print "the genre: " . $selectedGenre . '<br>';
-print "the query: " . $query . '<br>';
+//print "the console: " . $console . '<br>';
+//print "the genre: " . $selectedGenre . '<br>';
+//print "the query: " . $query . '<br>';
 ?>
 
 <div class="textBack" align="left" style="float:left" >
