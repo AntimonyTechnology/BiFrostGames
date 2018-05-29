@@ -102,7 +102,7 @@ include ('connectionSQL.php');
           print '<div class="clearfix">' . '<br>' .
           '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
           '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="cart.php?game='. $row['name'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
+           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="cart.php?gameId='. $row['game_id'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
          echo '<hr name = "productLine">';
          
 
