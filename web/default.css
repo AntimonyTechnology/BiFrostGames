@@ -17,6 +17,9 @@
 	width:auto;
 	height: auto;
 }
+
+
+
 .images {
 	/*add css to make images to position on the form*/
 	position: static;
@@ -61,6 +64,7 @@
 	/*add css for console name*/
 	color: black;
 	font-size: 20px;
+	
 }
 
 .gameName {
@@ -78,6 +82,18 @@
 	width: 50%;
 	
 }
+
+.genreSelect {
+		padding-right: 190px;
+		float: right;
+		
+		
+	}
+	
+.viewing{
+		color:black;
+		outline: solid aliceblue 2px;
+	}
 
 
 
@@ -157,10 +173,7 @@ h1{
 		
 	}
 	
-	.viewing{
-		color:black;
-		outline: solid aliceblue 2px;
-	}
+	
 
 nav ul li a:hover {background-color:aliceblue;}
 
@@ -199,7 +212,7 @@ table, th, td {
 }
 
 .textBack {
-	width:85%;
+	width:87%;
 	padding:20px;
 	margin: 20px;
 	color:black;
