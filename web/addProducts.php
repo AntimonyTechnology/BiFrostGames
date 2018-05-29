@@ -22,7 +22,7 @@ include "header.html";
     <div class="textBack" align="left" style="float:left" >
 <h1>Add Product</h1><br><br><br>
     <form action="productInsert.php" method="POST" enctype="multipart/form-data" onsubmit="return validation();">
-        <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+        <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
         <p>Game Name: <input type="text" name="gamename" id="gamename" required /></p>
         <p>Price: <input type="text" name="price" id="price" pattern="^\d+(\.\d{1,2})?$" required /></p>
         <p>Description: </p><textarea name="gamedesc" id="gamedesc" rows="8" cols="60"></textarea>
