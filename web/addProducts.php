@@ -31,7 +31,7 @@ include "header.html";
             <input type="radio" name="console" value="PS4" required> PS4
             <input type="radio" name="console" value="XB1" required> XBOX ONE
             <input type="radio" name="console" value="PC" required> PC
-            <input type="radio" name="console" value="Nintendo_Switch" required> SWITCH</p>
+            <input type="radio" name="console" value="Nintendo Switch" required> SWITCH</p>
         <p> Genre:
             <input type="checkbox" name="genre[]" value="action"> Action
             <input type="checkbox" name="genre[]" value="adventure"> Adventure
