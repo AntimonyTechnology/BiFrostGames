@@ -40,7 +40,7 @@ if($genreList){
 	print '<input name=' . '"' . 'theconsole' . '"' . 'type=' . "'" . 'hidden' . "'" . 'value = ' . "'" . $console . "'" . '>';
 }
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submitQ'])){
 
 	$selectedGenre = $_POST['theGenre'];
 	$console = $_POST['theconsole'];
@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 
 ?>
 </select>
-<input type = "submit" name ="submit"/>
+<input type = "submit" name ="submitQ" value="Search"/>
 </form>
 <br>
 
