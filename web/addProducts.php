@@ -46,8 +46,8 @@ include "header.html";
 
     </div>
 </article>
-    <footer>
-    Copyright &copy; 2018 Curtis Naples
-    </footer>
-</body>
-</html>
+
+<?php
+include('footer.php');
+	
+?>

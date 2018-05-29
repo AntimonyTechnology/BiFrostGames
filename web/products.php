@@ -127,11 +127,7 @@ include ('connectionSQL.php');
 
 </article>
 
-<hr>
-
-<footer>
-Copyright &copy; 2018 Curtis Naples	
-</footer>
-
-</body>
-</html>
+<?php
+include('footer.php');
+	
+?>
