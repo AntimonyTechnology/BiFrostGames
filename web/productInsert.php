@@ -75,5 +75,7 @@
     echo "<article>";
 ?>
 
-</body>
-</html>
+<?php
+include('footer.php');
+	
+?>

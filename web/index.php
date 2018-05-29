@@ -4,7 +4,7 @@ include('header.html');
 ?>
 
 <br>
-<div class="textBack" align="left" style="float:left" >
+<div class="textBack" align="left" style="float:top" >
 <p>
 <h1>Welcome to BiFrost Games!</h1>
 <br>
@@ -32,13 +32,14 @@ Aenean imperdiet. Etiam ultricies nisi vel augue.
 Curabitur ullamcorper ultricies nisi.
 
 </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 </div>
+</article>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -46,13 +47,9 @@ Curabitur ullamcorper ultricies nisi.
 
 	
 
-</article>
 
-<hr>
 
-<footer>
-Copyright &copy; 2018 Curtis Naples	
-</footer>
-
-</body>
-</html>
+<?php
+include('footer.php');
+	
+?>
