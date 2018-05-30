@@ -40,7 +40,25 @@ function closeNav() {
 	<li><a href="products.php" title="Browse products" >Shop</a></li>	
 	<li><a href="cart.php" title="View your cart" >My Cart</a></li>
 	<li><a href="orderHistory.php" title="View your order history">Order History</a></li>
-	<li><a href="addProducts.php" title="Add more products" >Add Product</a></li>
+	
+	<?php
+	session_start();
+	include ('connectionSQL.php');
+	
+	print_r ($_SESSION);
+	if (isset($_SESSION['user_id'])) {
+	
+		
+		$uID = $_SESSION['user_id'];
+		$query = "select admin from users where user_id = '$uID'";
+		$sessionQ = mysqli_query($link, $query);
+		if ($_SESSION['admin'] == 1){
+			print "<li><a href='addProducts.php' title='Add more products' >Add Product</a></li>";
+		}//END OF ADMIN CHECK
+
+	} //END of SESSION==TRUE
+	?>
+	
 	<li class="icon"><a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a></li>
 </ul>
 </nav>

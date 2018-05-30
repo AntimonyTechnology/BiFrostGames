@@ -1,5 +1,6 @@
-<?php 
-include "header.html";
+<?php
+include('header.php');
+
 ?>
 	
 
@@ -16,7 +17,7 @@ include "header.html";
 </ul>
 </nav>
 <?php
-session_start();
+
 //used to determine the console query
 $console = @$_GET['console'];
 $_SESSION['theconsole'] = $console;
