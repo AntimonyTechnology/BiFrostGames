@@ -1,7 +1,7 @@
 
 <?php
-    session_start();
-    include('header.html');
+    
+    include('header.php');
     include('connectionSQL.php');
     
     echo "<article>";
@@ -72,7 +72,7 @@
         echo "<p><a href=\"addProducts.php\">Add another product?</a></p>";
     }
     echo "</div>";
-    echo "<article>";
+    echo "</article>";
 ?>
 
 <?php
