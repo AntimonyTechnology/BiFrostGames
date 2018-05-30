@@ -4,7 +4,9 @@ include('header.html');
 ?>
 
 <br>
+<article>
 <div class="textBack" align="left" style="float:top" >
+
 <p>
 <h1>Welcome to BiFrost Games!</h1>
 <br>

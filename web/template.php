@@ -4,8 +4,9 @@ include('header.html');
 ?>
 
 <br>
-<div class="textBack" align="left" style="float:left" >
 <article>
+<div class="textBack" align="left" style="float:top" >
+
 <p>
 <h1>Welcome to BiFrost Games!</h1>
 <br>
@@ -33,6 +34,8 @@ Aenean imperdiet. Etiam ultricies nisi vel augue.
 Curabitur ullamcorper ultricies nisi.
 
 </p>
+
+</div>
 </article>
 <br>
 <br>
@@ -40,7 +43,6 @@ Curabitur ullamcorper ultricies nisi.
 <br>
 <br>
 <br>
-</div>
 <br>
 <br>
 <br>
