@@ -4,13 +4,18 @@ include('header.html');
 ?>
 
 <br>
+
 <article>
+<form class = "genreSelect" action="cartInsert.php" method="Post">
 <div class="textBack" align="left" style="float:top" >
 
 <p>
+
 <h1>Cart</h1>
 <br>
 <br>
+<br>
+<hr name = "productLine">
 
 
 <?php 
@@ -28,10 +33,10 @@ $result = mysqli_query($link, $query);
      
      while ($row = mysqli_fetch_array($result)) {
          //print $row['name'] . '<br>' .
-          print '<div class="clearfix">' . '<br>' .
+          print '<div class="clearfix">' . 
           '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
           '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br>$'. $row['price'] .'</a></p></div>';
+           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br>$'. $row['price'] .'<input style=float:right;  type="number" value="1" name="quantity"></p></div>';
          echo '<hr name = "productLine">';
          
 
@@ -42,20 +47,19 @@ $result = mysqli_query($link, $query);
 
 ?>
 
+<input type="button" name="checkout" value="Checkout" style="float: right">
+
+
 </p>
 
 </div>
+</form>
 </article>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 
 
