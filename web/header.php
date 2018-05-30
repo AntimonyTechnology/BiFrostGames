@@ -45,7 +45,7 @@ function closeNav() {
 	session_start();
 	include ('connectionSQL.php');
 	
-	print_r ($_SESSION);
+	//print_r ($_SESSION);
 	if (isset($_SESSION['user_id'])) {
 	
 		
