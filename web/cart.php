@@ -18,10 +18,11 @@ include('header.php');
 
 <?php 
 include('connectionSQL.php');
+$userId = $_SESSION['user_id'];
 //print "hello <br>";
 if(isset($_GET['gameId'])) {
 	$gameId = $_GET['gameId'];
-	$userId = 1;	//TEST VALUE change to $_SESSION later
+		//TEST VALUE change to $_SESSION later
 	$quantityDefault = 1;		//INITIAL INSERT VALUE -- implement the number input box to do update query on this in the value.
 
 	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameId', '$quantityDefault')";
@@ -46,34 +47,20 @@ $result = mysqli_query($link, $getCartQuery);
           print '<div class="clearfix">' . 
           '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
           '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>' . '<br><br>$'. $price .'<form method="get" action=""><input style=float:right;  type="textbox" value=' . '"' . $row['quantity'] . '"' . 'name="quantity"><input style=float:right; type="button" value="+" onclick="addQ($quantity)"><input style=float:right; type="button" value="-" onclick="remQ($quantity)"><input type="button" value="Remove" onclick="remove($currGameId,$userId)" ></form></p></div>';
+           '</span><br>' . '<br><br>$'. $price .'<input style=float:right;  type="textbox" value=' . '"' . $row['quantity'] . '"' . 'name="quantity"><input style=float:right; type="button" value="+" onclick="addQ($quantity,$currGameId)"><input style=float:right; type="button" value="-" onclick="remQ($quantity,$currGameId)"><input type="button" value="Remove" action="cart.php" onclick="remove($currGameId,$userId)" ></p></div>';
          echo '<hr name = "productLine">';
          $totalPrice = $totalPrice + $price;
      }
      
  }
-// edit cart quantity
-function addQ($quantity){
-    print "Before addQ: " . $quantity . "<br>";
-    $quantity = $quantity + 1;
-    print "After addQ: " . $quantity . "<br>";
-    return $quantity;
-}
-function remQ($quantity){
-  $quantity = $quantity - 1;
-  return $quantity;
-}
-//remove from cart
-function remove($gameId,$userId){
-  include ('connectionSQL.php');
-  $removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
-  @mysqli_query($link, $removeCartQuery);
-}
+
+$removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
+$quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where game_id ='. $gameId .  'and user_id=' . $userId;
 
 echo $totalPrice . '$';
 ?>
 
-<input type="button" name="checkout" value="Checkout" style="float: right">
+<input type="button" name="checkout" value="Checkout" onclick="remove(150,1)" style="float: right">
 
 </div>
 </form>
