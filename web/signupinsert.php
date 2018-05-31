@@ -10,7 +10,7 @@
 		$fname = strip_tags($_POST['fname']);
 		$lname = strip_tags($_POST['lname']);
 		$email = strip_tags($_POST['email']);
-		$pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+		$pass = strip_tags($_POST['pass']);  // password_hash($_POST['pass'], PASSWORD_DEFAULT);
 		
 		$emailcheckquery = "SELECT * FROM users WHERE email = '$email'";
 		$emailcheck = mysqli_num_rows(@mysqli_query($link, $emailcheckquery));
@@ -22,7 +22,6 @@
 			$adduserquery = "INSERT INTO users (fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$pass')";
 			@mysqli_query($link, $adduserquery);
 			$emailcheck = mysqli_num_rows(@mysqli_query($link, $emailcheckquery));
-			echo "$emailcheck";
 			if ($emailcheck == 1) {
 				echo "Sign up successful! Please log in <a href =\"login.php\">HERE</a>!";
 			}else{
@@ -30,14 +29,6 @@
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	echo "</div>";
     echo "</article>";
 	

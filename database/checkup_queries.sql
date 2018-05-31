@@ -16,15 +16,6 @@ SELECT * FROM shopping_cart;
 
 SELECT * FROM users;
 
-INSERT INTO users (fname, lname, email, password, admin) values (
-	'Website',
-    'Owner',
-    'website2_owner@bifrost.ca',
-    '1234',
-    '1'
-);
-
-
 /*** CAUTION
 	When editing the database, make sure to START TRANSACTION before making any changes.
     Create regular SAVEPOINTs, and ROLLBACK to them if a mistake is made.
@@ -40,7 +31,7 @@ SAVEPOINT a;
 ROLLBACK TO a;
 
 /*
-DELETE FROM users WHERE user_id > 0;
+DELETE FROM users WHERE user_id = 10;
 
 DELETE FROM games WHERE game_id > 157;
 */
