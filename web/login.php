@@ -1,12 +1,16 @@
 <?php
     include('header.php');
-    if (isset($_POST['email'])) { // Login submitted
-        echo "<p>You submitted a login.</p>";
-
+    
+	echo '<article>
+				<div class="textBack" align="center" style="float:left" >
+					<div id="login" align="left">
+						<h1>Log In</h1><br><br><br>';
+	
+	if (isset($_POST['email'])) { // Login submitted
+       
         // Set the submitted login info
         $semail = strip_tags($_POST['email']);
         $spass = sha1($_POST['pass']);
-        echo "<p>$spass</p>";
 
         // Retrieve the user info based on login data
         $userquery = "SELECT * FROM users WHERE email = '$semail'";
@@ -21,44 +25,41 @@
             $ulname = $userinfo[2];
             $uemail = $userinfo[3];
             $upass = $userinfo[4];
-            echo "<p>$upass</p>";
             $urole = $userinfo[5];
 
             // Check the submitted password, then handle it
             if ($spass == $upass) { // Valid password
-                echo "<p>$uID <br> $urole</p>";
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
-                print_r($_SESSION);
                 echo "<p>Hello $ufname! You have successfully logged in.</p>";
             } else { // Invalid password
-                echo "<p>Invalid email or password. Please try again.</p>";
+                echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             }
         } else { // User does not exist
-            echo "<p>Invalid email or password. Please try again.</p>";
+            echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
         }
+		echo '</div>';
     } else {
-        echo "<p>No login submitted.</p>";
+        echo '
+						<form action="login.php" method="POST" >
+							<p>Email: <input type="email" name="email" id="email" size="25" value="';
+							if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; }
+							echo '" required /></p>
+							<p>Password: <input type="password" name="pass" required /></p>
+							<input type="submit" value="Submit" />
+						</form>
+					</div>
+					<div id="signup" align="left">
+						<h1>Sign Up</h1><br><br><br>
+							<p>Don\'t have an account? <a href="signup.php">Sign up here!</a></p>
+					</div>
+				
+		';
     }
-?>
-
-<article>
-    <div class="textBack" align="center" style="float:left" >
-        <div id="login" align="left">
-            <h1>Log In</h1><br><br><br>
-            <form action="login.php" method="POST" >
-                <p>Email: <input type="email" name="email" id="email" size="25" value="<?php if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; } ?>" required /></p>
-                <p>Password: <input type="password" name="pass" required /></p>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-        <div id="signup" align="left">
-            <h1>Sign Up</h1><br><br><br>
-                <p>Don't have an account? <a href="signup.php">Sign up here!</a></p>
-        </div>
-    </div>
-</article>
-
-<?php
+	
+	echo'			
+				</div>
+			</article>';
+	
     include "footer.php";
 ?>
