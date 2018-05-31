@@ -68,7 +68,7 @@ function closeNav() {
 </ul>
 </nav>
 <nav>
-	<div style="padding-right: 35px"><ul align="right"><li><a href="login.php" class="loginButton" style="padding: 10px" >Login</a></li></ul></div>
+	<div style="padding-right: 35px"><ul align="right"><li><a href="login.php" class="loginButton" style="padding: 10px" >Log In</a></li></ul></div>
 	<span style="font-size:36px;cursor:pointer;padding: 10px;" onClick="openNav()"><a>&#9776;</a></span>
 </nav>
 

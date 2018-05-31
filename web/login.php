@@ -47,7 +47,7 @@
         <div id="login" align="left">
             <h1>Log In</h1><br><br><br>
             <form action="login.php" method="POST" >
-                <p>Email: <input type="email" name="email" value="<?php if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; } ?>" required /></p>
+                <p>Email: <input type="email" name="email" id="email" size="25" value="<?php if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; } ?>" required /></p>
                 <p>Password: <input type="password" name="pass" required /></p>
                 <input type="submit" value="Submit" />
             </form>
