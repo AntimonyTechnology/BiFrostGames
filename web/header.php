@@ -41,23 +41,27 @@ function closeNav() {
 	<li><a href="cart.php" title="View your cart" >My Cart</a></li>
 	<li><a href="orderHistory.php" title="View your order history">Order History</a></li>
 	
+	<!-- Persistant login -->
 	<?php
 	session_start();
 	include ('connectionSQL.php');
 	
-	//print_r ($_SESSION);
+	
 	if (isset($_SESSION['user_id'])) {
 	    print_r($_SESSION);
 	    $user = $_SESSION['user_id'];
 	    $role = $_SESSION['admin'];
-	    echo "<p>User:  $user <br/> Role: $role</p>";
+	    //echo "<p>User:  $user <br/> Role: $role</p>";
 		if ($_SESSION['admin'] == 1){
 			print "<li><a href='addProducts.php' title='Add more products' >Add Product</a></li>";
 		}//END OF ADMIN CHECK
-
+		print "<li><a href='login.php' title='Logoff' >Log Off</a></li>";
+	} 
+	else {
+		print "<li><a href='login.php' title='Login' >Log In</a></li>";
 	} //END of SESSION==TRUE
 	?>
-	
+	<!-- END of Persistant login -->
 	<li class="icon"><a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a></li>
 </ul>
 </nav>
