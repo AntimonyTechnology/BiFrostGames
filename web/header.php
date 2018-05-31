@@ -47,11 +47,10 @@ function closeNav() {
 	
 	//print_r ($_SESSION);
 	if (isset($_SESSION['user_id'])) {
-	
-		
-		$uID = $_SESSION['user_id'];
-		$query = "select admin from users where user_id = '$uID'";
-		$sessionQ = mysqli_query($link, $query);
+	    print_r($_SESSION);
+	    $user = $_SESSION['user_id'];
+	    $role = $_SESSION['admin'];
+	    echo "<p>User:  $user <br/> Role: $role</p>";
 		if ($_SESSION['admin'] == 1){
 			print "<li><a href='addProducts.php' title='Add more products' >Add Product</a></li>";
 		}//END OF ADMIN CHECK

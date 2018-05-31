@@ -21,14 +21,14 @@ include('header.php');
 <div class="textBack" align="left" style="..." >
 	<h1>Registration</h1><br><br><br>
 	<form action="signupinsert.php" method="POST" onsubmit="return validation();">
-	<p>First Name: <input type="text" name="fname" id="fname" required /></p>
-	<p>Last Name: <input type="text" name="lname" id="lname" required /></p>
-	<p>Email: <input type="email" name="email" id="email" required /></p>
-	<p>Password: <input type="password" name="pass" id="pass" required /></p>
-	<p>Confirm Password: <input type="password" name="cpass" id="cpass" required /></p>
-	<input type="submit" value="Submit" />
+	    <p>First Name: <input type="text" name="fname" id="fname" required /></p>
+	    <p>Last Name: <input type="text" name="lname" id="lname" required /></p>
+	    <p>Email: <input type="email" name="email" id="email" required /></p>
+	    <p>Password: <input type="password" name="pass" id="pass" required /></p>
+	    <p>Confirm Password: <input type="password" name="cpass" id="cpass" required /></p>
+	    <input type="submit" value="Submit" />
 	</form>
-	</div>
+</div>
 </article>
 
 <?php
