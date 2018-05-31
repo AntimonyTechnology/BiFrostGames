@@ -67,11 +67,18 @@ function closeNav() {
 	<li class="icon"><a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a></li>
 </ul>
 </nav>
-<nav>
-	<div style="padding-right: 35px"><ul align="right"><li><a href="login.php" class="loginButton" style="padding: 10px" >Log In</a></li></ul></div>
-	<span style="font-size:36px;cursor:pointer;padding: 10px;" onClick="openNav()"><a>&#9776;</a></span>
-</nav>
+<?php
+if (isset($_SESSION['user_id'])) {
+	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
+}
+else {
+	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='login.php' class='loginButton' style='padding: 10px' >Log In</a></li></ul></div>";
+}
+	echo "<span style='font-size:36px;cursor:pointer;padding: 10px;' onClick='openNav()'><a>&#9776;</a></span></nav>";
 
+
+
+?>
 
 
 
