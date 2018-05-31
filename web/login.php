@@ -5,7 +5,7 @@
 
         // Set the submitted login info
         $semail = strip_tags($_POST['email']);
-        $spass = strip_tags($_POST['pass']); // password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $spass = sha1($_POST['pass']);
         echo "<p>$spass</p>";
 
         // Retrieve the user info based on login data
@@ -16,7 +16,6 @@
         if (mysqli_num_rows($userinforesult) == 1) { // User exists
             // Retrieve the user's stored info
             $userinfo = mysqli_fetch_row($userinforesult);
-            print_r($userinfo);
             $uID = $userinfo[0];
             $ufname = $userinfo[1];
             $ulname = $userinfo[2];
