@@ -100,7 +100,12 @@
 		outline: solid aliceblue 2px;
 	}
 
-
+#logOut{
+	text-align:center;
+	
+	
+}
+	
 hr {
 	border: 0; 
   height: 1px; 
