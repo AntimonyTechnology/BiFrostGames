@@ -23,6 +23,8 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+
 </script>
 
 
@@ -55,7 +57,7 @@ function closeNav() {
 		if ($_SESSION['admin'] == 1){
 			print "<li><a href='addProducts.php' title='Add more products' >Add Product</a></li>";
 		}//END OF ADMIN CHECK
-		print "<li><a href='login.php' title='Logoff' >Log Off</a></li>";
+		print "<li><a href='logOut.php' class='logout' >Log Out</a></li>";
 	} 
 	else {
 		print "<li><a href='login.php' title='Login' >Log In</a></li>";
