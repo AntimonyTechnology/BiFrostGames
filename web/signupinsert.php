@@ -10,7 +10,7 @@
 		$fname = strip_tags($_POST['fname']);
 		$lname = strip_tags($_POST['lname']);
 		$email = strip_tags($_POST['email']);
-		$pass = strip_tags($_POST['pass']);  // password_hash($_POST['pass'], PASSWORD_DEFAULT);
+		$pass = sha1($_POST['pass']);
 		
 		$emailcheckquery = "SELECT * FROM users WHERE email = '$email'";
 		$emailcheck = mysqli_num_rows(@mysqli_query($link, $emailcheckquery));
