@@ -6,7 +6,7 @@ include('header.php');
 <br>
 
 <article>
-<form class = "genreSelect" action="receiptInsert.php" method="Post">
+
 <div class="textBack" align="left" style="float:top" >
 
 <h1>Cart</h1>
@@ -20,6 +20,14 @@ include('header.php');
 include('connectionSQL.php');
 $userId = $_SESSION['user_id'];
 //print "hello <br>";
+if(isset($_GET['removeId'])) {
+	$gameId = $_GET['removeId'];
+
+	$removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
+	
+	@mysqli_query($link, $removeCartQuery);
+
+}
 if(isset($_GET['gameId'])) {
 	$gameId = $_GET['gameId'];
 		//TEST VALUE change to $_SESSION later
@@ -28,7 +36,7 @@ if(isset($_GET['gameId'])) {
 	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameId', '$quantityDefault')";
 	@mysqli_query($link, $addToCartQuery);
 }
-$currGameId=0;
+
 //use to get which game_id(s) and theyre quantities from shopping cart to store in variables based on userId
 $getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
 //remove from cart button query
@@ -38,32 +46,60 @@ $result = mysqli_query($link, $getCartQuery);
  if ($result)   {
      $row_count = mysqli_num_rows($result);
      //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
-     
+     $count = 0;
+     $quantity = 1;
      while ($row = mysqli_fetch_array($result)) {
          //print $row['name'] . '<br>' .
-      $quantity = $row['quantity'];
       $currGameId = $row['game_id'];
-        $price = $row['price'] * $quantity;
-          print '<div class="clearfix">' . 
-          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
-          '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>' . '<br><br>$'. $price .'<input style=float:right;  type="textbox" value=' . '"' . $row['quantity'] . '"' . 'name="quantity"><input style=float:right; type="button" value="+" onclick="addQ($quantity,$currGameId)"><input style=float:right; type="button" value="-" onclick="remQ($quantity,$currGameId)"><input type="button" value="Remove" action="cart.php" onclick="remove($currGameId,$userId)" ></p></div>';
+        $price = $row['price'];
+          print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div class="clearfix">' . 
+          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">
+          <p class="gameName">' . $row['name'] . '</p><br>' .
+          '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>
+          <input type="text box" id=' .'"' . 'price'. $count .'"'.' value ='.'"'. $price . '"'. '>
+          <input id=' .'"' . 'quantity'. $count .'"'. 'style=float:right;  type="textbox" value=1>
+          <input style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$count.','.$price.')"'. '>
+          <input style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$count.','.$price.')"'. '>
+          <input type="submit" value="Remove"></form></div>';
          echo '<hr name = "productLine">';
          $totalPrice = $totalPrice + $price;
+         $count = $count + 1;
      }
      
  }
+$_GET['count'] = $count;
 
-$removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
 $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where game_id ='. $gameId .  'and user_id=' . $userId;
 
-echo $totalPrice . '$';
 ?>
 
-<input type="button" name="checkout" value="Checkout" onclick="remove(150,1)" style="float: right">
+<script>//to change the quantity and individual prices
+	function addQ(count,price) {
+		var quantity = document.getElementById('quantity'+ count).value;
+		quantity++;
+		document.getElementById('quantity'+count).value = quantity;
+		 document.getElementById('price' + count).value = (price * quantity).toFixed(2);
+		 calcTotal(<?php echo $_GET['count'] ?>);
+	}
+	function remQ(count,price) {
+		var quantity = document.getElementById('quantity'+ count).value;
+		quantity--;
+		document.getElementById('quantity'+count).value = quantity;
+		 document.getElementById('price' + count).value = (price * quantity).toFixed(2);
+		 calcTotal(<?php echo $_GET['count'] ?>);
+	}
+	function calcTotal(count){
+		var total = 0;
+		for (var i = 0; i < count; i++) {
+			total = total + Number(document.getElementById('price' + i).value);
+		}
+		document.getElementById('total').value = total;
+	}
+</script>
+<input id="total" style=float:right;  type="textbox"><script>calcTotal(<?php echo $_GET['count'] ?>);</script><br><br>
+<input type="submit" name="checkout" value="Checkout" style="float: right">
 
 </div>
-</form>
 </article>
 <br>
 <br>
