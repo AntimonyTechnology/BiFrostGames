@@ -31,18 +31,18 @@ if(isset($_GET['gameId'])) {
 	$gameId = $_GET['gameId'];
 	$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
 $result = mysqli_query($link, $getCartQuery);
- if ($result)   {
-     $row_count = mysqli_num_rows($result);
-     //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
-     $count = 0;
-     $quantity = 1;
-     while ($row = mysqli_fetch_array($result)) {
-         if($result == $gameId){
-      $gameDuplicate = $row['game_id'];
-  }
-}}
+$quantityDefault = 1;
+ 	if ($result)   {
+     	while ($row = mysqli_fetch_array($result)) {
+     		$priceDuplicate = $row['price'];
+        	 if($gameId==$row['game_id']){
+        	 	$duplicate = true; 
+
+  			}
+		}		
+	}
 		//TEST VALUE change to $_SESSION later
-	$quantityDefault = 1;		//INITIAL INSERT VALUE -- implement the number input box to do update query on this in the value.
+			//INITIAL INSERT VALUE -- implement the number input box to do update query on this in the value.
 
 	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameId', '$quantityDefault')";
 	@mysqli_query($link, $addToCartQuery);
@@ -70,6 +70,7 @@ $result = mysqli_query($link, $getCartQuery);
      	else{
      		$quantity = 1;
      	}
+
       
         $price = $row['price'];
           print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div class="clearfix">' . 
@@ -89,6 +90,7 @@ $result = mysqli_query($link, $getCartQuery);
      }
      
  }
+
 $_GET['count'] = $count;
 
 $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where game_id ='. $gameId .  'and user_id=' . $userId;
@@ -127,7 +129,11 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 	
 	calcTotal(<?php echo json_encode($gameArray); ?>);
 </script>
-
+<?php  
+if($duplicate == true){
+     	echo '<script>addQ('.$gameId.','.$priceDuplicate.')</script>';	
+     	}
+?>
 <input type="submit" name="checkout" value="Checkout" style="float: right;">
 
 </div>
