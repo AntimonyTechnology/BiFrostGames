@@ -81,7 +81,7 @@ $result = mysqli_query($link, $getCartQuery);
           <input id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>
           <input style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>
           <input style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>
-          <input type="submit" value="Remove"></form></div>';
+          <input type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'></form></div>';
          echo '<hr name = "productLine">';
          $totalPrice = $totalPrice + $price;
          $gameArray[$count]=$row['game_id'];
@@ -111,6 +111,9 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 	function remQ(count,price) {
 		var quantity = document.getElementById('quantity'+ count).value;
 		quantity--;
+		if(quantity == 0){
+			document.getElementById('remove' + count).click();
+		}
 		document.getElementById('quantity'+count).value = quantity;
 		var cookieString = count + "=" + quantity; 
 		document.cookie = cookieString;
