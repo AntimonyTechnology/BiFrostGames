@@ -18,41 +18,46 @@ include('header.php');
 <?php 
 include('connectionSQL.php');
 $userId = $_SESSION['user_id'];
-//print "hello <br>";
+
+
+//checks if a game was removed and removes from DB and resets quantity
 if(isset($_GET['removeId'])) {
 	$gameId = $_GET['removeId'];
-
+	//remove from DB here
 	$removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
-	
 	@mysqli_query($link, $removeCartQuery);
-
+	//remove cookie that is associated with gameId here
+	if(isset($_COOKIE[$gameId])){
+     		setcookie($gameId,1);
+     	}
 }
+
+//checks if a game was added to cart and adds to DB
 if(isset($_GET['gameId'])) {
 	$gameId = $_GET['gameId'];
+	//runs query to check if the game is already present
 	$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
 $result = mysqli_query($link, $getCartQuery);
 $quantityDefault = 1;
  	if ($result)   {
      	while ($row = mysqli_fetch_array($result)) {
+     		//copies a unique price for this game to be passed to JS function addQ()
      		$priceDuplicate = $row['price'];
+     		//checks if the game is already present here and returns a bool to be used in JS function addQ()
         	 if($gameId==$row['game_id']){
         	 	$duplicate = true; 
 
   			}
 		}		
-	}
-		//TEST VALUE change to $_SESSION later
-			//INITIAL INSERT VALUE -- implement the number input box to do update query on this in the value.
-
+	}		
+	//finally adds the game to the cart
 	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameId', '$quantityDefault')";
 	@mysqli_query($link, $addToCartQuery);
 }
 
+//used to query the users cart table in DB to populate the cart
 //use to get which game_id(s) and theyre quantities from shopping cart to store in variables based on userId
 $getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
-//remove from cart button query
-
-//print "remove cart query: " . $removeCartQuery;
 $result = mysqli_query($link, $getCartQuery);
  if ($result)   {
      $row_count = mysqli_num_rows($result);
@@ -63,15 +68,18 @@ $result = mysqli_query($link, $getCartQuery);
          //print $row['name'] . '<br>' .
      	//print_r($_COOKIE[$currGameId]);
      	$currGameId = $row['game_id'];
+     	//checks if the game already has a cookie assigned to it
      	if(isset($_COOKIE[$currGameId])){
+     		//cookie is present so quantity = whatever the cookie is
      		$quantity = $_COOKIE[$currGameId];
      		//print $quantity;
      	}
+     	//otherwise quantity defaults to zero
      	else{
      		$quantity = 1;
      	}
 
-      
+      	//displays the contents of your cart
         $price = $row['price'];
           print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div class="clearfix">' . 
           '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">
@@ -84,6 +92,7 @@ $result = mysqli_query($link, $getCartQuery);
           <input type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'></form></div>';
          echo '<hr name = "productLine">';
          $totalPrice = $totalPrice + $price;
+         //assigns an array of all the game ids to identify for JS function calcTotal()
          $gameArray[$count]=$row['game_id'];
          $count = $count + 1;
          
@@ -97,43 +106,58 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 //echo json_encode($gameArray);
 ?>
 <div id="total" style=float:right;></div><br><br>
-<script>//to change the quantity and individual prices
+<script>
+//to change the quantity and prices displayed, also save quantity to cookie
 	function addQ(count,price) {
+		//gets current quantity from form
 		var quantity = document.getElementById('quantity'+ count).value;
 		quantity++;
+		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
+		//creates and assigns cookie
 		var cookieString = count + "=" + quantity;  
 		document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
+		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
 	}
 	function remQ(count,price) {
+		//gets current quantity from form
 		var quantity = document.getElementById('quantity'+ count).value;
 		quantity--;
+		//clicks the remove button for the item if it changes to zero quantity
 		if(quantity == 0){
 			document.getElementById('remove' + count).click();
 		}
+		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
+		//creates and assigns cookie
 		var cookieString = count + "=" + quantity; 
 		document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
+		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
 	}
+//used to calculate and update the total price
 	function calcTotal(gameArray){
 		console.log(gameArray[0]);
 		var total = 0;
+		//loops through the gameIds and gets each price field and adds them up
 		for (var i = 0; i < gameArray.length; i++) {
 			total = total + Number(document.getElementById('price' + gameArray[i]).innerHTML);
 		}
+		//assigns total Price
 		document.getElementById('total').innerHTML = total.toFixed(2);
 	}
-	
+	//calls to calculate the total on page load
 	calcTotal(<?php echo json_encode($gameArray); ?>);
 </script>
 <?php  
+//checks if a duplicate occured on this load
 if($duplicate == true){
+		//runs the JS addQ() function with the duplicates gameId and price
      	echo '<script>addQ('.$gameId.','.$priceDuplicate.')</script>';	
      	}
 ?>
