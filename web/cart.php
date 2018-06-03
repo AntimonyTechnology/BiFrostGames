@@ -28,7 +28,8 @@ if(isset($_GET['removeId'])) {
 	@mysqli_query($link, $removeCartQuery);
 	//remove cookie that is associated with gameId here
 	if(isset($_COOKIE[$gameId])){
-     		setcookie($gameId,1);
+			unset($_COOKIE[$gameId]);
+     		setcookie($gameId,1, time() - 3600);
      	}
 }
 
@@ -104,12 +105,14 @@ $result = mysqli_query($link, $getCartQuery);
 
 $_GET['count'] = $count;
 
-$quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where game_id ='. $gameId .  'and user_id=' . $userId;
+
 //echo json_encode($gameArray);
 
 //add in hidden forms to hold the gameId and values of each quantity field
 //or assign $_POST variables dynamically inside ^ form !!!!!!!!!!!!!!!!!!!!!
-
+for ($i=0; $i < count($gameArray); $i++) { 
+	echo '<input type="hidden" name="gameArray[]" value="'.$gameArray[$i].'">';
+}
 ?>
 <div id="total" style=float:right;></div><br><br>
 <input type="submit" name= "checkout" value="Checkout" style="float: right;">
@@ -126,7 +129,8 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
 		//creates and assigns cookie
-		var cookieString = count + "=" + quantity;  
+		var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));	
+		var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
 		document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
@@ -144,12 +148,17 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
 		//creates and assigns cookie
-		var cookieString = count + "=" + quantity; 
+		var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));
+		var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
 		document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
+	}
+	function getQuantity(gameId){
+		var quantity = document.getElementById('quantity'+ gameId).value;
+		return quantity;
 	}
 //used to calculate and update the total price
 	function calcTotal(gameArray){
