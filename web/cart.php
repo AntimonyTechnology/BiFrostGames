@@ -4,7 +4,7 @@ include('header.php');
 ?>
 
 <br>
-
+<form method ="POST" action= "checkout.php" >
 <article>
 
 <div class="textBack" align="left" style="float:top; padding-bottom: 50px"" >
@@ -74,7 +74,7 @@ $result = mysqli_query($link, $getCartQuery);
      		$quantity = $_COOKIE[$currGameId];
      		//print $quantity;
      	}
-     	//otherwise quantity defaults to zero
+     	//otherwise quantity defaults to one
      	else{
      		$quantity = 1;
      	}
@@ -82,14 +82,16 @@ $result = mysqli_query($link, $getCartQuery);
       	//displays the contents of your cart
         $price = $row['price'];
           print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div class="clearfix">' . 
-          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">
-          <p class="gameName">' . $row['name'] . '</p><br>' .
-          '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>
-          <div id=' .'"' . 'price'. $currGameId .'"'.'>'. $price*$quantity . '</div>
-          <input id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>
-          <input style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>
-          <input style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>
-          <input type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'></form></div>';
+          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">'.
+          '<p class="gameName">' . $row['name'] . '</p><br>' .
+          '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>'.
+          '<div id=' .'"' . 'price'. $currGameId .'"'.'>'. $price*$quantity . '</div>'.
+          '<input id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>'.
+          '<input style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>'.
+          '<input style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>'.
+          '<input type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'></form></div>';
+
+          //fancy line between products
          echo '<hr name = "productLine">';
          $totalPrice = $totalPrice + $price;
          //assigns an array of all the game ids to identify for JS function calcTotal()
@@ -104,8 +106,17 @@ $_GET['count'] = $count;
 
 $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where game_id ='. $gameId .  'and user_id=' . $userId;
 //echo json_encode($gameArray);
+
+//add in hidden forms to hold the gameId and values of each quantity field
+//or assign $_POST variables dynamically inside ^ form !!!!!!!!!!!!!!!!!!!!!
+
 ?>
 <div id="total" style=float:right;></div><br><br>
+<input type="submit" name= "checkout" value="Checkout" style="float: right;">
+
+
+
+
 <script>
 //to change the quantity and prices displayed, also save quantity to cookie
 	function addQ(count,price) {
@@ -142,7 +153,7 @@ $quantityQuery = 'UPDATE shopping_cart set quantity =' . $quantity .   'where ga
 	}
 //used to calculate and update the total price
 	function calcTotal(gameArray){
-		console.log(gameArray[0]);
+		//console.log(gameArray[0]);
 		var total = 0;
 		//loops through the gameIds and gets each price field and adds them up
 		for (var i = 0; i < gameArray.length; i++) {
@@ -161,19 +172,13 @@ if($duplicate == true){
      	echo '<script>addQ('.$gameId.','.$priceDuplicate.')</script>';	
      	}
 ?>
-<input type="submit" name="checkout" value="Checkout" style="float: right;">
+
 
 </div>
 </article>
-<br>
-<br>
-<br>
-<br>
+</form>
 
 
-
-
-</article>
 
 <?php
 include "footer.php";
