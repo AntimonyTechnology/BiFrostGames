@@ -21,6 +21,11 @@ include('header.php');
 //used to determine the console query
 $console = @$_GET['console'];
 $_SESSION['theconsole'] = $console;
+if (isset($_SESSION['user_id'])) {
+    $cartURL = 'cart.php?gameId=';
+} else {
+    $cartURL = 'login.php?gameId=';
+}
 ?>
 <br><br><br>
 <form class = "genreSelect" action="products.php" method="Post" style = "float:right">
@@ -101,9 +106,9 @@ include ('connectionSQL.php');
      while ($row = mysqli_fetch_array($result)) {
          //print $row['name'] . '<br>' .
           print '<div class="clearfix">' . '<br>' .
-          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
+          '<img class ="images" src ="' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
           '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="cart.php?gameId='. $row['game_id'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
+           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="'. $cartURL . $row['game_id'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
          echo '<hr name = "productLine">';
          
 
