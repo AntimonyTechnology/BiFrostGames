@@ -47,7 +47,7 @@ $quantityDefault = 1;
      		//checks if the game is already present here and returns a bool to be used in JS function addQ()
         	 if($gameId==$row['game_id']){
         	 	$duplicate = true; 
-
+        	 	$quantityDefault = $quantityDefault + 1;
   			}
 		}		
 	}		
@@ -105,7 +105,21 @@ $result = mysqli_query($link, $getCartQuery);
 
 $_GET['count'] = $count;
 
-
+//keeps db quantity upto date when user leaves the cart
+$userId = $_SESSION['user_id'];
+foreach ($gameArray as $gameId) {
+ 	//echo 'Game Id: '.$gameId . ' ';
+ 	if(isset($_COOKIE[$gameId])){
+ 		$quantity = $_COOKIE[$gameId];
+ 		//echo 'Quantity: '.$quantity. '<br> ';
+ 	}
+ 	else{
+ 		$quantity = 1;
+ 	}
+$quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where game_id ='. $gameId .  ' and user_id=' . $userId;
+//echo '<br>Query: ' . $quantityQuery . '<br>';
+@mysqli_query($link, $quantityQuery);
+} 
 //echo json_encode($gameArray);
 ?>
 
