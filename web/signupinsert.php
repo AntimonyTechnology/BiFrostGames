@@ -30,7 +30,7 @@
 			if ($emailcheck == 1) {
 				echo "Sign up successful! Logging you in now....";
 				//Go to login.php and automatically log in the user 
-				echo '<form action="login.php" method="POST" id="loginRedirect">
+				echo '<form action="login.php" method="POST" id="signupRedirect">
 						<input type = "hidden" name="email" value="' . $email . '">
 						<input type = "hidden" name="pass" value="' . $_POST['pass'] . '">
 						
@@ -38,7 +38,7 @@
 						<script type="text/javascript">
 							setTimeout(SubmitLogin, 3000);
 							function SubmitLogin(){
-								document.getElementById(\'loginRedirect\').submit();
+								document.getElementById(\'signupRedirect\').submit();
 							}
 						</script>';
 			}else{
