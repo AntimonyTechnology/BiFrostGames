@@ -50,7 +50,7 @@ function closeNav() {
 	
 	
 	if (isset($_SESSION['user_id'])) {
-	    print_r($_SESSION);
+	    // print_r($_SESSION);
 	    $user = $_SESSION['user_id'];
 	    $role = $_SESSION['admin'];
 	    //echo "<p>User:  $user <br/> Role: $role</p>";

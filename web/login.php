@@ -32,6 +32,14 @@
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
                 echo "<p>Hello $ufname! You have successfully logged in.</p>";
+                echo '  <form action="products.php" id="loginRedirect">	
+					    </form>
+					    <script type="text/javascript">
+						    setTimeout(SubmitLogin, 2000);
+						    function SubmitLogin(){
+						    	document.getElementById(\'loginRedirect\').submit();
+						    }
+					    </script>';
             } else { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             }
