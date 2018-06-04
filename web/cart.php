@@ -4,7 +4,7 @@ include('header.php');
 ?>
 
 <br>
-<form method ="POST" action= "checkout.php" >
+
 <article>
 
 <div class="textBack" align="left" style="float:top; padding-bottom: 50px"" >
@@ -107,6 +107,10 @@ $_GET['count'] = $count;
 
 
 //echo json_encode($gameArray);
+?>
+
+<form method ="POST" action= "checkout.php" >
+<?php
 
 //add in hidden forms to hold the gameId and values of each quantity field
 //or assign $_POST variables dynamically inside ^ form !!!!!!!!!!!!!!!!!!!!!
@@ -116,8 +120,7 @@ for ($i=0; $i < count($gameArray); $i++) {
 ?>
 <div id="total" style=float:right;></div><br><br>
 <input type="submit" name= "checkout" value="Checkout" style="float: right;">
-
-
+</form>
 
 
 <script>
@@ -185,7 +188,7 @@ if($duplicate == true){
 
 </div>
 </article>
-</form>
+
 
 
 
