@@ -5,7 +5,11 @@
 				<div class="textBack" align="center" style="float:left" >
 					<div id="login" align="left">
 						<h1>Log In</h1><br><br><br>';
-	
+
+	if (isset($_GET['gameId'])) {
+	    setcookie("TempGameID", $_GET['gameId']);
+    }
+
 	if (isset($_POST['email'])) { // Login submitted
        
         // Set the submitted login info
@@ -31,15 +35,23 @@
             if ($spass == $upass) { // Valid password
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
+
+                if (isset($_COOKIE['TempGameID'])) {
+                    $loginURL = 'cart.php?gameId=' . $_COOKIE['TempGameID'];
+                    echo $loginURL;
+                } else {
+                    $loginURL = 'products.php';
+                }
+
                 echo "<p>Hello $ufname! You have successfully logged in.</p>";
-                echo '  <form action="products.php" id="loginRedirect">	
-					    </form>
+                echo '  <a href="' . $loginURL . '" id="loginRedirect"></a>
 					    <script type="text/javascript">
 						    setTimeout(SubmitLogin, 2000);
 						    function SubmitLogin(){
-						    	document.getElementById(\'loginRedirect\').submit();
+						    	document.getElementById(\'loginRedirect\').click();
 						    }
-					    </script>';
+					    </script>
+			    ';
             } else { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             }
