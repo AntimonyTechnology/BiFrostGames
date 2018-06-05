@@ -255,9 +255,41 @@ img{
 }
 
 
+#TOSlist {
+	padding-bottom: 120px;
+	padding-left: 50px;
+	padding-right:30px;
+}
+
+.TOSsubmit {
+    background-color: #a8ecf7; /* Green */
+    border: none;
+    color: black;
+    padding: 20px 37px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 21px;
+	margin-right:60px;
+	margin-left:300px;
+}
+	
 
 
 .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: lightsteelblue; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.TOSnav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -282,9 +314,28 @@ img{
 	
 }
 
+.TOSnav a {
+    padding: 8px 25px 8px 22px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.5s;
+	
+	
+}
+
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     background-color: #f1f1f1;
+}
+
+.TOSnav a:hover {
+    background-color: #f1f1f1;
+}
+
+.TOSsubmit:hover {
+	background-color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */
@@ -294,6 +345,18 @@ img{
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+
+.TOSnav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.TOSnav{
+   overflow-y: auto;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -306,6 +369,8 @@ img{
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+	.TOSnav {padding-top: 15px;}
+    .TOSnav a {font-size: 18px;}
 }
 
 
