@@ -31,7 +31,7 @@ SAVEPOINT a;
 ROLLBACK TO a;
 
 /*
-DELETE FROM users WHERE user_id = 32;
+DELETE FROM users WHERE user_id > 32;
 
 DELETE FROM games WHERE game_id > 157;
 */
