@@ -2,62 +2,36 @@
 include('header.php');
 
 ?>
+<script>
+function validation(){
+	
+	
+	
+}
 
-<br>
+
+
+
+
+</script>
+
 <article>
-<div class="textBack" align="left" style="float:top" >
+<div class="textBack" align="left" style="..." >
+	<h1>Checkout</h1><br><br><br>
+	<h2>Please Fill the forms below:</h2>
+	
+	<form action="" method="POST" onsubmit="return validation();">
+	    <p>Address: <input type="text" name="address" id="address" required /></p>
+	    <p>Postal Code: <input type="text" name="postal" id="postal" required /></p>
+	    <p>Province: <input type="email" name="province" id="province" required /></p>
+	    <p>City: <input type="password" name="city" id="city" required /></p>
+	   
+	    <input type="submit" value="Submit" />
+	</form>
 
-<p>
-<h1>Checkout</h1>
-<br>
-<br>
-<br>
-<br>
-
-
-<?php
-//this block updates the quantity in the cart based on an POST array of gameIds and cookies holding quantities for each gameId
-include('connectionSQL.php');
-//print_r($_POST['gameArray']);
-$userId = $_SESSION['user_id'];
-$gameArray = $_POST['gameArray'];
-foreach ($gameArray as $gameId) {
- 	//echo 'Game Id: '.$gameId . ' ';
- 	if($_COOKIE[$gameId]){
- 		$quantity = $_COOKIE[$gameId];
- 		//echo 'Quantity: '.$quantity. '<br> ';
- 	}
- 	else{
- 		$quantity = 1;
- 	}
-$quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where game_id ='. $gameId .  ' and user_id=' . $userId;
-//echo '<br>Query: ' . $quantityQuery . '<br>';
-@mysqli_query($link, $quantityQuery);
-} 
-?>
-
-Do billing input starting here down with paypal button to finish
-
-
-
-</p>
-</div>
-</article>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
+	</div>
 </article>
 
 <?php
-include "footer.php";
+include('footer.php');
 ?>
