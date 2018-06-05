@@ -2,9 +2,9 @@
     include('header.php');
 
     function loginRedirect ($url = 'index.php', $message, $timeout = 3000) { // $timeout is in milliseconds
-        echo "<p>$url</p>";
+        //echo "<p>$url</p>";
         echo "<p>$message</p>";
-        echo "<p>$timeout</p>";
+        //echo "<p>$timeout</p>";
 
         echo '  <a href="' . $url . '" id="loginRedirect"></a>
 					    <script type="text/javascript">
