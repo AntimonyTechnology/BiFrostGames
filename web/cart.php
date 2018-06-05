@@ -70,15 +70,7 @@ $result = mysqli_query($link, $getCartQuery);
      	//print_r($_COOKIE[$currGameId]);
      	$currGameId = $row['game_id'];
      	//checks if the game already has a cookie assigned to it
-     	if(isset($_COOKIE[$currGameId])){
-     		//cookie is present so quantity = whatever the cookie is
-     		$quantity = $_COOKIE[$currGameId];
-     		//print $quantity;
-     	}
-     	//otherwise quantity defaults to one
-     	else{
-     		$quantity = 1;
-     	}
+     	$quantity = $row['quantity'];
 
       	//displays the contents of your cart
         $price = $row['price'];
@@ -153,7 +145,21 @@ for ($i=0; $i < count($gameArray); $i++) {
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
+		 var passThis = {
+		 		gameId: count,
+		 		quantity: quantity
+		 	};
+		 $.ajax({
+         type: "POST",
+         url: "updateQ.php",
+         data: passThis,
+         success: function(msg){
+                     console.log( "Data Saved: " + msg );
+                  }
+    });
+		 
 	}
+	
 	function remQ(count,price) {
 		//gets current quantity from form
 		var quantity = document.getElementById('quantity'+ count).value;
@@ -172,6 +178,19 @@ for ($i=0; $i < count($gameArray); $i++) {
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
+		 var passThis = {
+		 		gameId: count,
+		 		quantity: quantity
+		 	};
+		 $.ajax({
+         type: "POST",
+         url: "updateQ.php",
+         data: passThis,
+         success: function(msg){
+                     console.log( "Data Saved: " + msg );
+                  }
+    });
+
 	}
 	function getQuantity(gameId){
 		var quantity = document.getElementById('quantity'+ gameId).value;
@@ -191,6 +210,14 @@ for ($i=0; $i < count($gameArray); $i++) {
 	//calls to calculate the total on page load
 	calcTotal(<?php echo json_encode($gameArray); ?>);
 </script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+
+</script>
+
+
 <?php  
 //checks if a duplicate occured on this load
 if($duplicate == true){
