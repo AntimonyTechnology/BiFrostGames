@@ -1,5 +1,6 @@
 <?php
     include('header.php');
+    include('popup.php');
 
     function loginRedirect ($url = 'index.php', $message, $timeout = 3000) { // $timeout is in milliseconds
         //echo "<p>$url</p>";
@@ -15,7 +16,7 @@
 					    </script>
 		';
     }
-    
+
 	echo '<article>
 				<div class="textBack" align="center" style="float:left" >
 					<div id="login" align="left">
@@ -62,7 +63,7 @@
             } else if ($spass != $upass) { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             } else { // Valid password, but Privacy Policy not accepted
-                echo "You have not accepted the new Privacy Policy.";
+                echo "<p>You have not accepted the new <a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"myFunction()\">Privacy Policy.</a></p>";
             }
         } else { // User does not exist
             echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
