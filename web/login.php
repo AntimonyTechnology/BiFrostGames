@@ -1,5 +1,20 @@
 <?php
     include('header.php');
+
+    function loginRedirect ($url = 'index.php', $message, $timeout = 3000) { // $timeout is in milliseconds
+        echo "<p>$url</p>";
+        echo "<p>$message</p>";
+        echo "<p>$timeout</p>";
+
+        echo '  <a href="' . $url . '" id="loginRedirect"></a>
+					    <script type="text/javascript">
+						    setTimeout(SubmitLogin, ' . $timeout . ');
+						    function SubmitLogin(){
+						    	document.getElementById(\'loginRedirect\').click();
+						    }
+					    </script>
+		';
+    }
     
 	echo '<article>
 				<div class="textBack" align="center" style="float:left" >
@@ -30,30 +45,24 @@
             $uemail = $userinfo[3];
             $upass = $userinfo[4];
             $urole = $userinfo[5];
+            $upriv = $userinfo[6];
 
             // Check the submitted password, then handle it
-            if ($spass == $upass) { // Valid password
+            if (($spass == $upass) && ($upriv == 1)) { // Valid password & Privacy Policy accepted
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
 
                 if (isset($_COOKIE['TempGameID'])) {
                     $loginURL = 'cart.php?gameId=' . $_COOKIE['TempGameID'];
-                    echo $loginURL;
                 } else {
                     $loginURL = 'products.php';
                 }
 
-                echo "<p>Hello $ufname! You have successfully logged in.</p>";
-                echo '  <a href="' . $loginURL . '" id="loginRedirect"></a>
-					    <script type="text/javascript">
-						    setTimeout(SubmitLogin, 2000);
-						    function SubmitLogin(){
-						    	document.getElementById(\'loginRedirect\').click();
-						    }
-					    </script>
-			    ';
-            } else { // Invalid password
+                loginRedirect($loginURL, 'Hello ' . $ufname . '! You have successfully logged in.', 2000);
+            } else if ($spass != $upass) { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
+            } else { // Valid password, but Privacy Policy not accepted
+                echo "You have not accepted the new Privacy Policy.";
             }
         } else { // User does not exist
             echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
