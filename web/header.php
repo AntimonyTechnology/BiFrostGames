@@ -40,8 +40,7 @@ function closeNav() {
 	<!--add class="viewing" to <a> tag to select page being viewed-->
 	<li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>
 	<li><a href="products.php" title="Browse products" >Shop</a></li>	
-	<li><a href="cart.php" title="View your cart" >My Cart</a></li>
-	<li><a href="orderHistory.php" title="View your order history">Order History</a></li>
+	
 	
 	<!-- Persistant login -->
 	<?php
@@ -57,7 +56,9 @@ function closeNav() {
 		if ($_SESSION['admin'] == 1){
 			print "<li><a href='addProducts.php' title='Add more products' >Add Product</a></li>";
 		}//END OF ADMIN CHECK
-		print "<li><a href='logOut.php' class='logout' >Log Out</a></li>";
+		print "<li><a href='cart.php' title='View your cart' >My Cart</a></li>
+				<li><a href='orderHistory.php' title='View your order history'>Order History</a></li>
+				<li><a href='logOut.php' class='logout' >Log Out</a></li>";
 	} 
 	else {
 		print "<li><a href='login.php' title='Login' id='login' >Log In</a></li>";
