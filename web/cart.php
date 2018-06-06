@@ -77,15 +77,16 @@ $result = mysqli_query($link, $getCartQuery);
 
       	//displays the contents of your cart
         $price = $row['price'];
-          print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div class="clearfix">' . 
-          '<img class =' . '"' . 'images' . '"' . 'src =' . '"' . $row['image'] . '">'.
-          '<p class="gameName">' . $row['name'] . '</p><br>' .
-          '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>'.
-          '<div id=' .'"' . 'price'. $currGameId .'"'.'>'. $price*$quantity . '</div>'.
-          '<input id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>'.
-          '<input style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>'.
-          '<input style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>'.
-          '<input type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'></form></div>';
+          print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div id="cartDiv">' . 
+          '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">'.
+          '<p class="cartGameName">' . $row['name'] . '</p><br>' .
+          '<span class="cartCname">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>'.
+          '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>'. $price*$quantity . '</div>'.
+		  '<input class="rButton" type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'>'.
+          '<input class="quantity" id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>'.
+          '<input class="qButton" style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>'.
+          '<input class="qButton" style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>'.
+          '</form></div>';
 
           //fancy line between products
          echo '<hr name = "productLine">';
@@ -128,11 +129,15 @@ $quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where ga
 //add in hidden forms to hold the gameId and values of each quantity field
 //or assign $_POST variables dynamically inside ^ form !!!!!!!!!!!!!!!!!!!!!
 for ($i=0; $i < count($gameArray); $i++) { 
-	echo '<input type="hidden" name="gameArray[]" value="'.$gameArray[$i].'">';
+	echo '<input type="hidden" name="gameArray[]" value="'.$gameArray[$i].'">
+			<input type="hidden" name="pagenum" value="1">
+	';
 }
 ?>
-<div id="total" style=float:right;></div><br><br>
-<input type="submit" name= "checkout" value="Checkout" style="float: right;">
+
+<div id="total" style=float:right;></div>
+<p id="subtotal">Subtotal: </p><br><br>
+<input type="submit" id= "checkOutButton" name= "checkout" value="Checkout" style="float: right;">
 </form>
 
 
