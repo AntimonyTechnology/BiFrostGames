@@ -31,8 +31,9 @@
 				echo "Sign up successful! Logging you in now....";
 				//Go to login.php and automatically log in the user 
 				echo '<form action="login.php" method="POST" id="signupRedirect">
-						<input type = "hidden" name="email" value="' . $email . '">
-						<input type = "hidden" name="pass" value="' . $_POST['pass'] . '">
+						<input type="hidden" name="email" value="' . $email . '">
+						<input type="hidden" name="pass" value="' . $_POST['pass'] . '">
+						<input type="hidden" name="send_page" value="signup.php">
 						
 						</form>
 						<script type="text/javascript">
