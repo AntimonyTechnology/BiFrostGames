@@ -24,7 +24,7 @@ $_SESSION['theconsole'] = $console;
 if (isset($_SESSION['user_id'])) {
     $cartURL = 'cart.php?gameId=';
 } else {
-    $cartURL = 'login.php?gameId=';
+    $cartURL = 'login.php?send_page=products.php&gameId=';
 }
 ?>
 <br><br><br>

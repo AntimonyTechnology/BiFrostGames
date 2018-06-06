@@ -77,7 +77,7 @@ if (isset($_GET['gameId'])) {
 						<form action="login.php" method="POST" >
 							<p>Email: <input type="email" name="email" id="email" size="25" value="';
 							if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; }
-							echo '" required /></p>
+							echo '" autofocus required /></p>
 							<p>Password: <input type="password" name="pass" required /></p>
 							<input type="submit" value="Submit" />
 						</form>
