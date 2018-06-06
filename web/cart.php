@@ -18,7 +18,10 @@ include('header.php');
 <?php 
 include('connectionSQL.php');
 $userId = $_SESSION['user_id'];
-
+if(isset($_GET['clearCart'])){
+	$clearCartQuery = 'DELETE FROM shopping_cart WHERE user_id ='. '"' . $userId . '"';
+	@mysqli_query($link, $clearCartQuery);
+}
 
 //checks if a game was removed and removes from DB and resets quantity
 if(isset($_GET['removeId'])) {
@@ -114,6 +117,10 @@ $quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where ga
 } 
 //echo json_encode($gameArray);
 ?>
+<form method="POST" action="cart.php?clearCart=1">
+
+<input type="submit" value="Clear Cart" id="clearCart" />
+</form>
 
 <form method ="POST" action= "checkout.php" >
 <?php
