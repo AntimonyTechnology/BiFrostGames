@@ -60,7 +60,7 @@ function closeNav() {
 		print "<li><a href='logOut.php' class='logout' >Log Out</a></li>";
 	} 
 	else {
-		print "<li><a href='login.php' title='Login' >Log In</a></li>";
+		print "<li><a href='login.php' title='Login' id='login' >Log In</a></li>";
 	} //END of SESSION==TRUE
 	?>
 	<!-- END of Persistant login -->
@@ -72,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
 	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
 }
 else {
-	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='login.php' class='loginButton' style='padding: 10px' >Log In</a></li></ul></div>";
+	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='login.php' class='loginButton' id='login' style='padding: 10px' >Log In</a></li></ul></div>";
 }
 	echo "<span style='font-size:36px;cursor:pointer;padding: 10px;' onClick='openNav()'><a>&#9776;</a></span></nav>";
 
