@@ -2,13 +2,9 @@
 
 <script>
 var userId = "";
-function openTOS() {
-    document.getElementById("terms").style.width = "80%";
-	
-}
+
 function openTOS(id){
 	document.getElementById("terms").style.width = "80%";
-	//console.log("user came from login")
 	userId = id;
 }
 function closeTOS() {
@@ -18,7 +14,8 @@ function closeTOS() {
 
 
 function agreeTOS() {
-	if(userId != ""){
+	console.log(userId);
+	if(userId != undefined){
 		//console.log("user came from login and need to update their policy agreement");
 		var passThis = {
 		 		id: userId
@@ -29,12 +26,13 @@ function agreeTOS() {
          url: "updateTOS.php",
          data: passThis,
          success: function(msg){
-                     alert("\n Thankyou for updating your terms of service! \n Please login again.");
+                     //alert("\n Thankyou for updating your terms of service! \n Please login again.");
                   }
     });
+		 document.getElementById("thankyou").innerHTML = "Thankyou for updating your terms of service! \n \n Please login again."
 		setTimeout(function(){
 			document.getElementById("login").click();
-		},1500); 
+		},3000); 
 		 
 	}	
 	else{
