@@ -27,7 +27,7 @@ include('popup.php');
 	    <p>Email: <input type="email" name="email" id="email" required /></p>
 	    <p>Password: <input type="password" name="pass" id="pass" required /></p>
 	    <p>Confirm Password: <input type="password" name="cpass" id="cpass" required /></p>
-        <p><input type="checkbox" name="priv_policy" id="priv_policy" required />I have read & accepted the <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">Privacy Policy.</a></p>
+        <p><input type="checkbox" name="priv_policy" id="priv_policy" required />I have read & accepted the <a href="javascript:void(0);" style="font-size:15px;" onclick="openTOS()">Privacy Policy.</a></p>
 	    <input type="submit" value="Submit" />
 	</form>
 </div>
