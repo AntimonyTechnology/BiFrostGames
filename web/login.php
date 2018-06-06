@@ -63,7 +63,8 @@
             } else if ($spass != $upass) { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             } else { // Valid password, but Privacy Policy not accepted
-                echo "<p>You have not accepted the new <a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS()\">Privacy Policy.</a></p>";
+                //use this to update policy inside js agreeTOS function
+                echo "<p>You have not accepted the new <a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS($uID)\">Privacy Policy.</a></p>";
             }
         } else { // User does not exist
             echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";

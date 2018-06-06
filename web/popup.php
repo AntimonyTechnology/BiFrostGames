@@ -1,10 +1,15 @@
 
 
 <script>
-
+var userId = "";
 function openTOS() {
     document.getElementById("terms").style.width = "80%";
 	
+}
+function openTOS(id){
+	document.getElementById("terms").style.width = "80%";
+	//console.log("user came from login")
+	userId = id;
 }
 function closeTOS() {
     document.getElementById("terms").style.width = "0";
@@ -13,9 +18,33 @@ function closeTOS() {
 
 
 function agreeTOS() {
-    closeTOS();
-	
+	if(userId != ""){
+		//console.log("user came from login and need to update their policy agreement");
+		var passThis = {
+		 		id: userId
+		 	};
+		 //passes variables to updateTOS.php to run the update policy query
+		 $.ajax({
+         type: "POST",
+         url: "updateTOS.php",
+         data: passThis,
+         success: function(msg){
+                     alert("\n Thankyou for updating your terms of service! \n Please login again.");
+                  }
+    });
+		setTimeout(function(){
+			document.getElementById("login").click();
+		},1500); 
+		 
+	}	
+	else{
+		//click checkbox
+		document.getElementById("priv_policy").click();
+		//console.log("the user agreed to TOS from sign up");
+	}
+	closeTOS();
 }
+
 
 function disagreeTOS() {
     closeTOS();
@@ -23,7 +52,7 @@ function disagreeTOS() {
 }
 
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <nav>
 <ul id="terms" class="TOSnav">
 <li><a href="javascript:void(0)" class="closebtn" onclick="closeTOS()">&times;</a></li>
