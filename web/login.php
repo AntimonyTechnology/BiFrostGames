@@ -1,4 +1,8 @@
 <?php
+if (isset($_GET['gameId'])) {
+		print_r($_GET['gameId']);
+	    setcookie("TempGameID", $_GET['gameId']);
+    }
     include('header.php');
     include('popup.php');
 
@@ -21,10 +25,8 @@
 				<div class="textBack" align="center" style="float:left" >
 					<div id="login" align="left">
 						<h1>Log In</h1><br><br><br>';
-
-	if (isset($_GET['gameId'])) {
-	    setcookie("TempGameID", $_GET['gameId']);
-    }
+	
+	
 
 	if (isset($_POST['email'])) { // Login submitted
        
