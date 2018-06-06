@@ -18,22 +18,22 @@ function validation(){
 
 	
 	<?php 
-	$pagenum = 1;
 	
+	if (!isset($_POST['pagenum'])) {
+		echo '
+			<form action="checkout.php" method="POST" onsubmit="return validation();">
+				<p>Page: <input type="text" name="pagenum" required /></p>
+				<input type="hidden" name="gameArray" value="'.$_POST['gameArray'] .'"/>
+				<input type="submit" value="Submit" />
+			</form>
+		';
+	}
 	
-	if($pagenum == 1){
-		echo'<nav>
-		<ul>
-		<li><a>STEP 1 -----></a></li>
-		<li><a>STEP 2 -----></a></li>
-		<li><a>STEP 3</a></li>
-		
-		
-		</ul>
-		</nav><br><br><br>';
+	if($_POST['pagenum'] == 1){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
+	print_r($_POST['gameArray']);
 	echo '<h2>Please Fill out Shipping Information:</h2>
 	
 	<form action="checkout.php" method="POST" onsubmit="return validation();">
@@ -42,52 +42,58 @@ function validation(){
 	    <p>Province: <input type="text" name="province" id="province" required /></p>
 	    <p>City: <input type="text" name="city" id="city" required /></p>
 		<p>Country: <input type="text" name="city" id="city" required /></p>
-	    <input type="hidden" name="pagenum" value="'. $pagenum .' + 1 "/>
+	    <input type="hidden" name="pagenum" value="2"/>
+		<input type="hidden" name="gameArray" value="'.$_POST['gameArray'] .'"/>
 	    <input type="submit" value="Submit" />
 	</form>';
 	
 	}
-	elseif($pagenum == 2){
-		echo'<nav>
-		<ul>
-		<li><a>STEP 1 -----></a></li>
-		<li><a>STEP 2 -----></a></li>
-		<li><a>STEP 3</a></li>
-		
-		
-		</ul>
-		</nav><br><br><br>';
+	elseif($_POST['pagenum'] == 2){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
-		echo '<h2>Please Fill out Payment Information:</h2>
+		print_r($_POST['gameArray']);
+		require_once('./config.php');
+		echo '<h2>Please confirm your order:</h2>
 	
-	<form action="checkout.php" method="POST" onsubmit="return validation();">
-		DO PAYMENT HERE!
-	    <input type="hidden" name="pagenum" value="'. $pagenum .' + 1 "/>
-	    <input type="submit" value="Submit" />
+	<form action="checkout.php" method="post">
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="' . $stripe['publishable_key'] . '"
+          data-description="Access for a year"
+          data-amount="5000"
+          data-locale="auto"></script>
+	    <input type="hidden" name="pagenum" value="3"/>
+		<input type="hidden" name="gameArray" value="'.$_POST['gameArray'] .'"/>
 	</form>';
 		
 	}else{
-		echo'<nav>
-		<ul>
-		<li><a>STEP 1 -----></a></li>
-		<li><a>STEP 2 -----></a></li>
-		<li><a>STEP 3</a></li>
 		
-		
-		</ul>
-		</nav><br><br><br>';
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
-		echo '<h2>Please Fill out Payment Information:</h2>
+	print_r($_POST['gameArray']);
+		
+		require_once('./config.php');
 	
-	<form action="" method="POST" onsubmit="return validation();">
-		DO CONFIRMATION HERE!!!
-	   
-	    <input type="submit" value="Submit" />
-	</form>';
+		$token = $_POST['stripeToken'];
+		$email = $_POST['stripeEmail'];
+		
+		$customer = \Stripe\Customer::create(array(
+		'email' => $email,
+		'source' => $token
+		));
+		
+		$charge = \Stripe\Charge::create(array(
+			'customer' => $customer->id,
+			'amount'   => 5000,
+			'currency' => 'usd'
+			));
+		
+		
+		
+		echo '<h2>Thank you for your order!</h2>';
+	
+	
 	}
 ?>
 	</div>
