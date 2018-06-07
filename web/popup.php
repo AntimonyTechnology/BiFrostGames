@@ -15,8 +15,9 @@ function closeTOS() {
 
 function agreeTOS() {
 	console.log(userId);
+	//this checks if a user id was passed or not(signup/login)
 	if(userId != undefined){
-		//console.log("user came from login and need to update their policy agreement");
+		//user came from login and need to update their policy agreement
 		var passThis = {
 		 		id: userId
 		 	};
@@ -36,7 +37,7 @@ function agreeTOS() {
 		 
 	}	
 	else{
-		//click checkbox
+		//user came from signup and is agreeing for the first time
 		document.getElementById("priv_policy").click();
 		//console.log("the user agreed to TOS from sign up");
 	}

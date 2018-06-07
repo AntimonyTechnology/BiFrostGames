@@ -18,12 +18,14 @@ include('header.php');
 <?php 
 include('connectionSQL.php');
 $userId = $_SESSION['user_id'];
+
+//checks if user selected clear cart and runs the query
 if(isset($_GET['clearCart'])){
 	$clearCartQuery = 'DELETE FROM shopping_cart WHERE user_id ='. '"' . $userId . '"';
 	@mysqli_query($link, $clearCartQuery);
 }
 
-//checks if a game was removed and removes from DB and resets quantity
+//checks if a game was removed and removes from DB
 if(isset($_GET['removeId'])) {
 	$gameId = $_GET['removeId'];
 	//remove from DB here
@@ -133,6 +135,7 @@ for ($i=0; $i < count($gameArray); $i++) {
 			
 	';
 }
+echo '<input type="hidden" name="total" id="passTotalCheckout">';
 echo '<input type="hidden" name="pagenum" value="1">';
 ?>
 
@@ -219,6 +222,7 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		}
 		//assigns total Price
 		document.getElementById('total').innerHTML = total.toFixed(2);
+		document.getElementById('passTotalCheckout').value = total.toFixed(2);
 	}
 	//calls to calculate the total on page load
 	calcTotal(<?php echo json_encode($gameArray); ?>);

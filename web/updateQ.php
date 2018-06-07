@@ -1,4 +1,5 @@
 <?php
+//this php is run server side from ajax inside JS function cart.php
 session_start();
 include('connectionSQL.php');
 if(isset($_POST['quantity'])){
@@ -10,8 +11,9 @@ if(isset($_POST['quantity'])){
 
 	@mysqli_query($link, $quantityQuery);
 
+	//make sure to close the link for server scripts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	mysqli_close($link);
-	echo "done";
+	//echo "done";
 }
 
 
