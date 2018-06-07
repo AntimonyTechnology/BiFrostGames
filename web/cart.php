@@ -130,9 +130,10 @@ $quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where ga
 //or assign $_POST variables dynamically inside ^ form !!!!!!!!!!!!!!!!!!!!!
 for ($i=0; $i < count($gameArray); $i++) { 
 	echo '<input type="hidden" name="gameArray[]" value="'.$gameArray[$i].'">
-			<input type="hidden" name="pagenum" value="1">
+			
 	';
 }
+echo '<input type="hidden" name="pagenum" value="1">';
 ?>
 
 <div id="total" style=float:right;></div>
