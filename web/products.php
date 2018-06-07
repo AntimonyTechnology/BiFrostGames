@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 
 ?>
 	
@@ -17,15 +17,16 @@ include('header.php');
 </ul>
 </nav>
 <?php
+    //used to determine the console query
+    $console = @$_GET['console'];
+    $_SESSION['theconsole'] = $console;
 
-//used to determine the console query
-$console = @$_GET['console'];
-$_SESSION['theconsole'] = $console;
-if (isset($_SESSION['user_id'])) {
-    $cartURL = 'cart.php?gameId=';
-} else {
-    $cartURL = 'login.php?send_page=products.php&gameId=';
-}
+    // Generates the redirect URL to use if the user tries to buy an item
+    if (isset($_SESSION['user_id'])) { // User signed in -> cart
+        $cartURL = 'cart.php?gameId=';
+    } else { // User not signed in -> login
+        $cartURL = 'login.php?gameId=';
+    }
 ?>
 <br><br><br>
 <form class = "genreSelect" action="products.php" method="Post" style = "float:right">
@@ -33,25 +34,24 @@ if (isset($_SESSION['user_id'])) {
 <option value = "All">All</option>
 
 <?php 
-//used to get the genres from DB
+    //used to get the genres from DB
 	include ('connectionSQL.php');
 	$genreQuery = "select * from genres";
 	$genreList = mysqli_query($link, $genreQuery);
-if($genreList){
-	$genreRows = mysqli_num_rows($genreList);
-	print $genreRows;
-	while($genre = mysqli_fetch_array($genreList)) {
-		print '<option value =' . '"' . $genre['genre_id'] . '">' . $genre['genre_id'] . '</option>';
-	}
-	print '<input name=' . '"' . 'theconsole' . '"' . 'type=' . "'" . 'hidden' . "'" . 'value = ' . "'" . $console . "'" . '>';
-}
+    if($genreList){
+        $genreRows = mysqli_num_rows($genreList);
+        print $genreRows;
+        while($genre = mysqli_fetch_array($genreList)) {
+            print '<option value =' . '"' . $genre['genre_id'] . '">' . $genre['genre_id'] . '</option>';
+        }
+        print '<input name=' . '"' . 'theconsole' . '"' . 'type=' . "'" . 'hidden' . "'" . 'value = ' . "'" . $console . "'" . '>';
+    }
 
-if(isset($_POST['submitQ'])){
+    if(isset($_POST['submitQ'])){
 
-	$selectedGenre = $_POST['theGenre'];
-	$console = $_POST['theconsole'];
-}
-
+        $selectedGenre = $_POST['theGenre'];
+        $console = $_POST['theconsole'];
+    }
 ?>
 </select>
 <input type = "submit" name ="submitQ" value="Search"/>
@@ -61,62 +61,53 @@ if(isset($_POST['submitQ'])){
 
 
 <?php
+    if(($console == "" || $console == "All")){
+        if($selectedGenre == "" || $selectedGenre == "All") {
+            //none selected
+            $query = 'select * from games';
+        }
+        else {
+            //genre selected only
+            $query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"';
+        }
+    }
+    else {
+        if($selectedGenre == "" || $selectedGenre == "All") {
+        //console only selected
+        $query = "select * from games where console_name like " . '"' . $console . '"';
+    }
+        else {
+            //both selected
+            $query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"' . 'AND console_name =' . '"' . $console . '"';
+        }
 
+    }
 
-
-
-if(($console == "" || $console == "All")){
-	if($selectedGenre == "" || $selectedGenre == "All") {
-		//none selected
-		$query = 'select * from games';
-	}
-	else {
-		//genre selected only
-		$query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"';
-	}
-}
-else {
-	if($selectedGenre == "" || $selectedGenre == "All") {
-	//console only selected
-	$query = "select * from games where console_name like " . '"' . $console . '"';
-}
-	else {
-		//both selected
-		$query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"' . 'AND console_name =' . '"' . $console . '"';
-	}
-	
-}
-
-//print "the console: " . $console . '<br>';
-//print "the genre: " . $selectedGenre . '<br>';
-//print "the query: " . $query . '<br>';
+    //print "the console: " . $console . '<br>';
+    //print "the genre: " . $selectedGenre . '<br>';
+    //print "the query: " . $query . '<br>';
 ?>
 
 <div class="textBack" align="left" style="float:left" >
 <?php header('charset=utf-8');
-include ('connectionSQL.php');
+    include ('connectionSQL.php');
 
 
- 
- $result = mysqli_query($link, $query);
- if ($result)   {
-     $row_count = mysqli_num_rows($result);
-     //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
-     
-     while ($row = mysqli_fetch_array($result)) {
-         //print $row['name'] . '<br>' .
-          print '<div class="clearfix">' . '<br>' .
-          '<img class ="images" src ="' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
-          '<span class="consoleName">' . $row['console_name'] . '<br>' .
-           '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="'. $cartURL . $row['game_id'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
-         echo '<hr name = "productLine">';
-         
 
+    $result = mysqli_query($link, $query);
+    if ($result)   {
+        $row_count = mysqli_num_rows($result);
+        //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
 
-     }
-     
- }
-
+        while ($row = mysqli_fetch_array($result)) {
+            //print $row['name'] . '<br>' .
+             print '<div class="clearfix">' . '<br>' .
+             '<img class ="images" src ="' . $row['image'] . '"><p class="gameName">' . $row['name'] . '</p><br>' .
+             '<span class="consoleName">' . $row['console_name'] . '<br>' .
+              '</span><br>'. '<br>' . $row['description'] . '<br><br><br><br><p class="price"><a href="'. $cartURL . $row['game_id'] . '" style="text-decoration:none;">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
+            echo '<hr name = "productLine">';
+        }
+    }
 ?>
 <br>
 <br>
@@ -134,6 +125,6 @@ include ('connectionSQL.php');
 </article>
 
 <?php
-include('footer.php');
+    include('footer.php');
 	
 ?>
