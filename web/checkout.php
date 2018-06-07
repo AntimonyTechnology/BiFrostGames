@@ -83,6 +83,7 @@ function validation(){
           data-amount="'. $total . '"
           data-locale="auto"></script>
 	    <input type="hidden" name="pagenum" value="3"/>
+	    <input type="hidden" name="total" value="'. $total .'"/>
 		<input type="hidden" name="gameArray" value="'. $gameArray .'"/>
 	</form>';
 		
@@ -91,7 +92,7 @@ function validation(){
 
 // page 3 confirmation
 	else{
-		
+		$total = $_POST['total'];
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
@@ -109,8 +110,8 @@ function validation(){
 		
 		$charge = \Stripe\Charge::create(array(
 			'customer' => $customer->id,
-			'amount'   => 5000,
-			'currency' => 'usd'
+			'amount'   => $total,
+			'currency' => 'cad'
 			));
 		
 		
