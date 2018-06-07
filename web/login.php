@@ -3,6 +3,11 @@
 		print_r($_GET['gameId']);
 	    setcookie("TempGameID", $_GET['gameId']);
     }
+
+    if (isset($_POST['send_page'])) {
+        $sendPage = $_POST['send_page'];
+    }
+
     include('header.php');
     include('popup.php');
 
@@ -54,6 +59,10 @@
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
 
+                // Update user info with login time
+                $loginquery = "UPDATE users SET last_login=DEFAULT WHERE user_id='" . $uID . "'";
+                $loginresult = @mysqli_query($link, $loginquery);
+
                 // Determine the final redirect URL
                 if (isset($_COOKIE['TempGameID'])) {
                     $loginURL = 'cart.php?gameId=' . $_COOKIE['TempGameID'];
@@ -61,11 +70,16 @@
                     $loginURL = 'products.php';
                 }
 
-                // Update user info with login time
-                $loginquery = "UPDATE users SET last_login=DEFAULT WHERE user_id='" . $uID . "'";
-                $loginresult = @mysqli_query($link, $loginquery);
+                // Determine redirect message & delay based on sending page
+                if ($sendPage == 'signup.php') {
+                    $redirectMessage = '';
+                    $redirectDelay = 0;
+                } else {
+                    $redirectMessage = 'Hello ' . $ufname . '! You have successfully logged in.';
+                    $redirectDelay = 2000;
+                }
 
-                loginRedirect($loginURL, 'Hello ' . $ufname . '! You have successfully logged in.', 2000);
+                loginRedirect($loginURL, $redirectMessage, $redirectDelay);
             } else if ($spass != $upass) { // Invalid password
                 echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
             } else { // Valid password, but Privacy Policy not accepted
