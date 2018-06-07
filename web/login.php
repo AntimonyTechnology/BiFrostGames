@@ -6,10 +6,11 @@
     include('header.php');
     include('popup.php');
 
+    // Redirect the user to the next page.
     function loginRedirect ($url = 'index.php', $message, $timeout = 3000) { // $timeout is in milliseconds
         //echo "<p>$url</p>";
-        echo "<p>$message</p>";
         //echo "<p>$timeout</p>";
+        echo "<p>$message</p>";
 
         echo '  <a href="' . $url . '" id="loginRedirect"></a>
 					    <script type="text/javascript">
@@ -27,7 +28,6 @@
 						<h1>Log In</h1><br><br><br>';
 
 	if (isset($_POST['email'])) { // Login submitted
-       
         // Set the submitted login info
         $semail = strip_tags($_POST['email']);
         $spass = sha1($_POST['pass']);
@@ -50,14 +50,20 @@
 
             // Check the submitted password, then handle it
             if (($spass == $upass) && ($upriv == 1)) { // Valid password & Privacy Policy accepted
+                // Set the user's session info
                 $_SESSION['user_id'] = $uID;
                 $_SESSION['admin'] = $urole;
 
+                // Determine the final redirect URL
                 if (isset($_COOKIE['TempGameID'])) {
                     $loginURL = 'cart.php?gameId=' . $_COOKIE['TempGameID'];
                 } else {
                     $loginURL = 'products.php';
                 }
+
+                // Update user info with login time
+                $loginquery = "UPDATE users SET last_login=DEFAULT WHERE user_id='" . $uID . "'";
+                $loginresult = @mysqli_query($link, $loginquery);
 
                 loginRedirect($loginURL, 'Hello ' . $ufname . '! You have successfully logged in.', 2000);
             } else if ($spass != $upass) { // Invalid password
