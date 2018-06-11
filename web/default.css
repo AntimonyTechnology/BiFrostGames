@@ -24,11 +24,30 @@
 	
 }
 
-
+.stripe-button {
+	padding-bottom: 25px;
+	margin-bottom:25px;
+}
 .quantity {
 	
 	margin-right: 70px;
 	margin-bottom: 5px;
+}
+
+.checkoutTotal {
+	margin-right: 70px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	float: left;
+	
+}
+
+.checkoutQuantity{
+	margin-right: 70px;
+	margin-bottom: 5px;
+	
+	float:left;
+	
 }
 
 .qButton {
@@ -177,7 +196,7 @@
 }
 
 #cartDiv {
-	padding-bottom: 0;
+	padding-bottom: 25px;
 	margin-bottom: 20px;
 }
 	
