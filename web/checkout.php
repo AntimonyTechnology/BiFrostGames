@@ -35,9 +35,9 @@ function validation(){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
-	print_r($_POST['gameArray']);
+	//print_r($_POST['gameArray']);
 	//if this needs to be done, passing the post gameArray needs to be done with for loop input echo, see line 133 in cart.php
-	$gameArray = $_POST['gameArray'];
+	//$gameArray = $_POST['gameArray'];
 
 	//takes the total passed from POST
 	$total = $_POST['total'];
@@ -50,7 +50,7 @@ function validation(){
 	    <p>Postal Code: <input type="text" name="postal" id="postal" required /></p>
 	    <p>Province: <input type="text" name="province" id="province" required /></p>
 	    <p>City: <input type="text" name="city" id="city" required /></p>
-		<p>Country: <input type="text" name="city" id="city" required /></p>
+		<p>Country: <input type="text" name="country" id="country" required /></p>
 	    <input type="hidden" name="pagenum" value="2"/>
 		<input type="hidden" name="gameArray" value="'. $gameArray .'"/>
 		<input type="hidden" name="total" value="'. $total .'"/>
@@ -65,27 +65,74 @@ function validation(){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
 	<h1>Checkout</h1><br><br><br>';
-		print_r($_POST['gameArray']);
+		//$games = $_POST['gameArray'];
+		//print_r($games);
 		//if this needs to be passed up, passing the post gameArray needs to be done with for loop input echo, see line 133 in cart.php
-		$gameArray = $_POST['gameArray'];
+		//$gameArray = $_POST['gameArray'];
 
 		//takes the total passed from POST
 		$total = str_replace('.', '', $_POST['total']);
+		$pricetotal = $total / 100;
 		//echo '<br>' . $total;
-
+		
+		$address = $_POST['address'];
+		$postal = $_POST['postal'];
+		$province = $_POST['province'];
+		$city = $_POST['city'];
+		$country = $_POST['country'];
+		
 		require_once('./config.php');
 		echo '<h2>Please confirm your order:</h2>
-	
-	<form action="checkout.php" method="post">
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+		<h3>Shipping address:</h3>
+		<p><b>Address:</b> ' . $address .'</p>
+		<p><b>Postal Code:</b> ' . $postal . '</p>
+		<p><b>Province:</b> ' . $province . '</p>
+		<p><b>City:</b> ' . $city . '</p>
+		<p><b>Country:</b> ' . $country . ' </p>
+		
+		<h3>Games being purchased:</h3>';
+		//used to query the users cart table in DB to populate the cart
+		//use to get which game_id(s) and theyre quantities from shopping cart to store in variables based on userId
+		$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
+		$result = mysqli_query($link, $getCartQuery);
+		if ($result)   {
+			$row_count = mysqli_num_rows($result);
+			//print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
+			$count = 0;
+     
+		while ($row = mysqli_fetch_array($result)) {
+			//print $row['name'] . '<br>' .
+			//print_r($_COOKIE[$currGameId]);
+			$currGameId = $row['game_id'];
+			//checks if the game already has a cookie assigned to it
+			$quantity = $row['quantity'];
+
+			//displays the contents of your cart
+			$price = $row['price'];
+			  print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div id="cartDiv">' . 
+			  '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">'.
+			  '<p class="cartGameName">' . $row['name'] . '</p>' .
+			  '<span class="cartCname">Console: ' . $row['console_name'] . '<br>' .'</span>' .
+			  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
+			  '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
+			  '</form>';
+
+			  //fancy line between products
+			 echo '<hr name = "productLine">';
+			
+		}
+		}
+		 echo '<p class="checkoutTotal"> Total Price: $'. $pricetotal .'</p>';
+	echo '<form action="checkout.php" method="post" style="float:right">
+		<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="' . $stripe['publishable_key'] . '"
-          data-description="Access for a year"
+          data-description="Game(s) purchase"
           data-amount="'. $total . '"
           data-locale="auto"></script>
 	    <input type="hidden" name="pagenum" value="3"/>
 	    <input type="hidden" name="total" value="'. $total .'"/>
 		<input type="hidden" name="gameArray" value="'. $gameArray .'"/>
-	</form>';
+	</form></div>';
 		
 	}
 
