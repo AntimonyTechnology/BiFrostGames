@@ -3,8 +3,9 @@
 include('connectionSQL.php');
 
 	$userId = mysqli_real_escape_string($link, $_POST['id']);
+    $policy = mysqli_real_escape_string($link, $_POST['policy']);
 
-	$updatePolicyQuery = 'UPDATE users set priv_policy= 1 where user_id ='.$userId;
+	$updatePolicyQuery = 'UPDATE users set priv_policy=' . $policy . ' where user_id ='.$userId;
 
 	@mysqli_query($link, $updatePolicyQuery);
 	
