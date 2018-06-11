@@ -6,7 +6,15 @@ session_start();
 session_destroy();
 unset($_COOKIE['TempGameID']);
 setcookie("TempGameID", 1, time() - 3600);
-echo 'You have been logged out. <a href="index.php">Go back</a>';
+echo "<p>You have successfully logged out.</p>";
+echo '  <a href="index.php" id="loginRedirect"></a>
+                            <script type="text/javascript">
+                                setTimeout(SubmitLogin, 3000);
+                                function SubmitLogin(){
+                                    document.getElementById(\'loginRedirect\').click();
+                                }
+                            </script>
+        ';
 
 echo '</p></article></div>';
 

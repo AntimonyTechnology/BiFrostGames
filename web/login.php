@@ -40,7 +40,7 @@
                                     document.getElementById(\'loginRedirect\').click();
                                 }
                             </script>
-            ';
+        ';
     }
 
     include('header.php');
