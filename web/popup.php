@@ -1,5 +1,6 @@
 
 
+
 <script>
 var userId = "";
 
@@ -19,8 +20,8 @@ function agreeTOS() {
 	if(userId != undefined){
 		//user came from login and need to update their policy agreement
         var passThis = {
-			id: userId
-
+			id: userId,
+            policy: 1
 		};
 		//passes variables to updateTOS.php to run the update policy query
 		$.ajax({
@@ -28,12 +29,12 @@ function agreeTOS() {
             url: "updateTOS.php",
             data: passThis,
             success: function(msg){
-                //alert("\n Thankyou for updating your terms of service! \n Please login again.");
+                //alert("\n Thank you for updating your terms of service! Logging you in...");
             }
         });
         document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
 		setTimeout(function(){
-		    document.getElementById("login").click();
+		    document.getElementById("autoLogin").submit();
 		},3000);
 	} else {
 		//user came from signup and is agreeing for the first time
@@ -45,8 +46,26 @@ function agreeTOS() {
 
 
 function disagreeTOS() {
+    console.log(userId);
+    //this checks if a user id was passed or not(signup/login)
+    if(userId != undefined){
+        //user came from login and need to update their policy agreement
+        var passThis = {
+            id: userId,
+            policy: 0
+        };
+        //passes variables to updateTOS.php to run the update policy query
+        $.ajax({
+            type: "POST",
+            url: "updateTOS.php",
+            data: passThis,
+            success: function(msg){
+                //alert("\n You must accept the Privacy Policy to log in.");
+            }
+        });
+    }
+
     closeTOS();
-	
 }
 
 </script>
@@ -168,6 +187,15 @@ function disagreeTOS() {
 <?php
 	echo "<input type='submit' value='Agree' class='TOSsubmit' onClick='agreeTOS()'/>";
 	echo "<input type='submit' value='Disagree' class='TOSsubmit'  onClick='disagreeTOS()'/>";
+    if (isset($_POST['email'])) {
+        echo "
+            <form action='login.php' method='POST' id='autoLogin'>
+                <input type='hidden' name='email' value='" . $_POST['email'] . "'>
+                <input type='hidden' name='pass' value='" . $_POST['pass'] . "'>
+                <input type='hidden' name='send_page' value='popup.php'>
+            </form>
+        ";
+    }
 ?>
 
 </div>	

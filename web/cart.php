@@ -43,8 +43,8 @@ if(isset($_GET['gameId'])) {
 	$gameId = $_GET['gameId'];
 	//runs query to check if the game is already present
 	$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
-$result = mysqli_query($link, $getCartQuery);
-$quantityDefault = 1;
+    $result = mysqli_query($link, $getCartQuery);
+    $quantityDefault = 1;
  	if ($result)   {
      	while ($row = mysqli_fetch_array($result)) {
      		//copies a unique price for this game to be passed to JS function addQ()
@@ -65,41 +65,39 @@ $quantityDefault = 1;
 //use to get which game_id(s) and theyre quantities from shopping cart to store in variables based on userId
 $getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
 $result = mysqli_query($link, $getCartQuery);
- if ($result)   {
-     $row_count = mysqli_num_rows($result);
-     //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
-     $count = 0;
-     
-     while ($row = mysqli_fetch_array($result)) {
-         //print $row['name'] . '<br>' .
-     	//print_r($_COOKIE[$currGameId]);
-     	$currGameId = $row['game_id'];
-     	//checks if the game already has a cookie assigned to it
-     	$quantity = $row['quantity'];
+if ($result)   {
+    $row_count = mysqli_num_rows($result);
+    //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
+    $count = 0;
+    while ($row = mysqli_fetch_array($result)) {
+        //print $row['name'] . '<br>' .
+        //print_r($_COOKIE[$currGameId]);
+        $currGameId = $row['game_id'];
+        //checks if the game already has a cookie assigned to it
+        $quantity = $row['quantity'];
 
-      	//displays the contents of your cart
+        //displays the contents of your cart
         $price = $row['price'];
-          print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div id="cartDiv">' . 
-          '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">'.
-          '<p class="cartGameName">' . $row['name'] . '</p><br>' .
-          '<span class="cartCname">' . $row['console_name'] . '<br>' .'</span><br>' . '<br><br>'.
-          '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>'. $price*$quantity . '</div>'.
-		  '<input class="rButton" type="submit" value="Remove" id=' .'"' . 'remove'. $currGameId .'"'.'>'.
-          '<input class="quantity" id=' .'"' . 'quantity'. $currGameId .'"'. 'style=float:right;  type="textbox" value='. $quantity.'>'.
-          '<input class="qButton" style=float:right; type="button" value="+" onclick='.'"'.'addQ('.$currGameId.','.$price.')"'. '>'.
-          '<input class="qButton" style=float:right; type="button" value="-" onclick='.'"'.'remQ('.$currGameId.','.$price.')"'. '>'.
-          '</form></div>';
+        print '<form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
+            '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">' .
+            '<p class="cartGameName">' . $row['name'] . '</p><br>' .
+            '<span class="cartCname">' . $row['console_name'] . '<br>' . '</span><br>' . '<br><br>' .
+            '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>' . $price * $quantity . '</div>' .
+            '<input class="rButton" type="submit" value="Remove" id=' . '"' . 'remove' . $currGameId . '"' . '>' .
+            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . '>' .
+            '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
+            '<input class="qButton" style=float:right; type="button" value="-" onclick=' . '"' . 'remQ(' . $currGameId . ',' . $price . ')"' . '>' .
+            '</form></div>';
 
-          //fancy line between products
-         echo '<hr name = "productLine">';
-         $totalPrice = $totalPrice + $price;
-         //assigns an array of all the game ids to identify for JS function calcTotal()
-         $gameArray[$count]=$row['game_id'];
-         $count = $count + 1;
-         
-     }
-     
- }
+        //fancy line between products
+        echo '<hr name = "productLine">';
+        $totalPrice = $totalPrice + $price;
+        //assigns an array of all the game ids to identify for JS function calcTotal()
+        $gameArray[$count] = $row['game_id'];
+        $count = $count + 1;
+
+    }
+}
 
 $_GET['count'] = $count;
 
