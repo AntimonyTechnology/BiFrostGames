@@ -18,25 +18,24 @@ function agreeTOS() {
 	//this checks if a user id was passed or not(signup/login)
 	if(userId != undefined){
 		//user came from login and need to update their policy agreement
-		var passThis = {
-		 		id: userId
-		 	};
-		 //passes variables to updateTOS.php to run the update policy query
-		 $.ajax({
-         type: "POST",
-         url: "updateTOS.php",
-         data: passThis,
-         success: function(msg){
-                     //alert("\n Thankyou for updating your terms of service! \n Please login again.");
-                  }
-    });
-		 document.getElementById("thankyou").innerHTML = "Thankyou for updating your terms of service! \n \n Please login again."
+        var passThis = {
+			id: userId
+
+		};
+		//passes variables to updateTOS.php to run the update policy query
+		$.ajax({
+            type: "POST",
+            url: "updateTOS.php",
+            data: passThis,
+            success: function(msg){
+                //alert("\n Thankyou for updating your terms of service! \n Please login again.");
+            }
+        });
+        document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
 		setTimeout(function(){
-			document.getElementById("login").click();
-		},3000); 
-		 
-	}	
-	else{
+		    document.getElementById("login").click();
+		},3000);
+	} else {
 		//user came from signup and is agreeing for the first time
 		document.getElementById("priv_policy").click();
 		//console.log("the user agreed to TOS from sign up");
@@ -167,12 +166,8 @@ function disagreeTOS() {
 <br>
 <br>
 <?php
-if (true){
 	echo "<input type='submit' value='Agree' class='TOSsubmit' onClick='agreeTOS()'/>";
 	echo "<input type='submit' value='Disagree' class='TOSsubmit'  onClick='disagreeTOS()'/>";
-	
-}
-
 ?>
 
 </div>	
