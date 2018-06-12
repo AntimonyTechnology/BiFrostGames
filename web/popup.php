@@ -32,10 +32,10 @@ function agreeTOS() {
                 //alert("\n Thank you for updating your terms of service! Logging you in...");
             }
         });
-        document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
+        /* document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
 		setTimeout(function(){
 		    document.getElementById("autoLogin").submit();
-		},3000);
+		},3000); */
 	} else {
 		//user came from signup and is agreeing for the first time
 		document.getElementById("priv_policy").click();
@@ -60,10 +60,11 @@ function disagreeTOS() {
             url: "updateTOS.php",
             data: passThis,
             success: function(msg){
-                //alert("\n You must accept the Privacy Policy to log in.");
+                //alert(msg);
             }
         });
     }
+	
 
     closeTOS();
 }
