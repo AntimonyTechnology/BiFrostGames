@@ -23,6 +23,7 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+    //
 </script>
 
 
@@ -70,7 +71,7 @@
 </nav>
 <?php
 if (isset($_SESSION['user_id'])) {
-	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
+	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' id='logout' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
 }
 else {
 	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='login.php' class='loginButton' id='login' style='padding: 10px' >Log In</a></li></ul></div>";
