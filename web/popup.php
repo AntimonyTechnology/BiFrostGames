@@ -32,13 +32,10 @@ function agreeTOS() {
                 //alert("\n Thank you for updating your terms of service! Logging you in...");
             }
         });
-        if(document.getElementById('thankyou')){
-        	document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
-			setTimeout(function(){
-		    	document.getElementById("autoLogin").submit();
-			},3000);
-        }
-
+        /* document.getElementById("thankyou").innerHTML = "Thank you for updating your terms of service! Logging you in..."
+		setTimeout(function(){
+		    document.getElementById("autoLogin").submit();
+		},3000); */
 	} else {
 		//user came from signup and is agreeing for the first time
 		document.getElementById("priv_policy").click();
@@ -68,14 +65,8 @@ function disagreeTOS() {
         });
     }
 	
-    closeTOS();
 
-    if(document.getElementById('logout')){
-    	setTimeout(function(){
-		    	document.getElementById('logout').click();
-			},500);
-    	
-    }
+    closeTOS();
 }
 
 </script>
