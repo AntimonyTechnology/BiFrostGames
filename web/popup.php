@@ -6,10 +6,12 @@ var userId = "";
 
 function openTOS(id){
 	document.getElementById("terms").style.width = "80%";
+	document.getElementById("mySidenav").style.width = "80%";
 	userId = id;
 }
 function closeTOS() {
     document.getElementById("terms").style.width = "0";
+	document.getElementById("mySidenav").style.width = "0";
 	
 }
 
