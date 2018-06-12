@@ -44,6 +44,7 @@
 	<?php
 	session_start();
 	include ('connectionSQL.php');
+	include('popup.php');
 	
 	
 	if (isset($_SESSION['user_id'])) {
@@ -56,7 +57,8 @@
 		}//END OF ADMIN CHECK
 		print "<li><a href='cart.php' title='View your cart' >My Cart</a></li>
 				<li><a href='orderHistory.php' title='View your order history'>Order History</a></li>
-				<li><a href='logOut.php' class='logout' >Log Out</a></li>";
+				<li><a href='logOut.php' class='logout' >Log Out</a></li>
+				<li><a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS($user)\">Terms of Service</a></li>";
 	} 
 	else {
 		print "<li><a href='login.php' title='Login' id='login' >Log In</a></li>";
