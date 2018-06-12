@@ -15,9 +15,9 @@ include('header.php');
 <br>
 <?php header('charset=utf-8');
     include ('connectionSQL.php');
-
+    $userId = $_SESSION['user_id'];
     //select * from orders inner join receipt using(receipt_id) where user_id= 29;
-    $query = 'select * from orders';
+    $query = 'select * from orders inner join receipt using(receipt_id) where user_id=29';
     $result = mysqli_query($link, $query);
     if ($result)   {
         $row_count = mysqli_num_rows($result);
@@ -27,9 +27,13 @@ include('header.php');
             //print $row['name'] . '<br>' .
              print '<div class="clearfix">' . '<br>' .
              
-             '<span class="receiptId">' . $row['receipt_id'] . '<br>' .'</span>'.
-             '<span class="userId">' . $row['user_id'] . '<br>' .'</span>'.
-             '<span class="orderTime">' . $row['order_time'] . '<br>' .'</span>';
+             '<span class=""> Receipt No. : ' . $row['receipt_id'] . '<br>' .'</span>'.
+             '<span class="">Date: ' . $row['order_time'] . '<br>' .'</span>' .
+             //insert second loop here
+             '<span class="">' . $row['name'] . '<br>' .'</span>'.
+             '<span class="">' . $row['quantity'] . '<br>' .'</span>'.
+             '<span class="">' . $row['price'] . '<br>' .'</span>';
+             
             echo '<hr name = "productLine">';
         }
     }
