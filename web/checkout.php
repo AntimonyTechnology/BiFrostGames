@@ -68,12 +68,12 @@ function validation(){
 	
 	<form action="checkout.php" method="POST" onsubmit="return validation();">
 	    <p>Address: <input type="text" name="address" id="address" value="'. $addressPlaceholder .'" pattern="\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:[Aa]venue|[Ll]ane|[Rr]oad|[Bb]oulevard|[Dd]rive|[Ss]treet|[Aa]ve|[Dd]r|[Rr]d|[Bb]lvd|[Ll]n|[Ss]t)\.?" required /></p>
-	    <p>Postal Code: <input type="text" name="postal" id="postal" value="'. $postalPlaceholder .' " required /></p>
-	    <p>Province: <input type="text" name="province" id="province" value="' . $provincePlaceholder .' " required /></p>
 	    <p>City: <input type="text" name="city" id="city" value="'. $cityPlaceholder .'" required /></p>
+		<p>Province: <input type="text" name="province" id="province" value="' . $provincePlaceholder .' " required /></p>
 		<p>Country: <input type="text" name="country" id="country" value="'. $countryPlaceholder .'" required /></p>
+		<p>Postal Code: <input type="text" name="postal" id="postal" value="'. $postalPlaceholder .' " required /></p>
 	    <input type="hidden" name="pagenum" value="2"/>
-		<input type="hidden" name="gameArray" value="'. $gameArray .'"/>
+		
 		<input type="hidden" name="total" value="'. $total .'"/>
 	    <input type="submit" value="Submit" />
 	</form>';
@@ -123,10 +123,10 @@ function validation(){
 		echo '<h2>Please confirm your order:</h2>
 		<h3>Shipping address:</h3>
 		<p><b>Address:</b> ' . $address .'</p>
-		<p><b>Postal Code:</b> ' . $postal . '</p>
-		<p><b>Province:</b> ' . $province . '</p>
 		<p><b>City:</b> ' . $city . '</p>
+		<p><b>Province:</b> ' . $province . '</p>
 		<p><b>Country:</b> ' . $country . ' </p>
+		<p><b>Postal Code:</b> ' . $postal . '</p>
 		
 		<h3>Games being purchased:</h3>';
 		//used to query the users cart table in DB to populate the cart
@@ -169,7 +169,12 @@ function validation(){
           data-locale="auto"></script>
 	    <input type="hidden" name="pagenum" value="3"/>
 	    <input type="hidden" name="total" value="'. $total .'"/>
-		<input type="hidden" name="gameArray" value="'. $gameArray .'"/>
+		<input type="hidden" name="oAddress" value="'. $address .'"/>
+		<input type="hidden" name="oPostal" value="'. $postal .'"/>
+		<input type="hidden" name="oProvince" value="'. $province .'"/>
+		<input type="hidden" name="oCity" value="'. $city .'"/>
+		<input type="hidden" name="oCountry" value="'. $country .'"/>
+		<input type="hidden" name="oPrice" value="'. $pricetotal .'"/>
 	</form></div>';
 		
 	}
@@ -241,7 +246,70 @@ function validation(){
 		}
 		}
 		//Save order receipt to a file
-		
+		if(is_writable('receipts')){
+			
+			$file = "receipts/$orderID.html";
+			
+			$oAddress = $_POST['oAddress'];
+			$oPostal = $_POST['oPostal'];
+			$oProvince = $_POST['oProvince'];
+			$oCity = $_POST['oCity'];
+			$oCountry = $_POST['oCountry'];
+			
+			$data = "
+				<html>
+				<head>
+				<meta charset=\"utf-8\">
+				<link rel='stylesheet' href='../default.css'>
+				<title> Receipt </title>
+				
+				</head>
+				<body>
+					<article>
+					<div class=\"textBack\" align=\"left\" style=\"...\" >
+						<h1>Order No. $orderID</h1><br><br>
+						<h2>Shipping to this address:</h2>
+						<p><b>Address: </b>$oAddress</p>
+						<p><b>City: </b>$oCity</p>
+						<p><b>Province: </b>$oProvince</p>
+						<p><b>Country: </b>$oCountry</p>
+						<p><b>Postal Code: </b>$oPostal</p>
+					
+						<h2>Games you ordered:</h2>
+			";
+			file_put_contents($file, $data);
+			
+			$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
+			$result = mysqli_query($link, $getCartQuery);
+			if ($result)   {
+				$row_count = mysqli_num_rows($result);
+		 
+			while ($row = mysqli_fetch_array($result)) {
+				//checks if the game already has a cookie assigned to it
+				$quantity = $row['quantity'];
+
+				//displays the contents of your cart
+				$price = $row['price'];
+				$gamedata = '<div id="cartDiv">' .
+				  '<p class="cartGameName">' . $row['name'] . '</p>' .
+				  '<span class="cartCname">Console: ' . $row['console_name'] . '<br>' .'</span>' .
+				  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
+				  '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
+				//fancy line between products
+				'<hr name = "productLine">';
+				file_put_contents($file, $gamedata, FILE_APPEND);
+			}
+			}
+			$oPrice = $_POST['oPrice'];
+			$dataEnd ='<p class="checkoutTotal"> Total Price: $'. $oPrice .'</p>
+			</div>
+			</body>
+			</html>';
+			
+			file_put_contents($file, $dataEnd, FILE_APPEND);
+		}else{
+			
+		}
 		
 		
 		
