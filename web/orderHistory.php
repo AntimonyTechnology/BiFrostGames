@@ -15,18 +15,21 @@ include('header.php');
 <br>
 <?php header('charset=utf-8');
 	$total = 0;
+	
     include ('connectionSQL.php');
     $userId = $_SESSION['user_id'];
     //select * from orders inner join receipt using(receipt_id) where user_id= 29;
-    $query = 'select * from orders where user_id=29';
+    $query = 'select * from orders where user_id='.$userId;
     $result = mysqli_query($link, $query);
     if ($result)   {
 
         while ($row = mysqli_fetch_array($result)) {
             $total = $row['total'];
+            $count = 1;
              print '<div class="clearfix">' . '<br>' .
-             '<span class=""> Receipt No. : ' . $row['receipt_id'] . '<br>' .'</span>'.
-             '<span class="">Date: ' . $row['order_time'] . '<br>' .'</span>';
+             
+             '<span class="">Purchase Date: ' . $row['order_time'] .'</span>'.
+             '<br><br><div class="productsHistory">Products</div>';
             
 
 
@@ -36,16 +39,17 @@ include('header.php');
 
              if($result2){
              	while($row = mysqli_fetch_array($result2)){
-             		print '<br><span class="">' . $row['name'] . '<br>' .'</span>'.
-             		'<span class="">' . $row['quantity'] . '<br>' .'</span>'.
-             		'<span class="">' . $row['price'] . '<br>' .'</span>';
+             		print '<p><br><span class="gameNameHistory">' .$count.":    ". $row['name'] .' </span>'.
+             		'<span class="gamePriceHistory">' . $row['price'] .'ea.</span>'.
+             		'<span class="quantityHistory">Quantity: ' . $row['quantity'] . ' <br>' .'</span></p>';
              		$rowTotal = $row['price']*$row['quantity'];
+             		$count = $count + 1;
              	}
              
              }
              
-
-            echo '<span class="">Total: ' . $total . '<br>' .'</span>';
+             echo '<br><div style="float:right"><br><br><div><hr name = "productLine"></div>';
+            echo '<span class="">Total: ' . $total . '<br>' .'</span></div><br><br><br><br>';
             echo '<hr name = "productLine">';
 
         }
