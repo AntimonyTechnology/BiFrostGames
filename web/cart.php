@@ -32,15 +32,15 @@ if(isset($_GET['removeId'])) {
 	$removeCartQuery = 'DELETE FROM shopping_cart WHERE  user_id = ' . '"' . $userId . '"' . ' and game_id = ' . '"' . $gameId . '"';
 	@mysqli_query($link, $removeCartQuery);
 	//remove cookie that is associated with gameId here
-	if(isset($_COOKIE[$gameId])){
+	/*if(isset($_COOKIE[$gameId])){
 			unset($_COOKIE[$gameId]);
      		setcookie($gameId,1, time() - 3600);
-     	}
+     	}*/
 }
 
 //checks if a game was added to cart and adds to DB
 if(isset($_GET['gameId'])) {
-	$gameId = $_GET['gameId'];
+	$gameIdPassed = $_GET['gameId'];
 	//runs query to check if the game is already present
 	$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
     $result = mysqli_query($link, $getCartQuery);
@@ -48,16 +48,17 @@ if(isset($_GET['gameId'])) {
  	if ($result)   {
      	while ($row = mysqli_fetch_array($result)) {
      		//copies a unique price for this game to be passed to JS function addQ()
-     		$priceDuplicate = $row['price'];
+     		
      		//checks if the game is already present here and returns a bool to be used in JS function addQ()
-        	 if($gameId==$row['game_id']){
+        	 if($gameIdPassed==$row['game_id']){
         	 	$duplicate = true; 
+        	 	$priceDuplicate = $row['price'];
         	 	$quantityDefault = $quantityDefault + 1;
   			}
 		}		
 	}		
 	//finally adds the game to the cart
-	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameId', '$quantityDefault')";
+	$addToCartQuery = "INSERT INTO shopping_cart (user_id, game_id, quantity) VALUES ('$userId', '$gameIdPassed', '$quantityDefault')";
 	@mysqli_query($link, $addToCartQuery);
 }
 
@@ -103,10 +104,10 @@ $_GET['count'] = $count;
 
 //keeps db quantity upto date when user leaves the cart
 $userId = $_SESSION['user_id'];
-foreach ($gameArray as $gameId) {
+/*foreach ($gameArray as $gameId) {
  	//echo 'Game Id: '.$gameId . ' ';
  	if(isset($_COOKIE[$gameId])){
- 		$quantity = $_COOKIE[$gameId];
+ 		//$quantity = $_COOKIE[$gameId];
  		//echo 'Quantity: '.$quantity. '<br> ';
  	}
  	else{
@@ -115,7 +116,7 @@ foreach ($gameArray as $gameId) {
 $quantityQuery = 'UPDATE shopping_cart set quantity=' . $quantity .   ' where game_id ='. $gameId .  ' and user_id=' . $userId;
 //echo '<br>Query: ' . $quantityQuery . '<br>';
 @mysqli_query($link, $quantityQuery);
-} 
+} */
 //echo json_encode($gameArray);
 ?>
 <form method="POST" action="cart.php?clearCart=1">
@@ -152,9 +153,9 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
 		//creates and assigns cookie
-		var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));	
-		var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
-		document.cookie = cookieString;
+		//var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));	
+		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
+		//document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
@@ -185,9 +186,9 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
 		//creates and assigns cookie
-		var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));
-		var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
-		document.cookie = cookieString;
+		//var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));
+		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
+		//document.cookie = cookieString;
 
 		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
@@ -237,7 +238,7 @@ echo '<input type="hidden" name="pagenum" value="1">';
 //checks if a duplicate occured on this load
 if($duplicate == true){
 		//runs the JS addQ() function with the duplicates gameId and price
-     	echo '<script>addQ('.$gameId.','.$priceDuplicate.')</script>';	
+     	echo '<script>addQ('.$gameIdPassed.','.$priceDuplicate.')</script>';	
      	}
 ?>
 
