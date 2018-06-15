@@ -40,7 +40,7 @@ include('header.php');
              if($result2){
              	while($row = mysqli_fetch_array($result2)){
              		print '<p><br><span class="gameNameHistory">' .$count.":    ". $row['name'] .' </span>'.
-             		'<span class="gamePriceHistory">' . $row['price'] .'ea.</span>'.
+             		'<span class="gamePriceHistory">$' . $row['price']*$row['quantity'] .'</span>'.
              		'<span class="quantityHistory">Quantity: ' . $row['quantity'] . ' <br>' .'</span></p>';
              		$rowTotal = $row['price']*$row['quantity'];
              		$count = $count + 1;
