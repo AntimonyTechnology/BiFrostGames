@@ -9,30 +9,31 @@
 </style>
 
 <script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-    //
+function myFunction() {
+	var x = document.getElementById("myTopnav");
+	if (x.className === "topnav") {
+		x.className += " responsive";
+	} else {
+		x.className = "topnav";
+	}
+}
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+
 </script>
 
 
 </head>
 
 <body>
-<hr>
-<header><a href="index.php"><img id="banner" src="BiFrostBanner.gif" alt="BiFrost Games"/></a></header>
 
+<header><a href="index.php"><img id="banner" src="BiFrostBanner.gif" alt="BiFrost Games"/></a></header>
+<hr>
 <nav>
 	
 <ul id="mySidenav" class="sidenav">
@@ -45,7 +46,6 @@
 	<?php
 	session_start();
 	include ('connectionSQL.php');
-	include('popup.php');
 	
 	
 	if (isset($_SESSION['user_id'])) {
@@ -58,8 +58,7 @@
 		}//END OF ADMIN CHECK
 		print "<li><a href='cart.php' title='View your cart' >My Cart</a></li>
 				<li><a href='orderHistory.php' title='View your order history'>Order History</a></li>
-				<li><a href='logOut.php' class='logout' >Log Out</a></li>
-				<li><a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS($user)\">Terms of Service</a></li>";
+				<li><a href='logOut.php' class='logout' >Log Out</a></li>";
 	} 
 	else {
 		print "<li><a href='login.php' title='Login' id='login' >Log In</a></li>";
@@ -71,7 +70,7 @@
 </nav>
 <?php
 if (isset($_SESSION['user_id'])) {
-	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' id='logout' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
+	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='logOut.php' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
 }
 else {
 	echo "<nav><div style='padding-right: 35px'><ul align='right'><li><a href='login.php' class='loginButton' id='login' style='padding: 10px' >Log In</a></li></ul></div>";
