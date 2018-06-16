@@ -149,18 +149,18 @@ function validation(){
 			$price = $row['price'];
 			  print '<form method ="POST" action='.'"'.'cart.php?removeId='.$currGameId.'"><div id="cartDiv">' . 
 			  '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">'.
-			  '<p class="cartGameName">' . $row['name'] . '</p>' .
-			  '<span class="cartCname">Console: ' . $row['console_name'] . '<br>' .'</span>' .
+			  '<p class="">' . $row['name'] . '</p>' .
+			  '<span class="">Console: ' . $row['console_name'] . '<br>' .'</span>' .
 			  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
-			  '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
-			  '</form>';
+			  '<br><br><div class="checkoutPrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
+			  '</div></form><br><br>';
 
 			  //fancy line between products
 			 echo '<hr name = "productLine">';
 			
 		}
 		}
-		 echo '<p class="checkoutTotal"> Total Price: $'. $pricetotal .'</p>';
+		 echo '<p class="checkoutTotal"> Total Price: $'. $pricetotal .'</p><br><br><br>';
 	echo '<form action="checkout.php" method="post" style="float:right">
 		<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="' . $stripe['publishable_key'] . '"

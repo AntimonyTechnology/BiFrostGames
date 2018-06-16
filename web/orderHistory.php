@@ -41,16 +41,16 @@ include('header.php');
              	while($row = mysqli_fetch_array($result2)){
              		print '<p><br><span class="gameNameHistory">' .$count.":    ". $row['name'] .' </span>'.
              		'<span class="gamePriceHistory">$' . $row['price']*$row['quantity'] .'</span>'.
-             		'<span class="quantityHistory">Quantity: ' . $row['quantity'] . ' <br>' .'</span></p>';
+             		'<span class="quantityHistory">Quantity: ' . $row['quantity'] . ' <br>' .'</span></p><hr style="width:80%">';
              		$rowTotal = $row['price']*$row['quantity'];
              		$count = $count + 1;
              	}
              
              }
              
-             echo '<br><div class="totalHistory"><br><br><div><hr name = "productLine"></div>';
+             echo '<br><div class="totalHistory"><br><br><div><hr name = "productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"></div>';
             echo '<span class="">Total: $' . $total . '<br>' .'</span></div><br><br><br><br>';
-            echo '<hr name = "productLine">';
+            echo '<hr name = "productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">';
 
         }
   

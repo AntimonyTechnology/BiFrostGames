@@ -18,7 +18,7 @@ function myFunction() {
 	}
 }
 function openNav() {
-    document.getElementById("mySidenav").style.width = "20vmax";
+    document.getElementById("mySidenav").style.width = "17vmax";
 }
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
