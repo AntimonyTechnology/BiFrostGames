@@ -1,6 +1,6 @@
 <?php
     if (isset($_GET['gameId'])) {
-		print_r($_GET['gameId']);
+		//print_r($_GET['gameId']);
 	    setcookie("TempGameID", $_GET['gameId']);
     }
 
