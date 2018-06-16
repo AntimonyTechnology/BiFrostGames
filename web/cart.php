@@ -6,7 +6,9 @@ include('header.php');
 <br>
 
 <article>
-
+<form action="products.php">
+<input type="submit" style="box-shadow: -8px 12px 15px #C2C2C2;margin-bottom: 10px" value="<  Back to Shopping" />
+</form>
 <div class="textBack" align="left" style="float:top; padding-bottom: 50px" >
 
 <h1 style="padding-left: 50px; padding-right: 50px;">Cart</h1>
@@ -248,6 +250,9 @@ if($duplicate == true){
 
 
 </div>
+<form action="products.php">
+<input type="submit" style="box-shadow: -8px 12px 15px #C2C2C2; margin-top: 10px" value="<  Back to Shopping" />
+</form>
 </article>
 
 
