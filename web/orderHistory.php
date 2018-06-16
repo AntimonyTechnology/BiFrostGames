@@ -19,7 +19,7 @@ include('header.php');
     include ('connectionSQL.php');
     $userId = $_SESSION['user_id'];
     //select * from orders inner join receipt using(receipt_id) where user_id= 29;
-    $query = 'select * from orders where user_id='.$userId;
+    $query = 'select * from orders where user_id='.$userId .' order by order_time DESC';
     $result = mysqli_query($link, $query);
     if ($result)   {
 
@@ -28,7 +28,7 @@ include('header.php');
             $count = 1;
              print '<div class="clearfix">' . '<br>' .
              
-             '<span class="">Purchase Date: ' . $row['order_time'] .'</span>'.
+             '<span class="">Purchase Date: ' . date("M jS, Y", strtotime($row['order_time'])) .'</span>'.
              '<br><br><div class="productsHistory">Products</div>';
             
 

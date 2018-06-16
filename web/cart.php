@@ -158,7 +158,7 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
 		//document.cookie = cookieString;
 
-		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
+		 document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
 		 var passThis = {
@@ -191,7 +191,7 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
 		//document.cookie = cookieString;
 
-		 document.getElementById('price' + count).innerHTML = (price * quantity).toFixed(2);
+		 document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
 		 var passThis = {
@@ -224,7 +224,7 @@ echo '<input type="hidden" name="pagenum" value="1">';
 			total = total + Number(price);
 		}
 		//assigns total Price
-		document.getElementById('total').innerHTML = total.toFixed(2);
+		document.getElementById('total').innerHTML = "$" + total.toFixed(2);
 		document.getElementById('passTotalCheckout').value = total.toFixed(2);
 	}
 	//calls to calculate the total on page load
