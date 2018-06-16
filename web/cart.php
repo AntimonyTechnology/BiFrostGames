@@ -7,7 +7,7 @@ include('header.php');
 
 <article>
 <form action="products.php">
-<input type="submit" style="box-shadow: -8px 12px 15px #C2C2C2;margin-bottom: 10px" value="<  Back to Shopping" />
+<input type="submit" class="greyBackButtons" style="margin-bottom: 10px" value="<  Back to Shopping" />
 </form>
 <div class="textBack" align="left" style="float:top; padding-bottom: 50px" >
 
@@ -84,8 +84,8 @@ if ($result)   {
         print '<form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
         	'<input class="rButton" type="submit" value="X" id=' . '"' . 'remove' . $currGameId . '"' . '><br><br>' .
             '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">' .
-            '<p class="cartGameName">' . $row['name'] . '</p><br>' .
-            '<span class="cartCname">' . $row['console_name'] . '<br>' . '</span><br>' . '<br><br>' .
+            '<p class="cartGameName">' . $row['name'] . '</p>' .
+            '<span class="cartCname">' . $row['console_name']  . '</span>' .
             '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' .
             
             '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
@@ -94,7 +94,7 @@ if ($result)   {
             '</form></div>';
 
         //fancy line between products
-        echo '<br><br><br><hr name = "productLine">';
+        echo '<br><br><br><br><br><hr name = "productLine">';
         $totalPrice = $totalPrice + $price;
         //assigns an array of all the game ids to identify for JS function calcTotal()
         $gameArray[$count] = $row['game_id'];
@@ -251,7 +251,7 @@ if($duplicate == true){
 
 </div>
 <form action="products.php">
-<input type="submit" style="box-shadow: -8px 12px 15px #C2C2C2; margin-top: 10px" value="<  Back to Shopping" />
+<input type="submit" class="greyBackButtons" style="margin-top: 10px" value="<  Back to Shopping" />
 </form>
 </article>
 
