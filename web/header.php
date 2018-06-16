@@ -18,7 +18,7 @@ function myFunction() {
 	}
 }
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "20vmax";
 }
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
@@ -33,6 +33,7 @@ function closeNav() {
 <body>
 
 <header><a href="index.php"><img id="banner" src="BiFrostBanner.gif" alt="BiFrost Games"/></a></header>
+
 <hr>
 <nav>
 	

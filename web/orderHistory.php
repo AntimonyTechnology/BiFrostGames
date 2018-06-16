@@ -48,7 +48,7 @@ include('header.php');
              
              }
              
-             echo '<br><div style="float:right"><br><br><div><hr name = "productLine"></div>';
+             echo '<br><div class="totalHistory"><br><br><div><hr name = "productLine"></div>';
             echo '<span class="">Total: $' . $total . '<br>' .'</span></div><br><br><br><br>';
             echo '<hr name = "productLine">';
 
