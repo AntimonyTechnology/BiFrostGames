@@ -5,10 +5,10 @@
 	
 
 <article>
-	<h1>Products</h1>
+	
 	
 	<nav class="console">
-<ul>
+<ul style="box-shadow: -6px 10px 12px #C2C2C2;">
 	<li><a href = "products.php?console=All" style = "cursor: pointer">All</a></li>
 	<li><a href = "products.php?console=Nintendo_Switch" style = "cursor: pointer">Nintendo Switch</a></li>
 	<li><a href = "products.php?console=PS4" style = "cursor: pointer">PlayStation 4</a></li>
@@ -30,7 +30,7 @@
 ?>
 <br><br><br>
 <form class = "genreSelect" action="products.php" method="Post" style = "float:right">
-<select name = "theGenre">
+<select name = "theGenre" class="dropdown">
 <option value = "All">All</option>
 
 <?php 
@@ -54,7 +54,7 @@
     }
 ?>
 </select>
-<input type = "submit" name ="submitQ" value="Search"/>
+<input type = "submit" style="box-shadow: -6px 8px 10px #C2C2C2; margin-left: 10px;" name ="submitQ" value="Search"/>
 </form>
 <br>
 
@@ -89,6 +89,8 @@
 ?>
 
 <div class="textBack" align="left" style="float:left" >
+<h1 style="font-size: 1.5vw">Products</h1>
+<br><br><br>
 <?php header('charset=utf-8');
     include ('connectionSQL.php');
 
@@ -106,7 +108,7 @@
              '<p class="gameName">' . $row['name'] . '</p><br>' .
              '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
              '<br>' . $row['description'] . '<br><br><br><br>'.
-             '<p class="price"><a style="text-decoration:none" href="'. $cartURL . $row['game_id'] . '" class="cost">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
+             '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div>';
             echo '<hr name = "productLine">';
         }
     }
