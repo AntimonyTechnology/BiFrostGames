@@ -7,7 +7,7 @@
 <style>
 	
 </style>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 function myFunction() {
 	var x = document.getElementById("myTopnav");
@@ -19,12 +19,23 @@ function myFunction() {
 }
 function openNav() {
     document.getElementById("mySidenav").style.width = "17vmax";
+    document.getElementById("openNavigation").style.visibility = "hidden";
 }
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("openNavigation").style.visibility = "visible";
 }
 
-
+ $(document).on('scroll',function(){
+     if ($(document).scrollTop() > 243) {
+         $('.openNavigation').addClass('fixed');
+         console.log("fixed");
+     } else {
+         $('.openNavigation').removeClass('fixed');
+         console.log("not fixed");
+     }
+  
+  });
 </script>
 
 
@@ -76,7 +87,7 @@ if (isset($_SESSION['user_id'])) {
 else {
 	echo "<nav><div style='padding-right: 35px'><ul align='right' class='box-shadow: -8px 12px 15px #C2C2C2'><li><a href='login.php' class='loginButton' id='login' style='padding: 10px' >Log In</a></li></ul></div>";
 }
-	echo "<span style='font-size:36px;cursor:pointer;padding: 10px;' onClick='openNav()'><a>&#9776;</a></span></nav>";
+	echo "<a class='openNavigation'><span id = 'openNavigation' class='openNavigation' onClick='openNav()'>&#9776;</span></a></nav>";
 
 
 

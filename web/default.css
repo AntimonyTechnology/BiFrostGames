@@ -280,7 +280,9 @@
 	padding: 7px 25px 7px;
 	box-shadow: -8px 12px 15px #C2C2C2;
 }
-
+.backProducts {
+	box-shadow: -8px 12px 15px #C2C2C2;
+}
 
 input[type=button], input[type=submit], input[type=reset] {
 	font-size: 16px;
@@ -367,7 +369,7 @@ h1{
 	article {
 		margin-left: 25px;
 		padding: 5em;
-		overflow: hidden;
+		position: relative;
 	}
 	nav ul li{ 
 		float: left;
@@ -422,6 +424,18 @@ table, th, td {
 	
 	
 }
+.openNavigation {
+	font-size:36px;
+	cursor:pointer;
+	padding: 10px;
+	
+}
+.fixed {
+	position: fixed;
+	top:0;
+	z-index: 9999; 
+}
+
 
 
 .textBack {
