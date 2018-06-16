@@ -1,6 +1,6 @@
 <?php
     if (isset($_GET['gameId'])) {
-		//print_r($_GET['gameId']);
+		print_r($_GET['gameId']);
 	    setcookie("TempGameID", $_GET['gameId']);
     }
 
@@ -8,8 +8,24 @@
         $sendPage = $_POST['send_page'];
     }
 
-    include('header.php');
-    include('popup.php');
+    function buildForm($message = '') {
+        echo '
+                            <form action="login.php" method="POST" >
+                                <p>Email: <input type="email" name="email" id="email" size="25" value="';
+                                    if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; }
+                                    echo '" autofocus required /></p>
+                                <p>Password: <input type="password" name="pass" required /></p>
+                                <input type="submit" value="Submit" />
+                            </form>
+                            ' . $message . '
+                        </div>
+                        <div id="signup" align="left">
+                            <h1>Sign Up</h1><br><br><br>
+                                <p>Don\'t have an account? <a href="signup.php">Sign up here!</a></p>
+                        </div>
+                    
+            ';
+    }
 
     // Redirect the user to the next page.
     function loginRedirect ($url = 'index.php', $message, $timeout = 3000) { // $timeout is in milliseconds
@@ -18,18 +34,21 @@
         echo "<p>$message</p>";
 
         echo '  <a href="' . $url . '" id="loginRedirect"></a>
-					    <script type="text/javascript">
-						    setTimeout(SubmitLogin, ' . $timeout . ');
-						    function SubmitLogin(){
-						    	document.getElementById(\'loginRedirect\').click();
-						    }
-					    </script>
-		';
+                            <script type="text/javascript">
+                                setTimeout(SubmitLogin, ' . $timeout . ');
+                                function SubmitLogin(){
+                                    document.getElementById(\'loginRedirect\').click();
+                                }
+                            </script>
+        ';
     }
+
+    include('header.php');
+    include('popup.php');
 
 	echo '<article>
 				<div class="textBack" align="center" style="float:left" >
-					<div id="login" align="left">
+					<div id="loginBox" align="left">
 						<h1>Log In</h1><br><br><br>';
 
 	if (isset($_POST['email'])) { // Login submitted
@@ -71,7 +90,7 @@
                 }
 
                 // Determine redirect message & delay based on sending page
-                if ($sendPage == 'signup.php') {
+                if ($sendPage == 'signup.php' || $sendPage == 'popup.php') {
                     $redirectMessage = '';
                     $redirectDelay = 0;
                 } else {
@@ -81,31 +100,21 @@
 
                 loginRedirect($loginURL, $redirectMessage, $redirectDelay);
             } else if ($spass != $upass) { // Invalid password
-                echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
+                buildForm('<p style=\'color: red;\'>Invalid email or password. Please try again.</p>');
             } else { // Valid password, but Privacy Policy not accepted
+                // Update user info with login time
+                $loginquery = "UPDATE users SET last_login=DEFAULT WHERE user_id='" . $uID . "'";
+                $loginresult = @mysqli_query($link, $loginquery);
+
                 //use this to update policy inside js agreeTOS function
-                echo "<div id='thankyou'><p>You have not accepted the new <a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS($uID)\">Privacy Policy.</a></p></div>";
+                echo "<div id='thankyou'><p>You must accept the new <a href=\"javascript:void(0);\" style=\"font-size:15px;\" onclick=\"openTOS($uID)\">Privacy Policy</a> to log in.</p></div>";
             }
         } else { // User does not exist
-            echo "<p>Invalid email or password. <a href ='login.php'>Please try again.</a></p>";
+            buildForm('<p style=\'color: red;\'>Invalid email or password. Please try again.</p>');
         }
 		echo '</div>';
     } else {
-        echo '
-						<form action="login.php" method="POST" >
-							<p>Email: <input type="email" name="email" id="email" size="25" value="';
-							if(isset($_POST['email'])){ echo "$semail"; }else{ echo ""; }
-							echo '" autofocus required /></p>
-							<p>Password: <input type="password" name="pass" required /></p>
-							<input type="submit" value="Submit" />
-						</form>
-					</div>
-					<div id="signup" align="left">
-						<h1>Sign Up</h1><br><br><br>
-							<p>Don\'t have an account? <a href="signup.php">Sign up here!</a></p>
-					</div>
-				
-		';
+        buildForm();
     }
 	
 	echo'			
