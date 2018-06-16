@@ -4,7 +4,7 @@
 	/* Regular*/
 
 @font-face {
-    font-family: Segoe " sans-serif";
+    font-family: Georgia, serif;
     	font-weight: normal;
     	font-style: normal;
 
@@ -48,7 +48,8 @@
 .gamePrice {
 	float:right;
 	margin-top: 5px;
-	padding-right: 50px;
+	padding-right: 10px;
+	margin-right: 2vw;
 	padding-left: 40px;
 }
 .gameNameHistory {
@@ -92,12 +93,12 @@
 	position: static;
 	float: right;
 	width: 100px;
-	width: 20vmin;
+	width: 12vw;
 	height: auto;
 	padding-bottom: 10px;
 	padding-top: 20px;
 	padding-right: 30px;
-	
+
 }
 
 .cartGameName {
@@ -117,9 +118,14 @@
 }
 
 .cartCname {
+	border: 2px solid aliceblue;
+	border-radius:15px;
+	text-align: center;
 	color: black;
-	font-size: 15px;
-	padding-left: 50px;
+	font-size: 1.3vw;
+	padding: 8px;
+	width: 10%;
+	margin-left: 50px;
 }
 
 .checkoutPrice{
@@ -139,7 +145,6 @@
 	height: auto;
 	padding-bottom: 10px;
 	padding-top: 80px;
-	
 	
 	
 }
@@ -170,7 +175,9 @@
 	background-color:aliceblue;
 }
 .price:active {
-	background-color:#9eb7d6;
+	background-color:#7a9cc7;
+	box-shadow: -4px 6px 7.5px #9eb7d6;
+	outline: none;
 }
 .cost {
 	font-size: 25px;
@@ -284,8 +291,18 @@
 	box-shadow: -8px 12px 15px #C2C2C2;
 }
 
+input[type=submit].greyBackButtons {
+	box-shadow: -8px 12px 15px #C2C2C2;
+}
+input[type=submit].greyBackButtons:active {
+	outline: none;
+	background-color:#a9a9a9;
+	box-shadow: -4px 6px 7.5px #C2C2C2;
+}
+
 input[type=button], input[type=submit], input[type=reset] {
 	font-size: 16px;
+	font-family:Georgia, serif;
 	background-color: white;
 	border: 2px aliceblue;
 	border-radius: 10px;
@@ -299,7 +316,9 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
-	background-color: #9eb7d6;
+	background-color: #7a9cc7;
+	box-shadow: -2px 4px 5px #9eb7d6;
+	outline: none;
 }
 
 hr {
@@ -359,7 +378,7 @@ h1{
 		background-color:lightsteelblue;
 		border: 2px solid aliceblue;
 		border-radius:15px;
-		box-shadow: -6px 10px 12px #C2C2C2;
+		box-shadow: -5px 8px 10px #C2C2C2;
 	}
 	nav ul a {
 		align-content: center;
@@ -383,7 +402,7 @@ h1{
 		transition: 0.3s;
 		font-size: 20px;
 		font-size: 1.4vw;
-		font-family: Segoe " sans-serif";
+		font-family: Georgia, serif;
 		
 	}
 	
@@ -391,6 +410,7 @@ h1{
 
 nav ul li a:hover {background-color:aliceblue;}
 nav ul li a:active {background-color:#9eb7d6;}
+nav ul:active{box-shadow: -3px 4px 5px #C2C2C2;}
 nav ul li.icon {display: none;}
 
 @media screen and (max-width:680px) {
@@ -446,7 +466,7 @@ table, th, td {
 	border: 3px solid aliceblue;
 	border-radius:15px;
 	background-color: lightsteelblue;
-	font-family: Verdana, sans-serif;
+	font-family: Georgia, serif;
 	box-shadow: -8px 12px 15px #C2C2C2;
 	position: relative;
 	

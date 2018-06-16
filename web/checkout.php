@@ -120,7 +120,8 @@ function validation(){
 		}
 		
 		require_once('./config.php');
-		echo '<h2>Please confirm your order:</h2>
+		echo '<h2>Please confirm your order</h2>
+		<br>
 		<h3>Shipping address:</h3>
 		<p><b>Address:</b> ' . $address .'</p>
 		<p><b>City:</b> ' . $city . '</p>
@@ -128,7 +129,8 @@ function validation(){
 		<p><b>Country:</b> ' . $country . ' </p>
 		<p><b>Postal Code:</b> ' . $postal . '</p>
 		
-		<h3>Games being purchased:</h3>';
+		<br>
+		<h3>Your Order:</h3><hr>';
 		//used to query the users cart table in DB to populate the cart
 		//use to get which game_id(s) and theyre quantities from shopping cart to store in variables based on userId
 		$getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';

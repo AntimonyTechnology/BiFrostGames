@@ -54,7 +54,7 @@
     }
 ?>
 </select>
-<input type = "submit" style="box-shadow: -6px 8px 10px #C2C2C2; margin-left: 10px;" name ="submitQ" value="Search"/>
+<input type = "submit" class="greyBackButtons" style="margin-left: 10px;" name ="submitQ" value="Search"/>
 </form>
 <br>
 
