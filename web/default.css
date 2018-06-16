@@ -26,9 +26,13 @@
 
 
 .quantity {
-	
-	margin-right: 70px;
+	height: 30px;
+	width:50px;
+	margin-right: 10px;
 	margin-bottom: 5px;
+	border-radius: 10px;
+	text-align: center;
+	margin-left:10px;
 }
 
 .qButton {
@@ -45,6 +49,7 @@
 	float:right;
 	margin-top: 5px;
 	padding-right: 50px;
+	padding-left: 40px;
 }
 .gameNameHistory {
 	padding-left: 60px;
@@ -145,19 +150,32 @@
 .price {
 	text-align: center;
 	font-size: 30px;
-	font-size: 2.5vw
+	font-size: 2vw;
 	color: black;
 	border: 2px solid aliceblue;
 	border-radius:15px;
-	padding: 8px;
-	padding-left: 70px;
+	padding: 10px;
+	padding-left: 3vw;
+	padding-right: 3vw;
 	overflow: hidden;
 	background-color: white;
-	width: 35%;
+	width: 25%;
+	box-shadow: -8px 12px 15px #9eb7d6;
+	margin-left: 30px;
+	
+}
+
+
+.price:hover {
+	background-color:aliceblue;
+}
+.price:active {
+	background-color:#9eb7d6;
 }
 .cost {
 	font-size: 25px;
 	font-size: 2vw;
+	text-decoration:none;
 }
 
 .cart {
@@ -167,7 +185,6 @@
 	height: 55px;
 	height: 3vw;
 	padding: 5px;
-	padding-right:60px;
 	padding-left: 0;
 	
 }
@@ -186,14 +203,32 @@
 	overflow: hidden;
 	border: 2px solid aliceblue;
 	border-radius:10%;
-	
 	text-align: center;
 	color: black;
 	padding: 8px;
-	padding-left: 40px;
 	overflow: hidden;
 	width: 50%;
 	
+}
+.homeToProducts {
+	font-size: 40px;
+	font-size: 3vw;
+	font-family: Georgia, serif;
+	overflow: hidden;
+	border: 2px solid aliceblue;
+	border-radius:10%;
+	text-align: center;
+	color: black;
+	padding: 8px;
+	overflow: hidden;
+	width: 50%;
+	box-shadow: -8px 12px 15px #9eb7d6;
+}
+.homeToProducts:hover {
+	background-color: aliceblue;
+}
+.homeToProducts:active {
+	background-color: #9eb7d6;
 }
 
 .genreSelect {
@@ -237,7 +272,34 @@
 	padding-bottom: 0;
 	margin-bottom: 20px;
 }
-	
+.dropdown {
+	background-color: white;
+	border: 2px aliceblue;
+	border-radius: 10px;
+	color: black;
+	padding: 7px 25px 7px;
+	box-shadow: -8px 12px 15px #C2C2C2;
+}
+
+
+input[type=button], input[type=submit], input[type=reset] {
+	font-size: 16px;
+	background-color: white;
+	border: 2px aliceblue;
+	border-radius: 10px;
+	color: black;
+	padding: 7px 25px 7px;
+	box-shadow: -4px 8px 10px #9eb7d6;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+	background-color: aliceblue;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+	background-color: #9eb7d6;
+}
+
 hr {
 	border: 0; 
   height: 1px; 
@@ -295,6 +357,7 @@ h1{
 		background-color:lightsteelblue;
 		border: 2px solid aliceblue;
 		border-radius:15px;
+		box-shadow: -6px 10px 12px #C2C2C2;
 	}
 	nav ul a {
 		align-content: center;
@@ -308,7 +371,7 @@ h1{
 	}
 	nav ul li{ 
 		float: left;
-	
+		
 	}
 	nav ul li a {
 		color: #555555;
@@ -325,7 +388,7 @@ h1{
 	
 
 nav ul li a:hover {background-color:aliceblue;}
-
+nav ul li a:active {background-color:#9eb7d6;}
 nav ul li.icon {display: none;}
 
 @media screen and (max-width:680px) {
@@ -401,9 +464,15 @@ img{
 	padding-right:30px;
 }
 
+
+
+
+
+
+
 .TOSsubmit {
-    background-color: #a8ecf7; /* Green */
-    border: none;
+    background-color: white;
+    border: 2px solid aliceblue;
     color: black;
     padding: 20px 37px;
     text-align: center;
@@ -412,6 +481,7 @@ img{
     font-size: 21px;
 	margin-right:60px;
 	margin-left:300px;
+	box-shadow: -6px 10px 12px #9eb7d6;
 }
 	
 
@@ -470,15 +540,21 @@ img{
 .sidenav a:hover {
     background-color: #f1f1f1;
 }
-
+.sidenav a:active {
+    background-color: #9eb7d6;
+}
 .TOSnav a:hover {
     background-color: #f1f1f1;
 }
-
+.TOSnav a:active {
+    background-color: #9eb7d6;
+}
 .TOSsubmit:hover {
 	background-color: #f1f1f1;
 }
-
+.TOSsubmit:active {
+	background-color: #9eb7d6;
+}
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;

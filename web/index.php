@@ -15,7 +15,7 @@ include('header.php');
 <br>
  
  <center>
-<div class="gameName"><a style="text-decoration: none" class="external ext" href="products.php">
+<div class="homeToProducts"><a style="text-decoration: none" class="external ext" href="products.php">
 <div class="container">
 	
 	<div class="bird-container">

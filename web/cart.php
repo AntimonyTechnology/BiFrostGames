@@ -7,9 +7,9 @@ include('header.php');
 
 <article>
 
-<div class="textBack" align="left" style="float:top; padding-bottom: 50px"" >
+<div class="textBack" align="left" style="float:top; padding-bottom: 50px" >
 
-<h1>Cart</h1>
+<h1 style="padding-left: 50px; padding-right: 50px;">Cart</h1>
 <br>
 <br>
 <br>
@@ -80,13 +80,14 @@ if ($result)   {
         //displays the contents of your cart
         $price = $row['price'];
         print '<form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
+        	'<input class="rButton" type="submit" value="X" id=' . '"' . 'remove' . $currGameId . '"' . '><br><br>' .
             '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">' .
             '<p class="cartGameName">' . $row['name'] . '</p><br>' .
             '<span class="cartCname">' . $row['console_name'] . '<br>' . '</span><br>' . '<br><br>' .
-            '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>' . $price * $quantity . '</div>' .
-            '<input class="rButton" type="submit" value="Remove" id=' . '"' . 'remove' . $currGameId . '"' . '>' .
-            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . '>' .
+            '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' .
+            
             '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
+            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . '>' .
             '<input class="qButton" style=float:right; type="button" value="-" onclick=' . '"' . 'remQ(' . $currGameId . ',' . $price . ')"' . '>' .
             '</form></div>';
 
@@ -217,7 +218,10 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		var total = 0;
 		//loops through the gameIds and gets each price field and adds them up
 		for (var i = 0; i < gameArray.length; i++) {
-			total = total + Number(document.getElementById('price' + gameArray[i]).innerHTML);
+			var price = document.getElementById('price' + gameArray[i]).innerHTML;
+			price = price.replace(/[^0-9.]/g,'');
+			console.log(price);
+			total = total + Number(price);
 		}
 		//assigns total Price
 		document.getElementById('total').innerHTML = total.toFixed(2);
