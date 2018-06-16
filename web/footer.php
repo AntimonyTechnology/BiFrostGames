@@ -1,7 +1,6 @@
 <br>
 <br>
 
-<hr>
 
 <footer>
 <?php
