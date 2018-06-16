@@ -71,7 +71,7 @@ function closeNav() {
 </nav>
 <?php
 if (isset($_SESSION['user_id'])) {
-	echo "<nav><div style='padding-right: 35px'><ul align='right' class='box-shadow: -8px 12px 15px #C2C2C2'><li><a href='logOut.php' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
+	echo "<nav><div style='padding-right: 35px'><ul align='right' class='box-shadow: -8px 12px 15px #C2C2C2'><li><a href='logOut.php' id='logout' class='loginButton' style='padding: 10px' >Log Out</a></li></ul></div>";	
 }
 else {
 	echo "<nav><div style='padding-right: 35px'><ul align='right' class='box-shadow: -8px 12px 15px #C2C2C2'><li><a href='login.php' class='loginButton' id='login' style='padding: 10px' >Log In</a></li></ul></div>";
