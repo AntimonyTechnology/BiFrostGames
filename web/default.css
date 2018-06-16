@@ -48,6 +48,7 @@
 }
 .gameNameHistory {
 	padding-left: 60px;
+	font-size: 1vw;
 
 }
 .gamePriceHistory {
@@ -116,6 +117,14 @@
 	padding-left: 50px;
 }
 
+.checkoutPrice{
+	float:right;
+	padding-right: 35px;
+}
+.checkoutTotal {
+	float:right;
+	padding-right: 35px;
+}
 .images {
 	/*add css to make images to position on the form*/
 	position: static;

@@ -91,7 +91,7 @@ if ($result)   {
             '</form></div>';
 
         //fancy line between products
-        echo '<hr name = "productLine">';
+        echo '<br><br><br><hr name = "productLine">';
         $totalPrice = $totalPrice + $price;
         //assigns an array of all the game ids to identify for JS function calcTotal()
         $gameArray[$count] = $row['game_id'];
