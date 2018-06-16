@@ -243,6 +243,12 @@ hr {
   height: 1px; 
   background-image: -webkit-linear-gradient(left, #D1D1D1, #8c8b8b, #D1D1D1);
 }
+a:link {
+	color: #555555;
+}
+a:visited {
+	color: #555555;
+}
 
 h1{
 		font-size: 2vw;
@@ -535,7 +541,7 @@ img{
 .container {
 	z-index: 1;
 	position: relative;
-	overflow: hidden;
+	
 	display: flex;
 	align-items: center;
 	justify-content: center;

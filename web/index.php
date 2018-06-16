@@ -13,7 +13,9 @@ include('header.php');
 <br>
 <br>
 <br>
- <a class="external ext" href="products.php">
+ 
+ <center>
+<div class="gameName"><a style="text-decoration: none" class="external ext" href="products.php">
 <div class="container">
 	
 	<div class="bird-container">
@@ -22,7 +24,7 @@ include('header.php');
 
 </div>
 <br>
-<center><div class="gameName">Go to Products</div></center>
+Go to Products</div></center>
 </a> 
 <br>
 

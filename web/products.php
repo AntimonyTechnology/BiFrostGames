@@ -106,7 +106,7 @@
              '<p class="gameName">' . $row['name'] . '</p><br>' .
              '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
              '<br>' . $row['description'] . '<br><br><br><br>'.
-             '<p class="price"><a href="'. $cartURL . $row['game_id'] . '" class="cost">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
+             '<p class="price"><a style="text-decoration:none" href="'. $cartURL . $row['game_id'] . '" class="cost">$'. $row['price'] .'<img src="cart.png" class="cart"></a></p></div>';
             echo '<hr name = "productLine">';
         }
     }
