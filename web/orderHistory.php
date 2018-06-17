@@ -13,6 +13,7 @@ include('header.php');
 <br>
 <br>
 <br>
+<hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
 <?php header('charset=utf-8');
 	$total = 0;
 	

@@ -21,7 +21,7 @@ include('header.php');
 
 <article>
     <div class="textBack" align="left" style="float:left" >
-<h1>Add Product</h1><br><br><br>
+<h1>Add Product</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
     <form action="productInsert.php" method="POST" enctype="multipart/form-data" onsubmit="return validation();">
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
         <p>Game Name: <input type="text" name="gamename" id="gamename" required /></p>
