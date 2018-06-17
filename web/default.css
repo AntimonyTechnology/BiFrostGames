@@ -179,10 +179,19 @@
 	box-shadow: -4px 6px 7.5px #9eb7d6;
 	outline: none;
 }
+.price:focus {
+	outline: none;
+}
 .cost {
 	font-size: 25px;
 	font-size: 2vw;
 	text-decoration:none;
+}
+.cost:active {
+	outline: none;
+}
+.cost:focus {
+	outline:none;
 }
 
 .cart {
@@ -237,7 +246,9 @@
 .homeToProducts:active {
 	background-color: #9eb7d6;
 }
-
+.homeToProducts:focus {
+	outline: none;
+}
 .genreSelect {
 		padding-right: 190px;
 		float: right;
@@ -297,9 +308,12 @@ input[type=submit].greyBackButtons {
 input[type=submit].greyBackButtons:active {
 	outline: none;
 	background-color:#a9a9a9;
+	border: 2px aliceblue;
 	box-shadow: -4px 6px 7.5px #C2C2C2;
 }
-
+input[type=submit].greyBackButtons:focus {
+	outline: none;
+}
 input[type=button], input[type=submit], input[type=reset] {
 	font-size: 16px;
 	font-family:Georgia, serif;
@@ -313,11 +327,17 @@ input[type=button], input[type=submit], input[type=reset] {
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 	background-color: aliceblue;
+	border: 2px aliceblue;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
 	background-color: #7a9cc7;
+	border: 2px aliceblue;
 	box-shadow: -2px 4px 5px #9eb7d6;
+	
+}
+
+input[type=button]:focus, input[type=submit]:focus, input[type=reset]:focus {
 	outline: none;
 }
 
@@ -331,6 +351,12 @@ a:link {
 }
 a:visited {
 	color: #555555;
+}
+a:active {
+	outline: none;
+}
+a:focus {
+	outline:none;
 }
 
 h1{
