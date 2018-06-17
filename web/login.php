@@ -20,7 +20,7 @@
                             ' . $message . '
                         </div>
                         <div id="signup" align="left">
-                            <h1>Sign Up</h1><br><br><br>
+                            <h1>Sign Up</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
                                 <p>Don\'t have an account? <a href="signup.php">Sign up here!</a></p>
                         </div>
                     
@@ -49,7 +49,7 @@
 	echo '<article>
 				<div class="textBack" align="center" style="float:left" >
 					<div id="loginBox" align="left">
-						<h1>Log In</h1><br><br><br>';
+						<h1>Log In</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>';
 
 	if (isset($_POST['email'])) { // Login submitted
         // Set the submitted login info

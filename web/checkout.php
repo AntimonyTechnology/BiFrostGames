@@ -34,7 +34,7 @@ function validation(){
 	if($_POST['pagenum'] == 1){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
-	<h1>Checkout</h1><br><br><br>';
+	<h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>';
 	//print_r($_POST['gameArray']);
 	//if this needs to be done, passing the post gameArray needs to be done with for loop input echo, see line 133 in cart.php
 	//$gameArray = $_POST['gameArray'];
@@ -85,7 +85,7 @@ function validation(){
 	elseif($_POST['pagenum'] == 2){
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
-	<h1>Checkout</h1><br><br><br>';
+	<h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>';
 		//$games = $_POST['gameArray'];
 		//print_r($games);
 		//if this needs to be passed up, passing the post gameArray needs to be done with for loop input echo, see line 133 in cart.php
@@ -154,7 +154,7 @@ function validation(){
 			  '<p class="">' . $row['name'] . '</p>' .
 			  '<span class="">Console: ' . $row['console_name'] . '<br>' .'</span>' .
 			  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
-			  '<br><br><div class="checkoutPrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
+			  '<br><br><br><br><br><div class="checkoutPrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
 			  '</div></form><br><br>';
 
 			  //fancy line between products
@@ -187,7 +187,7 @@ function validation(){
 		$total = $_POST['total'];
 		echo'<article>
 	<div class="textBack" align="left" style="..." >
-	<h1>Checkout</h1><br><br><br>';
+	<h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>';
 	print_r($_POST['gameArray']);
 		
 		require_once('./config.php');

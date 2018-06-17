@@ -89,8 +89,9 @@
 ?>
 
 <div class="textBack" align="left" style="float:left" >
-<h1 style="font-size: 1.5vw">Products</h1>
-<br><br><br>
+<h1 style="font-size: 28px">Products</h1>
+
+<br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">
 <?php header('charset=utf-8');
     include ('connectionSQL.php');
 

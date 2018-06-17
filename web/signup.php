@@ -20,7 +20,7 @@ include('popup.php');
 	
 <article>
 <div class="textBack" align="left" style="..." >
-	<h1>Registration</h1><br><br><br>
+	<h1>Registration</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
 	<form action="signupinsert.php" method="POST" onsubmit="return validation();">
 	    <p>First Name: <input type="text" name="fname" id="fname" required /></p>
 	    <p>Last Name: <input type="text" name="lname" id="lname" required /></p>
