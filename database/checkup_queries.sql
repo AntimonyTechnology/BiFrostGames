@@ -33,9 +33,9 @@ ROLLBACK TO a;
 /*
 DELETE FROM users WHERE user_id > 38;
 
-DELETE FROM games WHERE game_id > 157;
+DELETE FROM games WHERE game_id > 158;
 */
 
-
+select * from games order by name;
 
 

@@ -16,60 +16,68 @@
         $imagename = $_FILES['image']['name'];
         $imagetmp = $_FILES['image']['tmp_name'];
 
-        // Upload image to the web server & create query
-        if ($_FILES['image']['name'] != '') {
-            $imageurl = 'images/games/' . $imagename;
-            echo "<p>$imagename is being uploaded.</p>";
-            if (move_uploaded_file($_FILES['image']['tmp_name'], "images/games/{$_FILES['image']['name']}")) {
-                echo "<p>$imageurl uploaded.</p>";
-            } else {
-                print '<p style="color: red;">Your file could not be uploaded because: ';
+        // Check to see if the game already exists
+        $gamecheckquery = "SELECT * FROM games WHERE name='$gamename' AND console_name='$console'";
+        $gamecheck = @mysqli_query($link, $gamecheckquery);
 
-                // Print a message based upon the error:
-                switch ($_FILES['image']['error']) {
-                    case 1:
-                        print 'The file exceeds the upload_max_filesize setting in php.ini';
-                        break;
-                    case 2:
-                        print 'The file exceeds the MAX_FILE_SIZE setting in the HTML form';
-                        break;
-                    case 3:
-                        print 'The file was only partially uploaded';
-                        break;
-                    case 4:
-                        print 'No file was uploaded';
-                        break;
-                    case 6:
-                        print 'The temporary folder does not exist.';
-                        break;
-                    default:
-                        print 'Something unforeseen happened.';
-                        break;
+        if (mysqli_num_rows($gamecheck) == 0) { // Game does not exist
+            // Upload image to the web server & create query
+            if ($_FILES['image']['name'] != '') { // Image submitted
+                $imageurl = 'images/games/' . $imagename;
+                echo "<p>$imagename is being uploaded.</p>";
+                if (move_uploaded_file($_FILES['image']['tmp_name'], "images/games/{$_FILES['image']['name']}")) {
+                    echo "<p>$imageurl uploaded.</p>";
+                } else {
+                    print '<p style="color: red;">Your file could not be uploaded because: ';
+
+                    // Print a message based upon the error:
+                    switch ($_FILES['image']['error']) {
+                        case 1:
+                            print 'The file exceeds the upload_max_filesize setting in php.ini';
+                            break;
+                        case 2:
+                            print 'The file exceeds the MAX_FILE_SIZE setting in the HTML form';
+                            break;
+                        case 3:
+                            print 'The file was only partially uploaded';
+                            break;
+                        case 4:
+                            print 'No file was uploaded';
+                            break;
+                        case 6:
+                            print 'The temporary folder does not exist.';
+                            break;
+                        default:
+                            print 'Something unforeseen happened.';
+                            break;
+                    }
                 }
+                $gamequery = "INSERT INTO games (name, description, image, price, console_name) VALUES ('$gamename', '$gamedesc', '$imageurl', '$price', '$console')";
+            } else { // No image submitted
+                echo "<p>No image uploaded.</p>";
+                $gamequery = "INSERT INTO games (name, description, price, console_name) VALUES ('$gamename', '$gamedesc', '$price', '$console')";
             }
-            $gamequery = "INSERT INTO games (name, description, image, price, console_name) VALUES ('$gamename', '$gamedesc', '$imageurl', '$price', '$console')";
-        } else {
-            echo "<p>No image uploaded.</p>";
-            $gamequery = "INSERT INTO games (name, description, price, console_name) VALUES ('$gamename', '$gamedesc', '$price', '$console')";
+
+            // Add the new game to the database
+            @mysqli_query($link, $gamequery);
+
+            // Retrieve the game_id of the new game
+            $gameidquery = "SELECT LAST_INSERT_ID()";
+            $gameidresult = @mysqli_query($link, $gameidquery);
+            $gameidrow = mysqli_fetch_row($gameidresult);
+            $gameid = $gameidrow[0];
+
+            // Add the game's genres to the database
+            foreach ($genre as &$value) {
+                $genrequery = "INSERT INTO game_genres values('$gameid', '$value')";
+                @mysqli_query($link, $genrequery);
+            }
+
+            echo "<p>Successfully added game # $gameid</p>";
+        } else { // Game already exists
+            echo "<p>That game already exists.</p>";
         }
-
-        // Add the new game to the database
-        @mysqli_query($link, $gamequery);
-
-        // Retrieve the game_id of the new game
-        $gameidquery = "SELECT LAST_INSERT_ID()";
-        $gameidresult = @mysqli_query($link, $gameidquery);
-        $gameidrow = mysqli_fetch_row($gameidresult);
-        $gameid = $gameidrow[0];
-
-        // Add the game genres to the database
-        foreach ($genre as &$value) {
-            $genrequery = "INSERT INTO game_genres values('$gameid', '$value')";
-            @mysqli_query($link, $genrequery);
-        }
-
-        echo "<p>Successfully added game # $gameid</p>";
-        echo "<p><a href=\"addProducts.php\">Add another product?</a></p>";
+        echo "<p><a href=\"addProducts.php\">Add another product</a></p>";
     }
     echo "</div>";
     echo "</article>";

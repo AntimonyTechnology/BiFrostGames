@@ -36,7 +36,7 @@
 <?php 
     //used to get the genres from DB
 	include ('connectionSQL.php');
-	$genreQuery = "select * from genres";
+	$genreQuery = "select * from genres order by genre_id";
 	$genreList = mysqli_query($link, $genreQuery);
     if($genreList){
         $genreRows = mysqli_num_rows($genreList);
@@ -64,21 +64,21 @@
     if(($console == "" || $console == "All")){
         if($selectedGenre == "" || $selectedGenre == "All") {
             //none selected
-            $query = 'select * from games';
+            $query = "select * from games order by name, console_name";
         }
         else {
             //genre selected only
-            $query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"';
+            $query = "select * from games inner join game_genres using(game_id) where genre_id ='$selectedGenre' order by name, console_name";
         }
     }
     else {
         if($selectedGenre == "" || $selectedGenre == "All") {
         //console only selected
-        $query = "select * from games where console_name like " . '"' . $console . '"';
+        $query = "select * from games where console_name like '$console' order by name, console_name";
     }
         else {
             //both selected
-            $query = 'select * from games inner join game_genres using(game_id) where genre_id =' . '"' . $selectedGenre . '"' . 'AND console_name =' . '"' . $console . '"';
+            $query = "select * from games inner join game_genres using(game_id) where genre_id ='$selectedGenre' AND console_name ='$console' order by name, console_name";
         }
 
     }
