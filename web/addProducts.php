@@ -36,12 +36,13 @@ include('header.php');
         <p> Genre:
             <input type="checkbox" name="genre[]" value="action"> Action
             <input type="checkbox" name="genre[]" value="adventure"> Adventure
-            <input type="checkbox" name="genre[]" value="strategy"> Strategy
-            <input type="checkbox" name="genre[]" value="rpg"> RPG
             <input type="checkbox" name="genre[]" value="MMO"> MMO
             <input type="checkbox" name="genre[]" value="open-world"> Open-world
             <input type="checkbox" name="genre[]" value="racing"> Racing
-            <input type="checkbox" name="genre[]" value="shooter"> Shooter</p>
+            <input type="checkbox" name="genre[]" value="rpg"> RPG
+            <input type="checkbox" name="genre[]" value="shooter"> Shooter
+            <input type="checkbox" name="genre[]" value="strategy"> Strategy
+        </p>
         <input type="submit" value="Submit" />
     </form>
 
