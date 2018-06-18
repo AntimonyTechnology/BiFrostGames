@@ -241,14 +241,17 @@
 				<body>
 					<article>
 					<div class=\"textBack\" align=\"left\" style=\"...\" >
-						<h1>Order No. $orderID</h1><br><br>
+						<h1>Order No. $orderID</h1>
+						<br><br><br><br>
+						<p>Thank you for ordering from BiFrost! Here is your detailed order info: </p>
+						<br>
 						<h2>Shipping to this address:</h2>
 						<p><b>Address: </b>$oAddress</p>
 						<p><b>City: </b>$oCity</p>
 						<p><b>Province: </b>$oProvince</p>
 						<p><b>Country: </b>$oCountry</p>
 						<p><b>Postal Code: </b>$oPostal</p>
-					
+					    <br>
 						<h2>Games you ordered:</h2>
 			";
 			file_put_contents($file, $data);
@@ -264,18 +267,17 @@
 
 				//displays the contents of your cart
 				$price = $row['price'];
-				$gamedata = '<div id="cartDiv">' .
-				  '<p class="cartGameName">' . $row['name'] . '</p>' .
+				$gamedata = '<p class="cartGameName">' . $row['name'] . '</p>' .
 				  '<span class="cartCname">Console: ' . $row['console_name'] . '<br>' .'</span>' .
 				  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
-				  '<div class="gamePrice" id=' .'"' . 'price'. $currGameId .'"'.'>Price: $'. $price*$quantity .
+				  '<p>Price: $'. $price*$quantity . '</p><br>'.
 				//fancy line between products
 				'<hr name = "productLine">';
 				file_put_contents($file, $gamedata, FILE_APPEND);
 			}
 			}
 			$oPrice = $_POST['oPrice'];
-			$dataEnd ='<p class="checkoutTotal"> Total Price: $'. $oPrice .'</p>
+			$dataEnd ='<p class="checkoutTotal"> Total Price: $'. $oPrice .'</p><br><br>
 			</div>
 			</body>
 			</html>';
