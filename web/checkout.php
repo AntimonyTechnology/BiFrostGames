@@ -182,11 +182,6 @@
 			'currency' => 'cad'
 			));
 		
-		
-		
-		echo '<h2>Thank you for your order!</h2>';
-		echo '<h3>Your order will be shipped as soon as possible!</h3>';
-		
 		//Save order to order history and reciept
 		$total = $total / 100;
 		$orderQuery = "INSERT INTO orders(user_id, total) VALUES ('$userId', '$total')";
@@ -267,10 +262,10 @@
 
 				//displays the contents of your cart
 				$price = $row['price'];
-				$gamedata = '<p class="cartGameName">' . $row['name'] . '</p>' .
-				  '<span class="cartCname">Console: ' . $row['console_name'] . '<br>' .'</span>' .
-				  '<p class="checkoutQuantity"> Quantity: ' . $quantity .'<p><br>'.
-				  '<p>Price: $'. $price*$quantity . '</p><br>'.
+				$gamedata = '<div style="float: left;"><p class="">' . $row['name'] . '</p>' .
+				  '<span class="">' . $row['console_name'] . '<br></span></div>' .
+				  '<div style="float: right;"><p class=""> Quantity: ' . $quantity .'<p>'.
+				  '<p>Price: $'. $price*$quantity . '</p></div><br><br><br><br><br>'.
 				//fancy line between products
 				'<hr name = "productLine">';
 				file_put_contents($file, $gamedata, FILE_APPEND);
@@ -286,8 +281,10 @@
 		}else{
 			
 		}
-		
-		
+
+        echo '<h2>Thank you for your order!</h2>';
+        echo '<p>Order #' . $orderID . ' has been placed.';
+        echo '<h3>Your order will be shipped as soon as possible!</h3>';
 		
 		//payment complete, clear cart
 		include ('connectionSQL.php');
