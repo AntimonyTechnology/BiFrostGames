@@ -13,7 +13,7 @@ include('header.php');
 <br>
 <br>
 <br>
-<hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
+<hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">
 <?php header('charset=utf-8');
 	$total = 0;
 	
@@ -27,8 +27,8 @@ include('header.php');
         while ($row = mysqli_fetch_array($result)) {
             $total = $row['total'];
             $count = 1;
-             print '<div class="clearfix">' . '<br>' .
-             
+             print '<div class="clearfix">' .
+             '<p><b>Order #' . $row['receipt_id'] . '</b></p>' .
              '<span class="">Purchase Date: ' . date("M jS, Y", strtotime($row['order_time'])) .'</span>'.
              '<br><br><div class="productsHistory">Products</div>';
             
@@ -50,7 +50,7 @@ include('header.php');
              }
              
              echo '<br><div class="totalHistory"><br><br><div><hr name = "productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"></div>';
-            echo '<span class="">Total: $' . $total . '<br>' .'</span></div><br><br><br><br>';
+            echo '<span class="">Total: $' . $total . '<br>' .'</span></div><br><br><br><br><br>';
             echo '<hr name = "productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">';
 
         }
