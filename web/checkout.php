@@ -214,7 +214,7 @@
 			mysqli_query($link, $receiptQuery);
 		}
 		}
-		//Save order receipt to a file
+		//Save order receipt to an HTML file
 		if(is_writable('receipts')){
 			
 			$file = "receipts/$orderID.html";
@@ -262,25 +262,87 @@
 
 				//displays the contents of your cart
 				$price = $row['price'];
-				$gamedata = '<div style="float: left;"><p class="">' . $row['name'] . '</p>' .
-				  '<span class="">' . $row['console_name'] . '<br></span></div>' .
-				  '<div style="float: right;"><p class=""> Quantity: ' . $quantity .'<p>'.
-				  '<p>Price: $'. $price*$quantity . '</p></div><br><br><br><br><br>'.
-				//fancy line between products
-				'<hr name = "productLine">';
+				$gamedata = '    <div style="float: left;"><p class="">' . $row['name'] . '</p>
+                    ' . '<span class="">' . $row['console_name'] . '<br></span></div>
+                    ' . '<div style="float: right;"><p class=""> Quantity: ' . $quantity .'<p>
+                    ' . '<p>Price: $'. $price*$quantity . '</p></div><br><br><br><br><br>
+                    ' . '<hr name = "productLine">
+                ';
 				file_put_contents($file, $gamedata, FILE_APPEND);
 			}
 			}
 			$oPrice = $_POST['oPrice'];
-			$dataEnd ='<p class="checkoutTotal"> Total Price: $'. $oPrice .'</p><br><br>
+			$dataEnd ='<p class="checkoutTotal"> Order Total: $'. $oPrice .'</p><br><br>
 			</div>
 			</body>
 			</html>';
 			
 			file_put_contents($file, $dataEnd, FILE_APPEND);
-		}else{
-			
 		}
+        // Save order receipt to a txt file
+        if(is_writable('receipts')){
+
+            $file = "receipts/$orderID.txt";
+
+            $oAddress = $_POST['oAddress'];
+            $oPostal = $_POST['oPostal'];
+            $oProvince = $_POST['oProvince'];
+            $oCity = $_POST['oCity'];
+            $oCountry = $_POST['oCountry'];
+
+            $data = "
+Order No. $orderID
+
+
+Thank you for ordering from BiFrost! Here is your detailed order info: 
+
+
+Shipping to this address:
+-------------------------
+
+$oAddress
+$oCity, $oProvince
+$oCountry
+$oPostal
+
+
+
+Games you ordered:
+-------------------------
+
+";
+            file_put_contents($file, $data);
+
+            $getCartQuery = 'SELECT * FROM shopping_cart inner join games using (game_id) where user_id = ' . '"' . $userId . '"';
+            $result = mysqli_query($link, $getCartQuery);
+            if ($result)   {
+                $row_count = mysqli_num_rows($result);
+
+                while ($row = mysqli_fetch_array($result)) {
+                    //checks if the game already has a cookie assigned to it
+                    $quantity = $row['quantity'];
+
+                    //displays the contents of your cart
+                    $price = $row['price'];
+                    $gamedata = '
+' . $row['name'] . '
+Quantity: ' . $quantity . '
+' . $row['console_name'] . '
+Price: $'. $price*$quantity . '
+
+';
+                    file_put_contents($file, $gamedata, FILE_APPEND);
+                }
+            }
+            $oPrice = $_POST['oPrice'];
+            $dataEnd ='
+
+
+Order Total: $'. $oPrice .'
+';
+
+            file_put_contents($file, $dataEnd, FILE_APPEND);
+        }
 
         echo '<h2>Thank you for your order!</h2>';
         echo '<p>Order #' . $orderID . ' has been placed.';
