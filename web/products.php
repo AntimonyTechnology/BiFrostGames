@@ -10,7 +10,7 @@
 	<nav class="console">
 <ul style="box-shadow: -6px 10px 12px #C2C2C2;">
 	<li><a href = "products.php?console=All" style = "cursor: pointer">All</a></li>
-	<li><a href = "products.php?console=Nintendo_Switch" style = "cursor: pointer">Nintendo Switch</a></li>
+	<li><a href = "products.php?console=Nintendo Switch" style = "cursor: pointer">Nintendo Switch</a></li>
 	<li><a href = "products.php?console=PS4" style = "cursor: pointer">PlayStation 4</a></li>
 	<li><a href = "products.php?console=PC" style = "cursor: pointer">PC</a></li>
 	<li><a href = "products.php?console=XB1" style = "cursor: pointer">Xbox One</a></li>
