@@ -155,18 +155,16 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		quantity++;
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
-		//creates and assigns cookie
-		//var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));	
-		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
-		//document.cookie = cookieString;
-
-		 document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
+		document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
+		 //array that is to be passed to ajax
 		 var passThis = {
 		 		gameId: count,
 		 		quantity: quantity
 		 	};
+
+		 //call to ajax to run server side php	
 		 $.ajax({
          type: "POST",
          url: "updateQ.php",
@@ -188,18 +186,15 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		}
 		//assigns form new incremented quantity
 		document.getElementById('quantity'+count).value = quantity;
-		//creates and assigns cookie
-		//var expireDate = new Date(new Date().getTime() + (1000*60*60*24*7));
-		//var cookieString = count + "=" + quantity+'; expires=' +expireDate.toGMTString();  
-		//document.cookie = cookieString;
-
-		 document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
+		document.getElementById('price' + count).innerHTML = "$" + (price * quantity).toFixed(2);
 		 //calls to calculate the total on button press
 		 calcTotal(<?php echo json_encode($gameArray); ?>);
+		 //array to be passed to ajax
 		 var passThis = {
 		 		gameId: count,
 		 		quantity: quantity
 		 	};
+		 //ajax call to run server side script
 		 $.ajax({
          type: "POST",
          url: "updateQ.php",
