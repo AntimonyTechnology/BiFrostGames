@@ -1,6 +1,12 @@
 <?php
     include('header.php');
+?>
 
+    <article>
+        <div class="textBack" align="left" style="..." >
+            <h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
+
+<?php
 	$userId = $_SESSION['user_id'];
 	
 	if (!isset($_POST['pagenum'])) {
@@ -12,12 +18,9 @@
 			</form>
 		';
 	}
-	
+
 	//page 1 billing info
 	if($_POST['pagenum'] == 1){
-		echo'<article>
-            <div class="textBack" align="left" style="..." >
-            <h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>';
         //print_r($_POST['gameArray']);
         //if this needs to be done, passing the post gameArray needs to be done with for loop input echo, see line 133 in cart.php
         //$gameArray = $_POST['gameArray'];
@@ -65,11 +68,6 @@
 
 	//page 2 payment
 	elseif($_POST['pagenum'] == 2){
-		echo '<article>
-            <div class="textBack" align="left" style="..." >
-            <h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
-        ';
-
 		//takes the total passed from POST
 		$total = str_replace('.', '', $_POST['total']);
 		$pricetotal = $total / 100;
@@ -156,14 +154,10 @@
 		
 	}
 
-
-// page 3 confirmation
+    // page 3 confirmation & order save
 	else{
 		$total = $_POST['total'];
-		echo'<article>
-            <div class="textBack" align="left" style="..." >
-            <h1>Checkout</h1><br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)"><br>
-        ';
+
 	    print_r($_POST['gameArray']);
 		
 		require_once('./config.php');
@@ -346,6 +340,7 @@ Order Total: $'. $oPrice .'
 
         echo '<h2>Thank you for your order!</h2>';
         echo '<p>Order #' . $orderID . ' has been placed.';
+        echo '<p><a href="receipts/' . $orderID . '.html" target="_blank">View Receipt</a></p>';
         echo '<h3>Your order will be shipped as soon as possible!</h3>';
 		
 		//payment complete, clear cart
@@ -355,8 +350,8 @@ Order Total: $'. $oPrice .'
 	
 	}
 ?>
-	</div>
-</article>
+        	</div>
+    </article>
 
 <?php
 include('footer.php');
