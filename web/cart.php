@@ -84,8 +84,8 @@ if ($result)   {
         print '<form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
         	'<input class="rButton" type="submit" value="X" id=' . '"' . 'remove' . $currGameId . '"' . '><br><br>' .
             '<img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '">' .
-            '<p class="cartGameName">' . $row['name'] . '</p>' .
-            '<span class="cartCname">' . $row['console_name']  . '</span>' .
+            '<div class="cartGameName">' . $row['name'] . '</div><br>' .
+            '<div class="cartCname">' . $row['console_name']  . '</div><br>' .
             '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' .
             
             '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
