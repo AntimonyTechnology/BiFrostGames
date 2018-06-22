@@ -212,7 +212,7 @@
 	
 }
 
-.gameName {
+.gameNameProduct {
 	font-size: 40px;
 	font-size: 3vw;
 	font-family: Georgia, serif;
@@ -224,8 +224,32 @@
 	padding: 8px;
 	overflow: hidden;
 	width: 50%;
+}
+
+.gameName {
+	background-color: white;
+	font-size: 40px;
+	font-size: 3vw;
+	font-family: Georgia, serif;
+	overflow: hidden;
+	border: 2px solid aliceblue;
+	border-radius:10%;
+	text-align: center;
+	color: black;
+	padding: 8px;
+	overflow: hidden;
+	width: 50%;
+	box-shadow: -4px 8px 10px #9eb7d6;
+}
+.gameName:hover{
+	background-color: aliceblue;
 	
 }
+.gameName:active{
+	background-color: #7a9cc7;
+	box-shadow: -2px 4px 5px #9eb7d6;
+}
+
 .homeToProducts {
 	font-size: 40px;
 	font-size: 3vw;
@@ -489,9 +513,9 @@ table, th, td {
 	padding:20px;
 	margin: 20px;
 	color:black;
-	border: 3px solid aliceblue;
+	border: 5px double aliceblue;
 	border-radius:15px;
-	background-color: lightsteelblue;
+	background-color:  lightsteelblue;
 	font-family: Georgia, serif;
 	box-shadow: -8px 12px 15px #C2C2C2;
 	position: relative;

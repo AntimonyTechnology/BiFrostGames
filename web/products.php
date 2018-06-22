@@ -103,10 +103,11 @@
         //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
 
         while ($row = mysqli_fetch_array($result)) {
+            $gameId = $row['game_id'];
             //print $row['name'] . '<br>' .
              print '<div class="clearfix">' . '<br>' .
-             '<img class ="images" src ="' . $row['image'] . '">'.
-             '<p class="gameName">' . $row['name'] . '</p><br>' .
+             '<a href="product.php?gameId='.$gameId .'" class=""><img class ="images" src ="' . $row['image'] . '"></a>'.
+             '<a href="product.php?gameId='.$gameId .'" class="cost"><p class="gameName">' . $row['name'] . '</p></a><br>' .
              '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
              '<br>' . $row['description'] . '<br><br><br><br>'.
              '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div>';
