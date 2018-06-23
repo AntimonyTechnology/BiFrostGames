@@ -29,7 +29,19 @@
     }
 ?>
 <br><br><br>
-<form class = "genreSelect" action="products.php" method="Post" style = "float:right">
+<?php
+//makes the console selection persistant between category selections
+if(isset($_SESSION['theconsole'])){
+	$passedConsole = $_SESSION['theconsole'];
+	echo $passedConsole;
+	$formUrl = "products.php?console=".$passedConsole;
+
+}
+else{
+	$formUrl = "products.php";
+}
+echo '<form class = "genreSelect" action="'.$formUrl.'" method="Post" style = "float:right">';
+?>
 <select name = "theGenre" class="dropdown">
 <option value = "All">All</option>
 
@@ -54,7 +66,9 @@
     }
 ?>
 </select>
+
 <input type = "submit" class="greyBackButtons" style="margin-left: 10px;" name ="submitQ" value="Search"/>
+
 </form>
 <br>
 
@@ -65,20 +79,24 @@
         if($selectedGenre == "" || $selectedGenre == "All") {
             //none selected
             $query = "select * from games order by name, console_name";
+            
         }
         else {
             //genre selected only
             $query = "select * from games inner join game_genres using(game_id) where genre_id ='$selectedGenre' order by name, console_name";
+            
         }
     }
     else {
         if($selectedGenre == "" || $selectedGenre == "All") {
         //console only selected
         $query = "select * from games where console_name like '$console' order by name, console_name";
+        
     }
         else {
             //both selected
             $query = "select * from games inner join game_genres using(game_id) where genre_id ='$selectedGenre' AND console_name ='$console' order by name, console_name";
+            
         }
 
     }
@@ -89,9 +107,11 @@
 ?>
 
 <div class="textBack" align="left" style="float:left" >
+	
 <h1 style="font-size: 28px">Products</h1>
 
 <br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">
+<div class="flex-container">
 <?php header('charset=utf-8');
     include ('connectionSQL.php');
 
@@ -105,13 +125,13 @@
         while ($row = mysqli_fetch_array($result)) {
             $gameId = $row['game_id'];
             //print $row['name'] . '<br>' .
-             print '<div class="clearfix">' . '<br>' .
+             print '<div class="clearfix">' . '' .
+             '<span class="consoleName">' . $row['console_name'] . '' .'</span>'.
              '<a href="product.php?gameId='.$gameId .'" class=""><img class ="images" src ="' . $row['image'] . '"></a>'.
-             '<a href="product.php?gameId='.$gameId .'" class="cost"><p class="gameName">' . $row['name'] . '</p></a><br>' .
-             '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
-             '<br>' . $row['description'] . '<br><br><br><br>'.
+             '<a href="product.php?gameId='.$gameId .'" class="cost"><p class="gameName">' . $row['name'] . '</p></a>' .
+              
              '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div>';
-            echo '<hr name = "productLine">';
+            
         }
     }
 ?>
@@ -120,6 +140,7 @@
 <br>
 <br>
 <br>
+</div>
 </div>
 <br>
 <br>

@@ -139,23 +139,44 @@
 .images {
 	/*add css to make images to position on the form*/
 	position: static;
+	margin-bottom: 10px;
 	float: right;
 	width: 300px;
-	width: 24vw;
+	width: 20vw;
 	height: auto;
 	padding-bottom: 10px;
-	padding-top: 80px;
+	padding-top: 10px;
 	
 	
 }
+.flex-container{
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+.flex-container > div {
+	background-color: #d4dfed;
+	border-color: aliceblue;
+	border-width: 2px;
+	border-style: double;
+	width: 18.8vw;
+	height: auto;
+	margin-left: 10px; 
+	margin-bottom: 15px;
+	align-content: center;
+	border-radius: 15px;
+	position: relative;
+	padding:8px;
+	box-shadow: -8px 12px 15px #9eb7d6;
+}
 .clearfix {
-	overflow: auto;
+	float: center;
 }
 
 .price {
 	text-align: center;
 	font-size: 30px;
-	font-size: 2vw;
+	font-size: 1.3vw;
 	color: black;
 	border: 2px solid aliceblue;
 	border-radius:15px;
@@ -164,10 +185,11 @@
 	padding-right: 3vw;
 	overflow: hidden;
 	background-color: white;
-	width: 25%;
+	width: 75%;
 	box-shadow: -8px 12px 15px #9eb7d6;
-	margin-left: 30px;
-	
+	margin-left: 1.5vw;
+	position: absolute;
+	bottom: 0px;
 }
 
 
@@ -195,21 +217,19 @@
 }
 
 .cart {
-	position: static;
+	position: absolute;
 	float: right;
 	width: auto;
 	height: 55px;
-	height: 3vw;
-	padding: 5px;
-	padding-left: 0;
-	
+	height: 1vw;
+	margin-left: 1vw;
+	margin-top: .5vw;
 }
 
 .consoleName {
 	/*add css for console name*/
 	color: black;
 	font-size: 20px;
-	
 }
 
 .gameNameProduct {
@@ -229,17 +249,23 @@
 .gameName {
 	background-color: white;
 	font-size: 40px;
-	font-size: 3vw;
+	font-size: 2vw;
 	font-family: Georgia, serif;
 	overflow: hidden;
 	border: 2px solid aliceblue;
 	border-radius:10%;
 	text-align: center;
 	color: black;
-	padding: 8px;
+	padding: 5px;
+	padding-left: 1vw;
+	padding-right: 1vw;
 	overflow: hidden;
-	width: 50%;
+	width: 85%;
 	box-shadow: -4px 8px 10px #9eb7d6;
+	margin-left: 1.4vw;
+	margin-bottom: 80px;
+	position: sticky;
+	top:0.1vw;
 }
 .gameName:hover{
 	background-color: aliceblue;

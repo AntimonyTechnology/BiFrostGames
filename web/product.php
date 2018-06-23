@@ -36,8 +36,8 @@ include('header.php');
              '<p class="gameNameProduct">' . $row['name'] . '</p><br>' .
              '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
              '<br>' . $row['description'] . '<br><br><br><br>'.
-             '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div>';
-            echo '<hr name = "productLine">';
+             '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price" style="width: 50%">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div>';
+            
         }
     }
 ?>
