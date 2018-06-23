@@ -153,7 +153,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	
 }
 .flex-container > div {
 	background-color: #d4dfed;
@@ -204,6 +203,37 @@
 .price:focus {
 	outline: none;
 }
+
+.price2 {
+	text-align: center;
+	font-size: 30px;
+	font-size: 1.3vw;
+	color: black;
+	border: 2px solid aliceblue;
+	border-radius:15px;
+	padding: 10px;
+	padding-left: 3vw;
+	padding-right: 3vw;
+	overflow: hidden;
+	background-color: white;
+	width: 75%;
+	box-shadow: -8px 12px 15px #9eb7d6;
+	margin-left: 1.5vw;
+}
+
+
+.price2:hover {
+	background-color:aliceblue;
+}
+.price2:active {
+	background-color:#7a9cc7;
+	box-shadow: -4px 6px 7.5px #9eb7d6;
+	outline: none;
+}
+.price2:focus {
+	outline: none;
+}
+
 .cost {
 	font-size: 25px;
 	font-size: 2vw;
