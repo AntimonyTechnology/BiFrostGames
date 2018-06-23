@@ -3,7 +3,6 @@ include('header.php');
 
 ?>
 
-<br>
 <article>
 <form action="products.php">
 <input type="submit" class="greyBackButtons" style="margin-top: 10px" value="<  Back to Shopping" />
