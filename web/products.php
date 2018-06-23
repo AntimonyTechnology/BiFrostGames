@@ -3,12 +3,13 @@
 
 ?>
 	
-
+<div class="clearfix">
+    <div>
 <article>
 	
 	
 	<nav class="console">
-<ul style="box-shadow: -6px 10px 12px #C2C2C2;">
+<ul style="box-shadow: -6px 10px 12px #C2C2C2; margin-bottom: 10px; margin-right: 3.5vw">
     <?php
     $console = @$_GET['console'];
     $_SESSION['theconsole'] = $console;
@@ -174,7 +175,8 @@ echo '<h1 style="font-size: 28px">Games ';if(!isset($console) || $console == All
 	
 
 </article>
-
+</div>
+</div>
 <?php
     include('footer.php');
 	
