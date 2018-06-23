@@ -54,7 +54,7 @@
 }
 .gameNameHistory {
 	padding-left: 60px;
-	font-size: 1vw;
+	font-size: 1.4vw;
 
 }
 .gamePriceHistory {
@@ -279,7 +279,7 @@
 .gameName {
 	background-color: white;
 	font-size: 40px;
-	font-size: 2vw;
+	font-size: 1.5vw;
 	font-family: Georgia, serif;
 	overflow: hidden;
 	border: 2px solid aliceblue;
@@ -423,6 +423,7 @@ input[type=button]:focus, input[type=submit]:focus, input[type=reset]:focus {
 }
 
 hr {
+	margin-top: 15px;
 	border: 0; 
   height: 1px; 
   background-image: -webkit-linear-gradient(left, #D1D1D1, #8c8b8b, #D1D1D1);
