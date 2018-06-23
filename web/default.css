@@ -152,6 +152,7 @@
 .flex-container{
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	
 }
 .flex-container > div {
@@ -159,10 +160,9 @@
 	border-color: aliceblue;
 	border-width: 2px;
 	border-style: double;
-	width: 18.8vw;
+	width: 18vw;
 	height: auto;
-	margin-left: 10px; 
-	margin-bottom: 15px;
+	margin: 10px; 
 	align-content: center;
 	border-radius: 15px;
 	position: relative;
