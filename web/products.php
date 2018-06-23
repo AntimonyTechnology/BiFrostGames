@@ -9,17 +9,41 @@
 	
 	<nav class="console">
 <ul style="box-shadow: -6px 10px 12px #C2C2C2;">
-	<li><a href = "products.php?console=All" style = "cursor: pointer">All</a></li>
-	<li><a href = "products.php?console=Nintendo Switch" style = "cursor: pointer">Nintendo Switch</a></li>
-	<li><a href = "products.php?console=PS4" style = "cursor: pointer">PlayStation 4</a></li>
-	<li><a href = "products.php?console=PC" style = "cursor: pointer">PC</a></li>
-	<li><a href = "products.php?console=XB1" style = "cursor: pointer">Xbox One</a></li>
+    <?php
+    $console = @$_GET['console'];
+    $_SESSION['theconsole'] = $console;
+
+	echo '<li><a href = "products.php?console=All" style = "cursor: pointer" class="'; 
+    if(!isset($_SESSION['theconsole']) || $_SESSION['theconsole'] == "All"){
+            echo "viewing";
+        }
+         echo '">All</a></li>
+	<li><a href = "products.php?console=Nintendo Switch" style = "cursor: pointer" class="';
+    if($_SESSION['theconsole'] == "Nintendo Switch"){
+            echo "viewing";
+        }
+         echo '">Nintendo Switch</a></li>
+	<li><a href = "products.php?console=PS4" style = "cursor: pointer" class="';
+    if($_SESSION['theconsole'] == "PS4"){
+            echo "viewing";
+        }
+         echo '">PlayStation 4</a></li>
+	<li><a href = "products.php?console=PC" style = "cursor: pointer" class="'; 
+    if($_SESSION['theconsole'] == "PC"){
+            echo "viewing";
+        }
+         echo '">PC</a></li>
+	<li><a href = "products.php?console=XB1" style = "cursor: pointer" class="';
+    if($_SESSION['theconsole'] == "XB1"){
+            echo "viewing";
+        }
+         echo '">Xbox One</a></li>';
+?>
 </ul>
 </nav>
 <?php
     //used to determine the console query
-    $console = @$_GET['console'];
-    $_SESSION['theconsole'] = $console;
+    
 
     // Generates the redirect URL to use if the user tries to buy an item
     if (isset($_SESSION['user_id'])) { // User signed in -> cart
@@ -32,6 +56,7 @@
 <?php
 //makes the console selection persistant between category selections
 if(isset($_SESSION['theconsole'])){
+
 	$passedConsole = $_SESSION['theconsole'];
 	$formUrl = "products.php?console=".$passedConsole;
 
@@ -106,9 +131,9 @@ echo '<form class = "genreSelect" action="'.$formUrl.'" method="Post" style = "f
 ?>
 
 <div class="textBack" align="left" style="float:left" >
-	
-<h1 style="font-size: 28px">Products</h1>
-
+<?php
+echo '<h1 style="font-size: 28px">Games ';if(!isset($console) || $console == All){$console = "";}else{$console = "- ".$console;}echo $console .'</h1>';
+?>
 <br><br><br><hr name="productLine" style="background-image: -webkit-linear-gradient(left, black, #8c8b8b, black)">
 <div class="flex-container">
 <?php header('charset=utf-8');
