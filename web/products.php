@@ -33,7 +33,6 @@
 //makes the console selection persistant between category selections
 if(isset($_SESSION['theconsole'])){
 	$passedConsole = $_SESSION['theconsole'];
-	echo $passedConsole;
 	$formUrl = "products.php?console=".$passedConsole;
 
 }
