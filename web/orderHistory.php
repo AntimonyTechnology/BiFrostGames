@@ -28,7 +28,7 @@ include('header.php');
             $total = $row['total'];
             $count = 1;
              print '<div class="clearfix">' .
-             '<p><b>Order #' . $row['receipt_id'] . '</b></p>' .
+             '<p><b>Order #' . $row['receipt_id'] . '   -    <a href="receipts/' . $row['receipt_id'] . '.html" target="_blank">View Receipt</a></b></p>' .
              '<span class="">Purchase Date: ' . date("M jS, Y", strtotime($row['order_time'])) .'</span>'.
              '<br><br><div class="productsHistory">Products</div>';
             
