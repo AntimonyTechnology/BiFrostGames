@@ -9,6 +9,7 @@
     echo "<h1>Add Product</h1><br><br><br>";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $gamename = strip_tags($_POST['gamename']);
+        $youtubeLink = strip_tags($_POST['youtubeLink']);
         $price = strip_tags($_POST['price']);
         $gamedesc = nl2br(addslashes(strip_tags($_POST['gamedesc'])));
         $console = $_POST['console'];
@@ -52,10 +53,10 @@
                             break;
                     }
                 }
-                $gamequery = "INSERT INTO games (name, description, image, price, console_name) VALUES ('$gamename', '$gamedesc', '$imageurl', '$price', '$console')";
+                $gamequery = "INSERT INTO games (name, description, image, price, youtube_link, console_name) VALUES ('$gamename', '$gamedesc', '$imageurl', '$price','$youtubeLink', '$console')";
             } else { // No image submitted
                 echo "<p>No image uploaded.</p>";
-                $gamequery = "INSERT INTO games (name, description, price, console_name) VALUES ('$gamename', '$gamedesc', '$price', '$console')";
+                $gamequery = "INSERT INTO games (name, description, price, youtube_link, console_name) VALUES ('$gamename', '$gamedesc', '$price', '$youtubeLink', '$console')";
             }
 
             // Add the new game to the database
