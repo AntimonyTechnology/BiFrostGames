@@ -30,18 +30,21 @@ include('header.php');
         //print 'Retreived '. $row_count . ' rows from the <b> games </b> table<BR><BR>';
 
         while ($row = mysqli_fetch_array($result)) {
-            $youtubeLink = $row['youtube_link'];
+
             //print $row['name'] . '<br>' .
-             print '<div class="clearfix">' . '<br>' .
-             '<img class ="images" src ="' . $row['image'] . '">'.
-             '<p class="gameNameProduct">' . $row['name'] . '</p><br>' .
-             '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'. 
-             '<br>' . $row['description'] . '<br><br><br><br>'.
-             '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price2" style="width: 50%">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div><br><br>'.
-             '<div class="flex-container"><iframe style="margin-bottom:40px; align-self:center; width:60vw; height:37.5vw;" id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/embed/'.$youtubeLink.'?autoplay=1&origin=http://example.com"
-  frameborder="0"></iframe></div>';
-            
+            print '<div class="clearfix">' . '<br>' .
+                '<img class ="images" src ="' . $row['image'] . '">'.
+                '<p class="gameNameProduct">' . $row['name'] . '</p><br>' .
+                '<span class="consoleName">' . $row['console_name'] . '<br>' .'</span><br>'.
+                '<br>' . $row['description'] . '<br><br><br><br>'.
+                '<a href="'. $cartURL . $row['game_id'] . '" class="cost"><p class="price2" style="width: 50%">$'. $row['price'] .'<img src="cart.png" class="cart"></p></a></div><br><br>
+            ';
+
+            if ($row['youtube_link'] != "") {
+                $youtubeLink = $row['youtube_link'];
+                echo '<div class="flex-container"><iframe style="margin-bottom:40px; align-self:center; width:60vw; height:37.5vw;" id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/' . $youtubeLink . '?autoplay=1&origin=http://example.com" frameborder="0"></iframe></div>
+                ';
+            }
         }
     }
 ?>

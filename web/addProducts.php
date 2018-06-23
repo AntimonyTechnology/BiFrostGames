@@ -28,7 +28,7 @@ include('header.php');
         <p>Price: <input type="text" name="price" id="price" pattern="^\d+(\.\d{1,2})?$" required /></p>
         <p>Description: </p><textarea name="gamedesc" id="gamedesc" rows="8" cols="60"></textarea>
         <p>Image: <input type="file" name="image" id="image" accept="image/png, image/jpeg"/></p>
-        <p>YouTube Link: <input type="text" name="youtubeLink" id="youtubeLink" required /></p>
+        <p>YouTube Video ID: <input type="text" name="youtubeLink" id="youtubeLink" /></p>
         <p>Console:
             <input type="radio" name="console" value="PS4" required> PS4
             <input type="radio" name="console" value="XB1" required> XBOX ONE
