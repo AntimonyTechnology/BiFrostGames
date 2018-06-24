@@ -89,7 +89,7 @@ if ($result)   {
             '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' .
             
             '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
-            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . '>' .
+            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . ' disabled>' .
             '<input class="qButton" style=float:right; type="button" value="-" onclick=' . '"' . 'remQ(' . $currGameId . ',' . $price . ')"' . '>' .
             '</form></div>';
 
