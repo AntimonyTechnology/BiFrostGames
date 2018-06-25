@@ -90,12 +90,11 @@
 
 
 .cartImg {
-	position: static;
-	float: right;
+	position: relative;
 	width: 100px;
 	width: 17vw;
 	height: auto;
-	padding-bottom: 10px;
+	padding-bottom: 30px;
 	padding-top: 20px;
 	padding-right: 30px;
 
