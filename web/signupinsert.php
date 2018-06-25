@@ -6,7 +6,7 @@
 	
 	echo "<article>";
     echo "<div class=\"textBack\" align=\"left\" style=\"float:left\">";
-    echo "<h1>Registration</h1><br><br><br>";
+    //echo "<h1>Registration</h1><br><br><br>";
 	//Checking to see if method being used is POST
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		//Retrieve values through post and save them to variables
