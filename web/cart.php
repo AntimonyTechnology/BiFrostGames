@@ -215,13 +215,17 @@ echo '<input type="hidden" name="pagenum" value="1">';
 		var total = 0;
 		//loops through the gameIds and gets each price field and adds them up
 		for (var i = 0; i < gameArray.length; i++) {
+			//gets the price from DOM
 			var price = document.getElementById('price' + gameArray[i]).innerHTML;
+			//cleans off the $ sign
 			price = price.replace(/[^0-9.]/g,'');
 			console.log(price);
+			//adds up total
 			total = total + Number(price);
 		}
 		//assigns total Price
 		document.getElementById('total').innerHTML = "$" + total.toFixed(2);
+		//assigns to hidden input to POST value to checkout
 		document.getElementById('passTotalCheckout').value = total.toFixed(2);
 	}
 	//calls to calculate the total on page load
