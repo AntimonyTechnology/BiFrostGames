@@ -81,20 +81,24 @@ if ($result)   {
 
         //displays the contents of your cart
         $price = $row['price'];
-        print '<form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
+        print '<div style="margin-bottom:200px"><form method ="POST" action=' . '"' . 'cart.php?removeId=' . $currGameId . '"><div id="cartDiv">' .
         	'<input class="rButton" type="submit" value="X" id=' . '"' . 'remove' . $currGameId . '"' . '><br><br>' .
-            '<a href="product.php?gameId='.$currGameId .'" class="" style="text-decoration: none"><img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '"><a/>' .
+        	
+        	'<div style="float:right">'.
+            '<a href="product.php?gameId='.$currGameId .'" class="" style="text-decoration: none"><img class =' . '"' . 'cartImg' . '"' . 'src =' . '"' . $row['image'] . '"><a/><br>'.
+            '<div><div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' . 
+            '<input class="qButton"  type="button" value="-" onclick=' . '"' . 'remQ(' . $currGameId . ',' . $price . ')"' . '>' .
+            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . '  type="textbox" value=' . $quantity . ' disabled>' .
+            '<input class="qButton" type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '></div>' .
+
+            '</div>' .
             '<a href="product.php?gameId='.$currGameId .'" class="" style="text-decoration: none"><div class="cartGameName">' . $row['name'] . '</div></a><br>' .
             '<div class="cartCname">' . $row['console_name']  . '</div><br>' .
-            '<div class="gamePrice" id=' . '"' . 'price' . $currGameId . '"' . '>$' . $price * $quantity . '</div>' .
             
-            '<input class="qButton" style=float:right; type="button" value="+" onclick=' . '"' . 'addQ(' . $currGameId . ',' . $price . ')"' . '>' .
-            '<input class="quantity" id=' . '"' . 'quantity' . $currGameId . '"' . 'style=float:right;  type="textbox" value=' . $quantity . ' disabled>' .
-            '<input class="qButton" style=float:right; type="button" value="-" onclick=' . '"' . 'remQ(' . $currGameId . ',' . $price . ')"' . '>' .
-            '</form></div>';
+            '</form></div></div>';
 
         //fancy line between products
-        echo '<br><br><br><br><br><br><hr name = "productLine">';
+        echo '<hr name = "productLine">';
         $totalPrice = $totalPrice + $price;
         //assigns an array of all the game ids to identify for JS function calcTotal()
         $gameArray[$count] = $row['game_id'];
