@@ -568,6 +568,7 @@ table, th, td {
 	font-size:40px;
 	cursor:pointer;
 	padding: 8px;
+	padding-top: 20px;
 	
 }
 .fixed {
